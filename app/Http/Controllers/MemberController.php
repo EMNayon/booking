@@ -6,16 +6,12 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use PDF;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Mpdf\QrCode\QrCode as QrCode2;
 use Mpdf\QrCode\Output;
-use Mpdf\Mpdf;
+use Mpdf\QrCode\QrCode as QrCode2;
+use PDF;
 
 class MemberController extends Controller
 {
@@ -84,7 +80,7 @@ class MemberController extends Controller
         'Sunamganj Sadar Hospital',
         'Sylhet District Hospital',
         'Tangail 250 Bed District Hospital',
-        'Adhunik Sadar Hospital'
+        'Adhunik Sadar Hospital',
     ];
 
     public static $destinations = [
@@ -108,40 +104,57 @@ class MemberController extends Controller
     }
     public function submitMemberForm(Request $request)
     {
-        $this->validate($request, [
-            'certificate_no' => 'required',
-            'name' => 'required',
-            'dob' => 'required',
-            'nationality' => 'required',
-            'gender' => 'required',
-            'passport' => 'nullable|unique:members'
-        ], [
-            'certificate_no.required' => 'Certificate no field is required',
-            'name.required' => 'Name field is required',
-            'dob.required' => 'Date of Birth field is required',
-            'nationality.required' => 'Nationality field is required',
-            'gender.required' => 'Gender field is required',
-        ]);
+        // dd('okay');
 
         DB::beginTransaction();
         try {
             $code = $this->generateCode();
             $member = new Member();
+
+            $member->bin_no = $request->bin_no;
+            $member->mushak = $request->mushak;
+            $member->issuing_office = $request->issuing_office;
+            $member->money_receipt_no = $request->money_receipt_no;
+            $member->class_of_insurance = $request->class_of_insurance;
+            $member->mode_of_payment = $request->mode_of_payment;
+            $member->drawn_on = $request->drawn_on;
+
+            $member->policy_no = $request->policy_no;
+            $member->issue_date = $request->issue_date;
+            $member->plan_type = $request->plan_type;
+            $member->area_of_travel = $request->area_of_travel;
+            $member->no_of_days_covered = $request->no_of_days_covered;
+
+            $member->premium = $request->premium;
+
+            $vatPercentage = 15;
+            $vatAmount = ($request->premium * $vatPercentage) / 100;
+            $member->total_premium = $request->premium + $vatAmount;
+            // $member->total_premium = $request->premium;
+
+            $member->mr_no = $request->mr_no;
+
+            $member->name = $request->name;
+            $member->mobile_no = $request->mobile_no;
+            $member->address = $request->address;
+            $member->age = $request->age;
+            $member->dob = date('d-m-Y', strtotime($request->dob));
+            $member->pass_no = $request->pass_no;
+            $member->nationality = $request->nationality;
+
+            // $member->effective_date = date('d-m-Y', strtotime($request->effective_date));
+            // $member->certificate_no = $request->certificate_no;
+            // $member->nid = $request->nid;
+            // $member->gender = $request->gender;
+
             $member->code = $code;
             $member->hidden = 0;
-            $member->name = $request->name;
-            $member->passport = $request->passport;
-            $member->dob = date('d-m-Y', strtotime($request->dob));
-            $member->nationality = $request->nationality;
-            $member->destination = $request->destination;
-            $member->effective_date = date('d-m-Y', strtotime($request->effective_date));
-            $member->reference = $request->reference;
-            $member->phone_no = $request->phone_no;
-            $member->certificate_no = $request->certificate_no;
-            $member->nid = $request->nid;
-            $member->gender = $request->gender;
             $member->created_by = Auth::id();
+
+            // dd($member->created_by);
             $member->save();
+
+            // dd($member);
 
             DB::commit();
             Session::flash('success', 'File Submission Successfull.');
@@ -168,19 +181,17 @@ class MemberController extends Controller
         PLAN-Covid Plan (KSA)
         AGENT-NATIONAL
         PHONE-' . $member->phone_no . '
-        FROM-' .  $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
+        FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
         COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
         APPLICANT NAME-' . $member->name . '
         DATE OF BIRTH-' . $member->dob . '
         PASSPORT NO-' . $member->passport;
-
 
         $qrCode = new QrCode2($printdata);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
         $qr_filename = time() . '.png';
         file_put_contents('code/' . $qr_filename, $data);
-
 
         //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
         $qrcode = $qr_filename;
@@ -210,19 +221,17 @@ class MemberController extends Controller
         PLAN-Covid Plan (KSA)
         AGENT-NATIONAL
         PHONE-' . $member->phone_no . '
-        FROM-' .  $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
+        FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
         COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
         APPLICANT NAME-' . $member->name . '
         DATE OF BIRTH-' . $member->dob . '
         PASSPORT NO-' . $member->passport;
-
 
         $qrCode = new QrCode2($printdata);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
         $qr_filename = time() . '.png';
         file_put_contents('code/' . $qr_filename, $data);
-
 
         //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
         $qrcode = $qr_filename;
@@ -246,14 +255,18 @@ class MemberController extends Controller
         $structure = glob(rtrim($dir, "/") . '/*');
         if (is_array($structure)) {
             foreach ($structure as $file) {
-                if (is_dir($file))
+                if (is_dir($file)) {
                     deleteAll($file, true);
-                else if (is_file($file))
+                } else if (is_file($file)) {
                     unlink($file);
+                }
+
             }
         }
-        if ($remove)
+        if ($remove) {
             rmdir($dir);
+        }
+
     }
 
     public function scanResult(Request $request)
@@ -274,9 +287,19 @@ class MemberController extends Controller
     public function memberEdit($code)
     {
         $member = Member::where('code', $code)->first();
-        $centers = self::$centers;
-        $destinations = self::$destinations;
-        return view('admin.member_edit', compact('member', 'centers', 'destinations'));
+        // dd($member);
+        // $centers = self::$centers;
+        // $destinations = self::$destinations;
+        return view('admin.member_edit', compact('member'));
+    }
+    public function userMemberEdit($code)
+    {
+
+        // $member = Member::where('code', $code)->first();
+        dd('i am here');
+        // $centers = self::$centers;
+        // $destinations = self::$destinations;
+        return view('user.member_edit', compact('member'));
     }
 
     public function memberDelete($code)
@@ -300,33 +323,114 @@ class MemberController extends Controller
 
     public function memberUpdate(Request $request)
     {
-        $this->validate($request, [
+        // $this->validate($request, [
 
-            'name' => 'required',
-            'dob' => 'required',
-            'nationality' => 'required',
-            'gender' => 'required',
-            'passport' => ['nullable', Rule::unique('members')->ignore($request->id)]
-        ], [
-            'name.required' => 'Name field is required',
-            'dob.required' => 'Date of Birth field is required',
-            'nationality.required' => 'Nationality field is required',
-            'gender.required' => 'Gender field is required',
-        ]);
+        //     'name' => 'required',
+        //     'dob' => 'required',
+        //     'nationality' => 'required',
+        //     'gender' => 'required',
+        //     'passport' => ['nullable', Rule::unique('members')->ignore($request->id)]
+        // ], [
+        //     'name.required' => 'Name field is required',
+        //     'dob.required' => 'Date of Birth field is required',
+        //     'nationality.required' => 'Nationality field is required',
+        //     'gender.required' => 'Gender field is required',
+        // ]);
         DB::beginTransaction();
 
         try {
             $member = Member::find($request->id);
+
+            $member->bin_no = $request->bin_no;
+            $member->mushak = $request->mushak;
+            $member->issuing_office = $request->issuing_office;
+            $member->money_receipt_no = $request->money_receipt_no;
+            $member->class_of_insurance = $request->class_of_insurance;
+            $member->mode_of_payment = $request->mode_of_payment;
+            $member->drawn_on = $request->drawn_on;
+
+            $member->policy_no = $request->policy_no;
+            $member->issue_date = $request->issue_date;
+            $member->plan_type = $request->plan_type;
+            $member->area_of_travel = $request->area_of_travel;
+            $member->no_of_days_covered = $request->no_of_days_covered;
+            $member->premium = $request->premium;
+            
+            $vatPercentage = 15;
+            $vatAmount = ($request->premium * $vatPercentage) / 100;
+            $member->total_premium = $request->premium + $vatAmount;
+            // $member->total_premium = $request->total_premium;
+            $member->mr_no = $request->mr_no;
+
             $member->name = $request->name;
-            $member->passport = $request->passport;
+            $member->mobile_no = $request->mobile_no;
+            $member->address = $request->address;
+            $member->age = $request->age;
             $member->dob = date('d-m-Y', strtotime($request->dob));
+            $member->pass_no = $request->pass_no;
             $member->nationality = $request->nationality;
-            $member->destination = $request->destination;
-            $member->effective_date = date('d-m-Y', strtotime($request->effective_date));
-            $member->reference = $request->reference;
-            $member->phone_no = $request->phone_no;
-            $member->nid = $request->nid;
-            $member->gender = $request->gender;
+            $member->save();
+            DB::commit();
+            Session::flash('success', 'Successfully Updated');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Session::flash('error', 'Something went wrong. Please try again letter');
+            return redirect()->back();
+        }
+    }
+
+    public function userMemberUpdate(Request $request)
+    {
+        // $this->validate($request, [
+
+        //     'name' => 'required',
+        //     'dob' => 'required',
+        //     'nationality' => 'required',
+        //     'gender' => 'required',
+        //     'passport' => ['nullable', Rule::unique('members')->ignore($request->id)]
+        // ], [
+        //     'name.required' => 'Name field is required',
+        //     'dob.required' => 'Date of Birth field is required',
+        //     'nationality.required' => 'Nationality field is required',
+        //     'gender.required' => 'Gender field is required',
+        // ]);
+        DB::beginTransaction();
+
+        try {
+            $member = Member::find($request->id);
+
+            $member->bin_no = $request->bin_no;
+            $member->mushak = $request->mushak;
+            $member->issuing_office = $request->issuing_office;
+            $member->money_receipt_no = $request->money_receipt_no;
+            $member->class_of_insurance = $request->class_of_insurance;
+            $member->mode_of_payment = $request->mode_of_payment;
+            $member->drawn_on = $request->drawn_on;
+
+            $member->policy_no = $request->policy_no;
+            $member->issue_date = $request->issue_date;
+            $member->plan_type = $request->plan_type;
+            $member->area_of_travel = $request->area_of_travel;
+            $member->no_of_days_covered = $request->no_of_days_covered;
+            $member->premium = $request->premium;
+
+            dd($member->premium);
+
+            // $vatPercentage = 15;
+            // $vatAmount = ($request->premium * $vatPercentage) / 100;
+            // $member->total_premium = $request->premium + $vatAmount;
+            $member->total_premium = $request->premium;
+
+            $member->mr_no = $request->mr_no;
+
+            $member->name = $request->name;
+            $member->mobile_no = $request->mobile_no;
+            $member->address = $request->address;
+            $member->age = $request->age;
+            $member->dob = date('d-m-Y', strtotime($request->dob));
+            $member->pass_no = $request->pass_no;
+            $member->nationality = $request->nationality;
             $member->save();
             DB::commit();
             Session::flash('success', 'Successfully Updated');

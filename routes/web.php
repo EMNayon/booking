@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/money', function (){
+    return view('policy');
+});
+
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
@@ -17,6 +21,10 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/member/registration', [\App\Http\Controllers\MemberController::class, 'showMemberForm'])->name('show-member-form');
     Route::post('/member/registration', [\App\Http\Controllers\MemberController::class, 'submitMemberForm'])->name('submit-member-form');
     Route::get('/{code}', [\App\Http\Controllers\UserController::class, 'getMemberDataByCode'])->name('get-member-data');
+
+    // Route::get('/member/{code}/edit', [\App\Http\Controllers\UserController::class, 'userMemberEdit'])->name('member_edit');
+    // Route::post('/member/update', [\App\Http\Controllers\UserController::class, 'userMemberUpdate'])->name('member_update');
+
 });
 
 Route::group(['middleware' => 'admin'], function () {

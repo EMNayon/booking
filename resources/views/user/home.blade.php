@@ -76,14 +76,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="name">Date of Birth </label>
-                                <input type="text" class="form-control datepicker" id="dob" name="dob"
-                                    placeholder="Select Your Date of Birth" value="{{ old('dob') }}">
-                                @error('dob')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
+                            
                             <div class="col-sm-12 ">
                                 <label for="class_of_insurance">Class of Insurance</label>
                                 <input type="text" class="form-control" id="class_of_insurance" name="class_of_insurance"
@@ -109,38 +102,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="gender">Gender </label>
-                                <select name="gender" id="gender" class="form-control">
-                                    <option value="">Select Gender</option>
-                                    <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                                    <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female
-                                    </option>
-                                    <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
-                                </select>
-                                @error('gender')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
+
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
                             <h3 class="text-left" style="font-weight: bold">Insurance Details</h3>
 
-                            {{-- <div class="col-sm-12 ">
-                                <label for="destination">Destination</label>
-                                <select id="destination" class="form-control" name="destination" required>
-                                    <option value="">---------</option>
-                                    @foreach ($destinations as $destination)
-                                        <option value="{{ $destination }}"
-                                            @if (old('destination') == $destination) selected @endif>{{ $destination }}</option>
-                                    @endforeach
-                                </select>
-                                @error('destination')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
+
                             <div class="col-sm-12 ">
                                 <label for="policy_no">Policy No</label>
                                 <input type="text" class="form-control text-white" id="policy_no" name="policy_no"
@@ -189,14 +158,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="plan_type">Money REceipt URL</label>
-                                <input type="text" class="form-control" id="plan_type" name="plan_type"
-                                    placeholder="Plan Type" value="{{ old('plan_type') }}">
-                                @error('plan_type')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
+
                             <div class="col-sm-12 ">
                                 <label for="mr_no">MR No</label>
                                 <input type="text" class="form-control" id="mr_no" name="mr_no"

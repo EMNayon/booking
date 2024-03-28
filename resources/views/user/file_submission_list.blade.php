@@ -17,8 +17,8 @@
                             <th>Name</th>
                             <th>Issue Date</th>
                             <th>Passport</th>
-                            <th>Country</th>
-                            <th>Reference</th>
+                            {{-- <th>Country</th> --}}
+                            {{-- <th>Reference</th> --}}
                             <th>Phone</th>
                             <th>Action</th>
                         </tr>
@@ -27,19 +27,19 @@
                         @foreach ($members as $key => $row)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ $row->certificate_no }}</td>
+                                <td>{{ $row->policy_no }}</td>
                                 <td>{{ $row->name }}</td>
-                                <td>{{ $row->effective_date }}</td>
-                                <td>{{ $row->passport }}</td>
-                                <td>{{ $row->destination }}</td>
-                                <td>{{ $row->reference }}</td>
-                                <td>{{ $row->phone_no }}</td>
+                                <td>{{ $row->issue_date }}</td>
+                                <td>{{ $row->pass_no }}</td>
+                                {{-- <td>{{ $row->created_by }}</td> --}}
+                                {{-- <td>{{ $row->name }}</td> --}}
+                                <td>{{ $row->mobile_no }}</td>
                                 <td>
-                                    {!! "<a class='btn btn-sm btn-info text-white' href='" .
+                                    {!! "<a class='btn btn-sm btn-primary' href='" . route('member_edit', [$row->code]) . "'>View/Edit</a><a title='Money Receipt'  class='btn btn-sm btn-info text-white' href='" .
                                         route('print_wecare', [$row->code]) .
-                                        "'>PDF Download (We Care)</a><br><br><a class='btn btn-sm btn-info text-white' href='" .
+                                        "'>MR</a><a  title='Policy Download'  class='btn btn-sm btn-info text-white' href='" .
                                         route('print_travelvisit', [$row->code]) .
-                                        "'>PDF Download (Travel Visit)</a>" !!}
+                                        "'>OMP</a>" !!}
                                 </td>
                             </tr>
                         @endforeach

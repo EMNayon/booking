@@ -49,15 +49,10 @@
                     <li>
                         <a href="{{ route('user_submission_list') }}">
                             <i class="tim-icons icon-atom"></i>
-                            <p>Insurance Certificates new</p>
+                            <p>Insurance Certificates</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('user_submission_list') }}">
-                            <i class="tim-icons icon-atom"></i>
-                            <p>Insurance Certificates past</p>
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </div>

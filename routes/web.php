@@ -21,9 +21,12 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/member/registration', [\App\Http\Controllers\MemberController::class, 'showMemberForm'])->name('show-member-form');
     Route::post('/member/registration', [\App\Http\Controllers\MemberController::class, 'submitMemberForm'])->name('submit-member-form');
     Route::get('/{code}', [\App\Http\Controllers\UserController::class, 'getMemberDataByCode'])->name('get-member-data');
+    // Route::get('/member/{code}/edit', function(){
+    //     dd("edit");
+    // });
 
-    // Route::get('/member/{code}/edit', [\App\Http\Controllers\UserController::class, 'userMemberEdit'])->name('member_edit');
-    // Route::post('/member/update', [\App\Http\Controllers\UserController::class, 'userMemberUpdate'])->name('member_update');
+    Route::get('/member/{code}/edit', [\App\Http\Controllers\UserController::class, 'userMemberEdit'])->name('member_edit');
+    Route::post('/member/update', [\App\Http\Controllers\UserController::class, 'userMemberUpdate'])->name('member_update');
 
 });
 

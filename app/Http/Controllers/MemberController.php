@@ -176,20 +176,22 @@ class MemberController extends Controller
         $this->deleteAllFilesofByPath('code/');
         $member = Member::where('code', $code)->first();
 
+
         $printdata = 'TRAVEL INSURANCE CERTIFICATE
         POLICY NUMBER WC-' . $member->certificate_no . '
         PLAN-Covid Plan (KSA)
         AGENT-NATIONAL
-        PHONE-' . $member->phone_no . '
-        FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
+        PHONE-' . $member->mobile_no . '
+        FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
         COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
         APPLICANT NAME-' . $member->name . '
         DATE OF BIRTH-' . $member->dob . '
-        PASSPORT NO-' . $member->passport;
+        PASSPORT NO-' . $member->pass_no;
 
         $qrCode = new QrCode2($printdata);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
+        // dd($data);
         $qr_filename = time() . '.png';
         file_put_contents('code/' . $qr_filename, $data);
 
@@ -203,10 +205,14 @@ class MemberController extends Controller
         //        exit;
         //        return view('downloadWecare', $data);
 
-        $pdf = PDF::loadView('downloadWecare', $data);
+
+        // dd($pdf);
+        // $pdf = PDF::loadView('downloadWecare', $data);
+
+        $pdf = PDF::loadView('money');
 
         // $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
-        $pdfName = $member->name . '_' . $member->certificate_no;
+        $pdfName = $member->name;
         return $pdf->download($pdfName . '.pdf');
     }
 
@@ -355,7 +361,7 @@ class MemberController extends Controller
             $member->area_of_travel = $request->area_of_travel;
             $member->no_of_days_covered = $request->no_of_days_covered;
             $member->premium = $request->premium;
-            
+
             $vatPercentage = 15;
             $vatAmount = ($request->premium * $vatPercentage) / 100;
             $member->total_premium = $request->premium + $vatAmount;

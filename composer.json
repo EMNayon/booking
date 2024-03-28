@@ -11,6 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "misterspelik/laravel-pdf": "^1.1",
         "mpdf/qrcode": "^1.2",
         "niklasravnsborg/laravel-pdf": "^4.1",
         "simplesoftwareio/simple-qrcode": "^4.2",

@@ -49,6 +49,7 @@ class AuthController extends Controller
     // }
 
     public function login(Request $request){
+
         try {
             $this->validate($request, [
                 'email' => 'required',
@@ -79,7 +80,7 @@ class AuthController extends Controller
                 return redirect()->back();
             }
         } catch (\Exception $e) {
-            
+
             // Log the exception or handle it according to your application's requirements
             dd($e->getMessage()); // For debugging purposes, you can display the exception message
         }

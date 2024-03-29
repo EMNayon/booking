@@ -2,17 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/money', function (){
+Route::get('/money', function () {
     return view('policy');
 });
-
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
 Route::get('i', [\App\Http\Controllers\MemberController::class, 'scanResult'])->name('scan');
-Route::get('/print_wecare/{code}', [\App\Http\Controllers\MemberController::class, 'printWecarePdf'])->name('print_wecare');
-Route::get('/print_travelvisit/{code}', [\App\Http\Controllers\MemberController::class, 'printTravelvisitPdf'])->name('print_travelvisit');
+// Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');;
+Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
+Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
 
 Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/user/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('user.home');
@@ -42,7 +41,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/member/{code}/toggle', [\App\Http\Controllers\MemberController::class, 'memberToggle'])->name('member_toggle');
     Route::get('/member/{code}/delete', [\App\Http\Controllers\MemberController::class, 'memberDelete'])->name('member_delete');
-
 
     Route::get('/agent/signup', [\App\Http\Controllers\AuthController::class, 'showSignupForm'])->name('signup');
     Route::post('/agent/signup', [\App\Http\Controllers\AuthController::class, 'signup'])->name('signup.submit');

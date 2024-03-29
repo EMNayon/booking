@@ -35,10 +35,10 @@
                                 {{-- <td>{{ $row->name }}</td> --}}
                                 <td>{{ $row->mobile_no }}</td>
                                 <td>
-                                    {!! "<a class='btn btn-sm btn-primary' href='" . route('member_edit', [$row->code]) . "'>View/Edit</a><a title='Money Receipt'  class='btn btn-sm btn-info text-white' href='" .
-                                        route('print_wecare', [$row->code]) .
+                                    {!! "<a title='Money Receipt'  class='btn btn-sm btn-info text-white' href='" .
+                                        route('money_receipt', [$row->code]) .
                                         "'>MR</a><a  title='Policy Download'  class='btn btn-sm btn-info text-white' href='" .
-                                        route('print_travelvisit', [$row->code]) .
+                                        route('policy', [$row->code]) .
                                         "'>OMP</a>" !!}
                                 </td>
                             </tr>

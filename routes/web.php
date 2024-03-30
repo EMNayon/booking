@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/money', function () {
-    return view('policy');
+    return view('money');
 });
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');

@@ -101,12 +101,13 @@
     <section>
         <div class="header">
             <h3>Policy of OMP Insurance</h3>
-            <img src="./images/scc.png">
+            {{-- <img src="./images/scc.png"> --}}
+            <img src="{{ public_path('/') }}code/{{ $path }}" style="height: 150px; width: 150px" />
             <p>Please scan the QR code to validate your policy and benefits</p>
             <h4>OVERSEAS MEDICLAIM IDENTIFICATION (B&H) SCHEDULE</h4>
         </div>
         <div class="header-box">
-            <p>This Overseas Mediclaim Insurance is only available to Bangladeshi Citizens between 6 months and 79 years
+            <p >This Overseas Mediclaim Insurance is only available to Bangladeshi Citizens between 6 months and 79 years
                 of age who are
                 undertaking bonfide trips outside Bangladesh which will not involve any form of manual work and do not
                 exceed 180 days in
@@ -121,42 +122,40 @@
                 </tr>
                 <tr>
                     <td colspan="">Policy No.</td>
-                    <td colspan="3">MIIPLC/MGB/OMP-00108/09/2023( B&H )</td>
+                    <td colspan="3">{{$member->policy_no}}</td>
                     <td>Issue Date</td>
-                    <td>10/09/2023</td>
+                    <td>{{$member->issue_date}}</td>
 
                 </tr>
                 <tr>
                     <td>Plan Type</td>
-                    <td colspan="5">Plan A: For Schengen Countries and Worldwide excluding USA/CANADA</td>
+                    <td colspan="5">{{$member->plan_type}}</td>
 
                 </tr>
                 <tr>
                     <td colspan="">Area of Travel</td>
-                    <td colspan="5">PORTUGAL</td>
+                    <td colspan="5">{{$member->area_of_travel}}</td>
                 </tr>
 
                 <tr>
                     <td colspan="">No. of Dayes Covered</td>
-                    <td colspan="5">For 120 days From 13/10/2023 To 09/02/2024 Or 120 Days From the date of Travel.</td>
+                    <td colspan="5">{{$member->no_of_days_covered}}</td>
                 </tr>
 
                 <tr>
                     <td colspan="">Premium</td>
-                    <td colspan="">BDT
-                        13,707.00</td>
+                    <td colspan="">BDT {{$member->premium}}</td>
                     <td>VAT</td>
-                    <td>BDT
-                        2,056.00</td>
+                    <td>BDT {{$member->total_premium - $member->premium}}</td>
                     <td>Total Premium</td>
-                    <td>BDT 15,763.00</td>
+                    <td>BDT {{$member->total_premium}}</td>
                 </tr>
 
                 <tr>
                     <td colspan="">Money Receipt URL</td>
-                    <td colspan="3">https://um.pe/hRab6E</td>
+                    <td colspan="3">{{$member->policy_no}}</td>
                     <td>MR No.</td>
-                    <td>BMGB-2023-443</td>
+                    <td>{{$member->mr_no}}</td>
 
                 </tr>
             </table>
@@ -174,26 +173,26 @@
 
                 <tr>
                     <td colspan="">Name</td>
-                    <td colspan="5">ISLAM UDDIN</td>
+                    <td colspan="5">{{$member->name}}</td>
                     <td colspan="5">Mobile No.</td>
-                    <td colspan="5">+880 1731496092</td>
+                    <td colspan="5">{{$member->mobile_no}}</td>
 
                 </tr>
 
                 <tr>
                     <td colspan="">Address</td>
-                    <td colspan="11">BAYAMPUR, KANAIGHAT, KANAIGHAT, SYLHET.</td>
+                    <td colspan="11">{{$member->address}}</td>
 
                 </tr>
                 <tr>
                     <td>Age</td>
-                    <td colspan="2">57 +</td>
+                    <td colspan="2">{{$member->age}} +</td>
                     <td>Date of Birth</td>
-                    <td>05/03/1967</td>
+                    <td>{{$member->dob}}</td>
                     <td>Passport No.</td>
-                    <td>EH0967313</td>
+                    <td>{{$member->pass_no}}</td>
                     <td>Nationality</td>
-                    <td colspan="4">Bangladeshi</td>
+                    <td colspan="4">{{$member->nationality}}</td>
                 </tr>
             </table>
         </div>

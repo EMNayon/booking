@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
-use Barryvdh\DomPDF\Facade\Pdf;
+// use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use Mpdf\QrCode\Output;
 use Mpdf\QrCode\QrCode as QrCode2;
 
-// use PDF;
+use PDF;
 
 class MemberController extends Controller
 {
@@ -175,43 +175,41 @@ class MemberController extends Controller
     public function moneyReceiptPdf($code)
     {
 
+        // dd( 'hello');
         $this->deleteAllFilesofByPath('code/');
 
-        // $member = Member::where('code', $code)->first();
-        // dd( $member);
+        $member = Member::where('code', $code)->first();
 
-        // $printdata = 'TRAVEL INSURANCE CERTIFICATE
-        // POLICY NUMBER WC-' . $member->certificate_no . '
-        // PLAN-Covid Plan (KSA)
-        // AGENT-NATIONAL
-        // PHONE-' . $member->mobile_no . '
-        // FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
-        // COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
-        // APPLICANT NAME-' . $member->name . '
-        // DATE OF BIRTH-' . $member->dob . '
-        // PASSPORT NO-' . $member->pass_no;
 
-        // $qrCode = new QrCode2($printdata);
-        // $output = new Output\Png();
-        // $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
-        // // dd($data);
-        // $qr_filename = time() . '.png';
-        // file_put_contents('code/' . $qr_filename, $data);
+        $printdata = 'TRAVEL INSURANCE CERTIFICATE
+        POLICY NUMBER WC-' . $member->policy_no . '
+        AGENT-NATIONAL
+        PHONE-' . $member->mobile_no . '
+        FROM-' . $member->issue_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
+        COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
+        APPLICANT NAME-' . $member->name . '
+        DATE OF BIRTH-' . $member->dob . '
+        PASSPORT NO-' . $member->pass_no;
+        // dd($printdata);
 
-        // //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
-        // $qrcode = $qr_filename;
-        // $data = [
-        //     'path' => $qrcode,
-        //     'member' => $member,
-        // ];
-        //        echo $html;
-        //        exit;
-        //        return view('downloadWecare', $data);
+        $qrCode = new QrCode2($printdata);
+        // $qrCode = new QrCode2(route('money_receipt').'/'.$member->code);
+        // dd($qrCode);
+        $output = new Output\Png();
+        $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
+        // dd($data);
+        $qr_filename = time() . '.png';
+        // dd($qr_filename);
+        file_put_contents('code/' . $qr_filename, $data);
 
-        // dd($pdf);
-        // $pdf = PDF::loadView('downloadWecare', $data);
+        //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
+        $qrcode = $qr_filename;
+        $data = [
+            'path' => $qrcode,
+            'member' => $member,
+        ];
 
-        $pdf = PDF::loadView('money');
+        $pdf = PDF::loadView('money', $data);
 
         // $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         $pdfName = $member->name;
@@ -251,7 +249,7 @@ class MemberController extends Controller
         //        exit;
         //        return view('downloadTravelvisit', $data);
 
-        $pdf = PDF::loadView('downloadTravelvisit', $data);
+        $pdf = PDF::loadView('policy', $data);
 
         $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         return $pdf->download($pdfName . '.pdf');

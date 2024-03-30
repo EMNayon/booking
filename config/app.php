@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        // Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -174,9 +175,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+        // niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
-        // misterspelik\LaravelPdf\PdfServiceProvider::class
+        misterspelik\LaravelPdf\PdfServiceProvider::class
 
     ],
 
@@ -234,7 +235,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
-        // 'PDF' => misterspelik\LaravelPdf\Facades\Pdf::class
+        'PDF' => misterspelik\LaravelPdf\Facades\Pdf::class
+        // 'PDF' => \Barryvdh\DomPDF\Facade\Pdf::class,
 
     ],
 

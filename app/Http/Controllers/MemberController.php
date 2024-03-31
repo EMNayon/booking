@@ -190,10 +190,10 @@ class MemberController extends Controller
         APPLICANT NAME-' . $member->name . '
         DATE OF BIRTH-' . $member->dob . '
         PASSPORT NO-' . $member->pass_no;
-        // dd($printdata);
+        // dd(route('scan').'/'.$member->code);
 
-        $qrCode = new QrCode2($printdata);
-        // $qrCode = new QrCode2(route('money_receipt').'/'.$member->code);
+        // $qrCode = new QrCode2($printdata);
+        $qrCode = new QrCode2(route('scan').'/'.$member->code);
         // dd($qrCode);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
@@ -233,7 +233,10 @@ class MemberController extends Controller
         DATE OF BIRTH-' . $member->dob . '
         PASSPORT NO-' . $member->passport;
 
-        $qrCode = new QrCode2($printdata);
+        // $qrCode = new QrCode2($printdata);
+        // $pdfname = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
+        $qrCode = new QrCode2(route('scanp') . '/pdf/'. $member->code);
+        // dd($qrCode);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
         $qr_filename = time() . '.png';
@@ -275,8 +278,25 @@ class MemberController extends Controller
 
     }
 
-    public function scanResult(Request $request)
+    public function scanResultMoney(Request $request)
     {
+        // dd('i am here');
+        $code = $request->id;
+        if ($code == null) {
+            return view('invalid');
+        }
+        $member = Member::where('code', $code)->first();
+        if (!empty($member) && !$member->hidden) {
+            $page = 'result';
+            return view('show', compact('member', 'page'));
+        }
+
+        return view('invalid');
+    }
+
+    public function scanResultPolicy(Request $request)
+    {
+        // dd('i am here');
         $code = $request->id;
         if ($code == null) {
             return view('invalid');

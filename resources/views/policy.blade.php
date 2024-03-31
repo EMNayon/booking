@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>OMP PDF</title>
    <style>
     *{
         margin: 0;
@@ -25,6 +25,7 @@
     .header h3{
         color: red;
         font-weight: 500;
+        font-size: 15px;
     }
     .header img{
         height: 100px;
@@ -47,6 +48,7 @@
     table, th, td {
         border:1px solid black;
         border-collapse: collapse;
+        font-size: 12px;
       }
       .table-space{
         padding: 5px;
@@ -98,11 +100,11 @@
 </head>
 
 <body>
-    <section>
+    <section style="font-size: 10px;">
         <div class="header">
             <h3>Policy of OMP Insurance</h3>
             {{-- <img src="./images/scc.png"> --}}
-            <img src="{{ public_path('/') }}code/{{ $path }}" style="height: 150px; width: 150px" />
+            <img src="{{ public_path('/') }}code/{{ $path }}" style="height: 100px; width: 100px; border:1px solid black;" />
             <p>Please scan the QR code to validate your policy and benefits</p>
             <h4>OVERSEAS MEDICLAIM IDENTIFICATION (B&H) SCHEDULE</h4>
         </div>
@@ -120,8 +122,8 @@
                     <td colspan="6" class="table-space">Mercantile Islami Insurance PLC OMP Policy Details
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="">Policy No.</td>
+                <tr >
+                    <td colspan="" >Policy No.</td>
                     <td colspan="3">{{$member->policy_no}}</td>
                     <td>Issue Date</td>
                     <td>{{$member->issue_date}}</td>
@@ -153,7 +155,7 @@
 
                 <tr>
                     <td colspan="">Money Receipt URL</td>
-                    <td colspan="3">{{$member->policy_no}}</td>
+                    <td colspan="3">{{route('scan').'/'.$member->code}}</td>
                     <td>MR No.</td>
                     <td>{{$member->mr_no}}</td>
 
@@ -174,7 +176,7 @@
                 <tr>
                     <td colspan="">Name</td>
                     <td colspan="5">{{$member->name}}</td>
-                    <td colspan="5">Mobile No.</td>
+                    <td colspan="">Mobile No.</td>
                     <td colspan="5">{{$member->mobile_no}}</td>
 
                 </tr>

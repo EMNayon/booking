@@ -39,7 +39,6 @@
         }
 
         .b_bottom {
-            width: 100%;
             border-bottom: 1px solid #333;
             padding-left: 0px;
         }
@@ -49,18 +48,31 @@
             max-width: 450px;
             height: auto;
         }
-        .d-inline-block {
-            display: inline-block;
-        }
     </style>
     <title>Money Receipt</title>
 </head>
 
-<body oncontextmenu="return false;" onload="showModal()" style="background: whitesmoke;" cz-shortcut-listen="true">
-    <div class="container" style="max-width: 21cm;">
+<body oncontextmenu="return false;"  style="background: whitesmoke;" cz-shortcut-listen="true">
+    <div class="container-fluid" style="max-width: 800px; background: #fff;">
+        <div class="row">
+            <div class="col">
+                <div id="myModal" class="modal" style="text-align: center; display: none;">
+                    <div>
+                        <button class="btn btn-light" id="close" style="margin-left: 22%;"><b>X</b></button>
+                    </div>
+                    <div>
+                        <a class="myImg" href="https://play.google.com/store/apps/details?id=com.idra.ump"
+                            target="_blank" rel="noopener noreferrer">
+                            <img id="myImg" src="https://um.pe/static/app_qrcode.png" alt="Qr Code Image"
+                                class="img img-responsive res_image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row text-center mb-5">
             <div class="col-sm-12 pt-3">
-                <img src="	https://um.pe/get-logo/mercantile" alt="Company Logo" class="img img-responsive" width="100%">
+                <img src="/get-logo/mercantile" alt="Company Logo" class="img img-responsive" width="100%">
             </div>
             <div class="col-sm-12">
                 <span style="white-space: pre-line">Head Office: Red Crescent Bhaban 61, Motijheel C/A (1st Floor),
@@ -91,29 +103,29 @@
             <div class="row py-4">
                 <div class="col-sm-12 col-md-6">
                     <div class="row no-gutters">
-                        <label class="col-5 d-inline-block">Issuing Office</label>
-                        <label class="col-7 d-inline-block">
-                            <span style="float: left; padding-right: 5px;">:</span>
-                            <span style="float: left;"> {{ $member->issuing_office }}</span>
-                        </label>
+                        <div class="col-5">Issuing Office</div>
+                        <div class="col-7">
+                            <div style="float: left; padding-right: 5px;">:</div>
+                            <div style="float: left;"> {{ $member->issuing_office }}</div>
+                        </div>
                     </div>
                     <div class="row">
-                        <label class="col-5">Money Receipt No.</label>
-                        <label class="col-7">
-                            <span style="float: left; padding-right: 5px;">:</span>
-                            <span style="float: left;">{{ $member->money_receipt_no }}</span>
-                        </label>
+                        <div class="col-5">Money Receipt No.</div>
+                        <div class="col-7">
+                            <div style="float: left; padding-right: 5px;">:</div>
+                            <div style="float: left;">{{ $member->money_receipt_no }}</div>
+                        </div>
                     </div>
 
                 </div>
                 <div class="row pe-0">
                     <div class="col-sm-6 col-md-6">
                         <div class="row no-gutters">
-                            <label class="col-5">Class of Insurance</label>
-                            <label class="col-7">
-                                <span style="float: left; padding-left: 3px; padding-right: 5px;">:</span>
-                                <span style="float: left;">{{ $member->class_of_insurance }}</span>
-                            </label>
+                            <div class="col-5">Class of Insurance</div>
+                            <div class="col-7">
+                                <div style="float: left; padding-left: 3px; padding-right: 5px;">:</div>
+                                <div style="float: left;">{{ $member->class_of_insurance }}</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 text-end pe-0">
@@ -122,50 +134,50 @@
                 </div>
             </div>
             <div class="row align-items-end my-2">
-                <label class="col-4">
+                <div class="col-4">
                     <span class="fw-bold">Received with thanks from</span>
-                </label>
-                <span class="col-8 b_bottom">
-                    {{ $member->name }} , {{ $member->address }}
-                </span>
+                </div>
+                <div class="col-8 b_bottom">
+                    <span>{{ $member->name }} , {{ $member->address }}</span>
+                </div>
             </div>
             <div class="row align-items-end mb-2">
-                <label class="col-2 ">
+                <div class="col-2">
                     <span>The sum of</span>
-                </label>
-                <span class="col-10 b_bottom ">
+                </div>
+                <div class="col-10 b_bottom">
                     {{ $member->total_premium }}
-                </span>
+                </div>
             </div>
             <div class="row align-items-end mb-2">
-                <label class="col-3">
+                <div class="col-3">
                     <span>Mode of Payment</span>
-                </label>
-                <span class="col-4 b_bottom">
+                </div>
+                <div class="col-4 b_bottom">
                     Pay Order; {{ $member->mode_of_payment }}
-                </span>
-                <label class="col-2 text-end">
+                </div>
+                <div class="col-2 text-end">
                     <span>Dated</span>
-                </label>
-                <span class="col-3 b_bottom">
+                </div>
+                <div class="col-3 b_bottom">
                     {{ $member->issue_date }}
-                </span>
+                </div>
             </div>
             <div class="row align-items-end mb-2">
-                <span class="col-2">
+                <div class="col-2">
                     <span>Drawn on</span>
-                </span>
-                <span class="col-10 b_bottom">
+                </div>
+                <div class="col-10 b_bottom">
                     {{ $member->drawn_on }}
-                </span>
+                </div>
             </div>
             <div class="row align-items-end mb-2">
-                <span class="col-2">
+                <div class="col-2">
                     <span>Issued against</span>
-                </span>
-                <span class="col-10 b_bottom">
+                </div>
+                <div class="col-10 b_bottom">
                     {{ $member->policy_no }}
-                </span>
+                </div>
             </div>
 
             <div class="row">
@@ -191,9 +203,11 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- <div class="col-6 text-center">
+                    <img src="" alt="qrCodeImage" class="qr-code img-responsive" />
+                </div> -->
                 <div class="col-6 text-center">
-                    {{-- <img src="" alt="qrCodeImage" class="qr-code img-responsive" /> --}}
-                    <img src="{{ public_path('/') }}code/{{ $path }}" style="width: 100px;" class="qr-code img-responsive"  />
+                    <img src="{{ public_path('/') }}code/{{ $path }}" style="width: 100px;" />
                 </div>
             </div>
             <div class="row mt-4">
@@ -209,12 +223,12 @@
         </div>
         <div class="row pb-2">
             <label for="" style="color: red;">* Note: If have any complain about Insurance, call
-                16130.</label> 
+                16130.</label>
         </div>
 
     </div>
 
-    <script>
+    {{-- <script>
         function showModal() {
             document.getElementById("myModal").style.display = "block";
         }
@@ -232,7 +246,7 @@
         }
         // const printBtn = document.getElementById('printBtn')
         // printBtn.addEventListener('click', event => window.print());
-    </script>
+    </script> --}}
 
     <!-- <script src="/static/bootstrap.bundle.js"></script> -->
 

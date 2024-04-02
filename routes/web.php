@@ -6,14 +6,18 @@ Route::get('/money', function () {
     return view('money');
 });
 
+
+Route::get('/test/{code}', [\App\Http\Controllers\MemberController::class, 'test'])->name('money_receipt');
+
+
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
-Route::get('/m', [\App\Http\Controllers\MemberController::class, 'scanResultMoney'])->name('scan');
-// Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('scan');
+Route::get('m', [\App\Http\Controllers\MemberController::class, 'scanResultMoney'])->name('scan');
+Route::get('m/{code}', [\App\Http\Controllers\MemberController::class, 'test']);
 Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
 Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
 Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
-Route::get('/p', [\App\Http\Controllers\MemberController::class, 'scanResultPolicy'])->name('scanp');
+Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
 
 Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/user/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('user.home');

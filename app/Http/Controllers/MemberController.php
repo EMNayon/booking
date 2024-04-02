@@ -210,10 +210,47 @@ class MemberController extends Controller
         ];
 
         $pdf = PDF::loadView('money', $data);
+        // $pdf->setPaper('A4','Portrait');
 
         // $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         $pdfName = $member->name;
         return $pdf->download($pdfName . '.pdf');
+        // return view('money', $data);
+    }
+
+    public function test($code){
+        $this->deleteAllFilesofByPath('code/');
+
+        $member = Member::where('code', $code)->first();
+        // $printdata = 'TRAVEL INSURANCE CERTIFICATE
+        // POLICY NUMBER WC-' . $member->policy_no . '
+        // AGENT-NATIONAL
+        // PHONE-' . $member->mobile_no . '
+        // FROM-' . $member->issue_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
+        // COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
+        // APPLICANT NAME-' . $member->name . '
+        // DATE OF BIRTH-' . $member->dob . '
+        // PASSPORT NO-' . $member->pass_no;
+        // // dd(route('scan').'/'.$member->code);
+
+        // // $qrCode = new QrCode2($printdata);
+        // $qrCode = new QrCode2(route('scan').'/'.$member->code);
+        // // dd($qrCode);
+        // $output = new Output\Png();
+        // $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
+        // // dd($data);
+        // $qr_filename = time() . '.png';
+        // // dd($qr_filename);
+        // file_put_contents('code/' . $qr_filename, $data);
+
+        // //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
+        // $qrcode = $qr_filename;
+        // $data = [
+        //     'path' => $qrcode,
+        //     'member' => $member,
+        // ];
+
+        return view('moneyVerified', compact('member'));
     }
 
     public function policyPdf($code)
@@ -281,7 +318,8 @@ class MemberController extends Controller
     public function scanResultMoney(Request $request)
     {
         // dd('i am here');
-        $code = $request->id;
+        $code = $request->code;
+        dd($code);
         if ($code == null) {
             return view('invalid');
         }

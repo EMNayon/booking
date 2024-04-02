@@ -11,32 +11,39 @@
         padding: 0;
     }
     body {
-        width: 21cm; /* Set width to match A4 width */
+        width: 25cm; /* Set width to match A4 width */
         margin: auto; /* Center the content horizontally */
-        padding: 0.5cm; /* Add padding to keep content away from page edges */
-        box-sizing: border-box;
-        border: 1px solid grey; /* Include padding in the total width */
+        padding: 0.1cm; /* Add padding to keep content away from page edges */
+        /* box-sizing: border-box;
+        border: 1px solid black; Include padding in the total width */
     }
     .header {
         text-align: center;
-        padding-bottom: 4px;
+        line-height: 0;
+        /* padding-bottom: 4px; */
     }
 
     .header h3{
         color: red;
         font-weight: 500;
-        font-size: 15px;
+        font-size: 16px;
     }
+    /* .header p{
+        font-size: 12px;
+    } */
     .header img{
         height: 100px;
         width: auto;
     }
     .header h4{
     font-weight: bold;
+    font-size: 12px;
     }
-
+    .header-box {
+        line-height: 0;
+    }
     .header-box p{
-        border: 2px solid grey;
+        border: 2px solid black;
         padding: 3px;
     }
 
@@ -60,7 +67,7 @@
 
     .table td, .table th {
         padding: 4px; /* Add padding to table cells */
-        border: 1px solid grey; /* Add border to table cells */
+        border: 1px solid black; /* Add border to table cells */
     }
 
     .table-space {
@@ -80,11 +87,12 @@
         padding-top: 5px;
     }
     .terms ol{
-        margin-left: 30px;
-        padding-top: 8px;
+        margin-left: 10px;
+        /* padding-top: 8px; */
     }
     .italic {
         font-style: italic; /* Apply italic style */
+        font-size: 12px;
     }
     .footer{
         text-align: center;
@@ -100,7 +108,7 @@
 </head>
 
 <body>
-    <section style="font-size: 10px;">
+    <section style="font-size: 10px; border:1px solid black; padding:1px;">
         <div class="header">
             <h3>Policy of OMP Insurance</h3>
             {{-- <img src="./images/scc.png"> --}}
@@ -232,11 +240,8 @@
                     <td colspan="12" class="table-space">Emergency Assurance
                     </td>
                 </tr>
-
-
-
                 <tr>
-                    <td>
+                    <td colspan="12">
                         <p>
                             <span> Claims Handling Agent of IMR</span> <br />
                             IntanaGlobal, <br />
@@ -245,8 +250,6 @@
                         </p>
                     </td>
                 </tr>
-
-
             </table>
         </div>
 
@@ -254,14 +257,14 @@
             <h5 class="italic">Terms and Conditions Apply</h5>
             <ol>
                 <li>
-                    <p>Warranted that if any alteration/Modification/ Cancellation of this policy is needed the insured
+                   Warranted that if any alteration/Modification/ Cancellation of this policy is needed the insured
                         must inform the insurer Mercantile Islami Insurance PLC in writing before his/her departure from
-                        Bangladesh.</p>
+                        Bangladesh.
                 </li>
                 <li>
-                    <p>In the event of hospitalization, the insured Person or treating hospital is required to contact
+                    In the event of hospitalization, the insured Person or treating hospital is required to contact
                         the assigned Emergency Assistance within 24 hours of admission and the Insured Person or
-                        treating hospital must receive an acknowledgment on the coverage.</p>
+                        treating hospital must receive an acknowledgment on the coverage.
                 </li>
             </ol>
         </div>

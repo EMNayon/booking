@@ -35,7 +35,7 @@
                                 {{-- <td>{{ $row->name }}</td> --}}
                                 <td>{{ $row->mobile_no }}</td>
                                 <td>
-                                    {!! "<a title='Money Receipt'  class='btn btn-sm btn-info text-white' href='" .
+                                    {!! "<a title='Money Receipt'   class='btn btn-sm btn-info text-white' href='" .
                                         route('money_receipt', [$row->code]) .
                                         "'>MR</a><a  title='Policy Download'  class='btn btn-sm btn-info text-white' href='" .
                                         route('policy', [$row->code]) .

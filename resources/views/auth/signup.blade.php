@@ -51,6 +51,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="point" name="point" placeholder=""
+                                    min="11" max="13">
+                                <label for="point">Point</label>
+                                @error('point')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                             <div class="form-floating mt-2">
                                 <input type="password" class="form-control" id="floatingPassword" name="password"

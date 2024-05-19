@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="https://um.pe/static/bootstrap.css">
     <link rel="stylesheet" href="https://um.pe/static/solaimanlipi.css">
     <link rel="stylesheet" href="https://um.pe/static/style.css">
-
-    <!-- <link rel="stylesheet" href="/static/bootstrap.css">
-        <link rel="stylesheet" href="/static/solaimanlipi.css"> -->
-    <!-- <link rel="stylesheet" href="/static/style.css"> -->
     <style>
         td {
             padding: 3px 9px;

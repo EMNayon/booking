@@ -7,13 +7,13 @@ Route::get('/money', function () {
 });
 
 
-Route::get('/test/{code}', [\App\Http\Controllers\MemberController::class, 'test'])->name('money_receipt');
+// Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
 
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
 Route::get('m', [\App\Http\Controllers\MemberController::class, 'scanResultMoney'])->name('scan');
-Route::get('m/{code}', [\App\Http\Controllers\MemberController::class, 'test']);
+Route::get('m/{code}', [\App\Http\Controllers\MemberController::class, 'moneyVerifiedPdf']);
 Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
 Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
 Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');

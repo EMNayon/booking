@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
-// use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +11,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Mpdf\QrCode\Output;
 use Mpdf\QrCode\QrCode as QrCode2;
+use Illuminate\Support\Facades\Response;
+
 
 use PDF;
 
@@ -106,7 +107,15 @@ class MemberController extends Controller
     }
     public function submitMemberForm(Request $request)
     {
-        // dd('okay');
+        // dd('ok');
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Check if the user has enough points
+        if ($user->point <= 0) {
+            Session::flash('error', 'You do not have enough points to submit the form.');
+            return redirect()->back();
+        }
 
         DB::beginTransaction();
         try {
@@ -128,11 +137,9 @@ class MemberController extends Controller
             $member->no_of_days_covered = $request->no_of_days_covered;
 
             $member->premium = $request->premium;
-
             $vatPercentage = 15;
             $vatAmount = ($request->premium * $vatPercentage) / 100;
             $member->total_premium = $request->premium + $vatAmount;
-            // $member->total_premium = $request->premium;
 
             $member->mr_no = $request->mr_no;
 
@@ -144,19 +151,15 @@ class MemberController extends Controller
             $member->pass_no = $request->pass_no;
             $member->nationality = $request->nationality;
 
-            // $member->effective_date = date('d-m-Y', strtotime($request->effective_date));
-            // $member->certificate_no = $request->certificate_no;
-            // $member->nid = $request->nid;
-            // $member->gender = $request->gender;
-
             $member->code = $code;
             $member->hidden = 0;
             $member->created_by = Auth::id();
 
-            // dd($member->created_by);
             $member->save();
 
-            // dd($member);
+            // Decrement the user's points
+            $user->point -= 1;
+            $user->save();
 
             DB::commit();
             Session::flash('success', 'File Submission Successfull.');
@@ -175,31 +178,14 @@ class MemberController extends Controller
     public function moneyReceiptPdf($code)
     {
 
-        // dd( 'hello');
         $this->deleteAllFilesofByPath('code/');
 
         $member = Member::where('code', $code)->first();
 
-
-        $printdata = 'TRAVEL INSURANCE CERTIFICATE
-        POLICY NUMBER WC-' . $member->policy_no . '
-        AGENT-NATIONAL
-        PHONE-' . $member->mobile_no . '
-        FROM-' . $member->issue_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
-        COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
-        APPLICANT NAME-' . $member->name . '
-        DATE OF BIRTH-' . $member->dob . '
-        PASSPORT NO-' . $member->pass_no;
-        // dd(route('scan').'/'.$member->code);
-
-        // $qrCode = new QrCode2($printdata);
         $qrCode = new QrCode2(route('scan').'/'.$member->code);
-        // dd($qrCode);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
-        // dd($data);
         $qr_filename = time() . '.png';
-        // dd($qr_filename);
         file_put_contents('code/' . $qr_filename, $data);
 
         //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
@@ -210,46 +196,52 @@ class MemberController extends Controller
         ];
 
         $pdf = PDF::loadView('money', $data);
-        // $pdf->setPaper('A4','Portrait');
 
         // $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         $pdfName = $member->name;
         return $pdf->download($pdfName . '.pdf');
-        // return view('money', $data);
+        // return view('money',$data);
+        // return $pdf->stream();
     }
 
-    public function test($code){
+
+//     public function moneyReceiptPdf($code)
+// {
+//     // Logic to generate PDF
+//     $pdf = $this->generatePdf($code);
+
+//     // Return PDF as response
+//     return Response::make($pdf, 200, [
+//         'Content-Type' => 'application/pdf',
+//         'Content-Disposition' => 'inline; filename="money_receipt.pdf"',
+//     ]);
+// }
+
+// private function generatePdf($code)
+// {
+//     // Your PDF generation logic here
+//     // For example:
+//     $member = Member::where('code', $code)->first();
+//     $qrCode = new QrCode2(route('scan').'/'.$member->code);
+//         $output = new Output\Png();
+//         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
+//         $qr_filename = time() . '.png';
+//         file_put_contents('code/' . $qr_filename, $data);
+
+//         //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
+//         $qrcode = $qr_filename;
+//         $data = [
+//             'path' => $qrcode,
+//             'member' => $member,
+//         ];
+//     $pdf = PDF::loadView('money', $data);
+//     return $pdf->stream();
+//     // return view('money', $data);
+// }
+
+    public function moneyVerifiedPdf($code){
         $this->deleteAllFilesofByPath('code/');
-
         $member = Member::where('code', $code)->first();
-        // $printdata = 'TRAVEL INSURANCE CERTIFICATE
-        // POLICY NUMBER WC-' . $member->policy_no . '
-        // AGENT-NATIONAL
-        // PHONE-' . $member->mobile_no . '
-        // FROM-' . $member->issue_date . ' TO ' . date('d-m-Y', strtotime($member->issue_date . ' +30 days')) . '
-        // COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
-        // APPLICANT NAME-' . $member->name . '
-        // DATE OF BIRTH-' . $member->dob . '
-        // PASSPORT NO-' . $member->pass_no;
-        // // dd(route('scan').'/'.$member->code);
-
-        // // $qrCode = new QrCode2($printdata);
-        // $qrCode = new QrCode2(route('scan').'/'.$member->code);
-        // // dd($qrCode);
-        // $output = new Output\Png();
-        // $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
-        // // dd($data);
-        // $qr_filename = time() . '.png';
-        // // dd($qr_filename);
-        // file_put_contents('code/' . $qr_filename, $data);
-
-        // //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
-        // $qrcode = $qr_filename;
-        // $data = [
-        //     'path' => $qrcode,
-        //     'member' => $member,
-        // ];
-
         return view('moneyVerified', compact('member'));
     }
 
@@ -259,21 +251,7 @@ class MemberController extends Controller
         $this->deleteAllFilesofByPath('code/');
         $member = Member::where('code', $code)->first();
 
-        $printdata = 'TRAVEL INSURANCE CERTIFICATE
-        POLICY NUMBER WC-' . $member->certificate_no . '
-        PLAN-Covid Plan (KSA)
-        AGENT-NATIONAL
-        PHONE-' . $member->phone_no . '
-        FROM-' . $member->effective_date . ' TO ' . date('d-m-Y', strtotime($member->effective_date . ' +30 days')) . '
-        COUNTRY OF RESIDENCE ' . strtoupper($member->nationality) . '
-        APPLICANT NAME-' . $member->name . '
-        DATE OF BIRTH-' . $member->dob . '
-        PASSPORT NO-' . $member->passport;
-
-        // $qrCode = new QrCode2($printdata);
-        // $pdfname = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         $qrCode = new QrCode2(route('scanp') . '/pdf/'. $member->code);
-        // dd($qrCode);
         $output = new Output\Png();
         $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
         $qr_filename = time() . '.png';
@@ -285,12 +263,7 @@ class MemberController extends Controller
             'path' => $qrcode,
             'member' => $member,
         ];
-        //        echo $html;
-        //        exit;
-        //        return view('downloadTravelvisit', $data);
-
         $pdf = PDF::loadView('policy', $data);
-
         $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
         return $pdf->download($pdfName . '.pdf');
     }
@@ -317,7 +290,6 @@ class MemberController extends Controller
 
     public function scanResultMoney(Request $request)
     {
-        // dd('i am here');
         $code = $request->code;
         dd($code);
         if ($code == null) {
@@ -334,7 +306,6 @@ class MemberController extends Controller
 
     public function scanResultPolicy(Request $request)
     {
-        // dd('i am here');
         $code = $request->id;
         if ($code == null) {
             return view('invalid');
@@ -351,9 +322,6 @@ class MemberController extends Controller
     public function memberEdit($code)
     {
         $member = Member::where('code', $code)->first();
-        // dd($member);
-        // $centers = self::$centers;
-        // $destinations = self::$destinations;
         return view('admin.member_edit', compact('member'));
     }
 
@@ -378,19 +346,6 @@ class MemberController extends Controller
 
     public function memberUpdate(Request $request)
     {
-        // $this->validate($request, [
-
-        //     'name' => 'required',
-        //     'dob' => 'required',
-        //     'nationality' => 'required',
-        //     'gender' => 'required',
-        //     'passport' => ['nullable', Rule::unique('members')->ignore($request->id)]
-        // ], [
-        //     'name.required' => 'Name field is required',
-        //     'dob.required' => 'Date of Birth field is required',
-        //     'nationality.required' => 'Nationality field is required',
-        //     'gender.required' => 'Gender field is required',
-        // ]);
         DB::beginTransaction();
 
         try {
@@ -409,12 +364,11 @@ class MemberController extends Controller
             $member->plan_type = $request->plan_type;
             $member->area_of_travel = $request->area_of_travel;
             $member->no_of_days_covered = $request->no_of_days_covered;
-            $member->premium = $request->premium;
 
+            $member->premium = $request->premium;
             $vatPercentage = 15;
             $vatAmount = ($request->premium * $vatPercentage) / 100;
             $member->total_premium = $request->premium + $vatAmount;
-            // $member->total_premium = $request->total_premium;
             $member->mr_no = $request->mr_no;
 
             $member->name = $request->name;

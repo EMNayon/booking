@@ -88,9 +88,17 @@
                                         Log out
                                     </p>
                                 </a>
+                                @if(Auth::check())
+                                    @php
+                                        $user = Auth::user();
+                                        $points = $user->point; // Assuming the points column is in the users table
+                                    @endphp
+                                @endif
                                 <ul class="dropdown-menu dropdown-navbar">
                                     <li class="nav-link"><a href="{{ route('logout') }}"
                                             class="nav-item dropdown-item">Log out</a></li>
+                                    <li class="nav-link"><a href=""
+                                            class="nav-item dropdown-item">User Point : {{ $points }}</a></li>
                                 </ul>
                             </li>
                             <li class="separator d-lg-none"></li>

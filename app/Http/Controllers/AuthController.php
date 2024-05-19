@@ -97,6 +97,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
+            'point' => 'required',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
@@ -106,6 +107,7 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
+            $user->point = $request->point;
             $user->password = Hash::make($request->password);
             $user->user_type = User::USER_TYPE_USER;
             $user->status = User::STATUS_INACTIVE;

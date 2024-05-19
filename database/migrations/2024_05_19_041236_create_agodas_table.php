@@ -31,7 +31,7 @@ class CreateAgodasTable extends Migration
             $table->string('number_of_childern');
             $table->string('room_type');
             $table->string('promotion');
-            $table->string('promotion');
+            // $table->string('promotion');
 
             $table->string('arrival');
             $table->string('departure');

@@ -36,69 +36,77 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
+            <h3 class="text-left" style="font-weight: bold; margin-left: 10px;">Agoda</h3>
             <form action="{{ route('submit-member-form') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
-                            <h3 class="text-left" style="font-weight: bold; margin-left: 10px;">Money Receipt Information</h3>
                             <div class="col-sm-12">
-                                <label for="bin_no">BIN No </label>
-                                <input type="text" class="form-control" id="bin_no"
-                                    name="bin_no" placeholder="BIN No"
+                                <label for="booking_id">Booking ID </label>
+                                <input type="text" class="form-control" id="booking_id"
+                                    name="booking_id" placeholder="Booking ID"
                                     ">
                                     {{-- value="{{ rand(100000000000, 9999999999) }} --}}
-                                @error('bin_no')
+                                @error('booking_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="mushak">MUSHAK </label>
-                                <input type="text" class="form-control" id="mushak" name="mushak"
-                                    placeholder="MUSHAK" value="{{ old('mushak') }}">
-                                @error('mushak')
+                                <label for="booking_reference_no">Booking Reference No </label>
+                                <input type="text" class="form-control" id="booking_reference_no" name="booking_reference_no"
+                                    placeholder="Booking Reference No" value="{{ old('booking_reference_no') }}">
+                                @error('booking_reference_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="issuing_office">Issuing Office </label>
-                                <input type="text" class="form-control" id="issuing_office" name="issuing_office"
-                                    placeholder="Issuing Office" value="{{ old('issuing_office') }}">
-                                @error('issuing_office')
+                                <label for="client">Client </label>
+                                <input type="text" class="form-control" id="client" name="client"
+                                    placeholder="Client" value="{{ old('client') }}">
+                                @error('client')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="money_receipt_no">Money Receipt No</label>
-                                <input type="text" class="form-control" id="money_receipt_no" name="money_receipt_no"
-                                    placeholder="Money Receipt No" value="{{ old('money_receipt_no') }}">
-                                @error('money_receipt_no')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            
-                            <div class="col-sm-12 ">
-                                <label for="class_of_insurance">Class of Insurance</label>
-                                <input type="text" class="form-control" id="class_of_insurance" name="class_of_insurance"
-                                    placeholder="Class of Insurance" value="{{ old('class_of_insurance') }}">
-                                @error('class_of_insurance')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="mode_of_payment">Mode Of Payment </label>
-                                <input type="text" class="form-control text-white" id="mode_of_payment" name="mode_of_payment"
-                                    placeholder="Mode Of Payment"  >
-                                @error('mode_of_payment')
+                                <label for="member_id">Member ID</label>
+                                <input type="text" class="form-control" id="member_id" name="member_id"
+                                    placeholder="Member ID" value="{{ old('member_id') }}">
+                                @error('member_id')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-sm-12 ">
-                                <label for="drawn_on">Drawn On </label>
+                                <label for="country_of_residence">Country of Residence</label>
+                                <input type="text" class="form-control" id="country_of_residence" name="country_of_residence"
+                                    placeholder="Country of Residence" value="{{ old('country_of_residence') }}">
+                                @error('country_of_residence')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="property">Property </label>
+                                <input type="text" class="form-control text-white" id="property" name="property"
+                                    placeholder="Property"  >
+                                @error('property')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-12 ">
+                                <label for="address">Address </label>
                                 <input type="text" class="form-control text-white" id="drawn_on" name="drawn_on"
                                     placeholder="Drawn On"  >
                                 @error('drawn_on')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="arrival">Arrival </label>
+                                <input type="text" class="form-control text-white" id="arrival" name="arrival"
+                                    placeholder="Arrival"  >
+                                @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -107,63 +115,71 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            <h3 class="text-left" style="font-weight: bold">Insurance Details</h3>
+                            {{-- <h3 class="text-left" style="font-weight: bold">Insurance Details</h3> --}}
 
 
                             <div class="col-sm-12 ">
-                                <label for="policy_no">Policy No</label>
-                                <input type="text" class="form-control text-white" id="policy_no" name="policy_no"
-                                    placeholder="Policy No" value="">
-                                @error('policy_no')
+                                <label for="property_contact_number">Property Contact Number</label>
+                                <input type="text" class="form-control text-white" id="property_contact_number" name="property_contact_number"
+                                    placeholder="Property Contact Number" value="">
+                                @error('property_contact_number')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="issue_date">Issue Date</label>
-                                <input type="text" class="form-control text-white" id="issue_date" name="issue_date"
-                                    placeholder="Issue Date" value="">
-                                @error('issue_date')
+                                <label for="number_of_rooms">Number of Rooms</label>
+                                <input type="text" class="form-control text-white" id="number_of_rooms" name="number_of_rooms"
+                                    placeholder="Number of rooms" value="">
+                                @error('number_of_rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="plan_type">Plan Type</label>
-                                <input type="text" class="form-control" id="plan_type" name="plan_type"
-                                    placeholder="Plan Type" value="{{ old('plan_type') }}">
-                                @error('plan_type')
+                                <label for="number_of_extra_beds">Number of Extra Beds</label>
+                                <input type="text" class="form-control" id="number_of_extra_beds" name="number_of_extra_beds"
+                                    placeholder="Number of Extra Beds" value="{{ old('number_of_extra_beds') }}">
+                                @error('number_of_extra_beds')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="area_of_travel">Area of Travel</label>
-                                <input type="text" class="form-control" id="area_of_travel" name="area_of_travel"
-                                    placeholder="Area of Travel" value="{{ old('area_of_travel') }}">
-                                @error('area_of_travel')
+                                <label for="number_of_adults">Number of Adults</label>
+                                <input type="text" class="form-control" id="number_of_adults" name="number_of_adults"
+                                    placeholder="Number of Adults" value="{{ old('number_of_adults') }}">
+                                @error('number_of_adults')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="no_of_days_covered">No of Days Covered</label>
-                                <input type="text" class="form-control" id="no_of_days_covered" name="no_of_days_covered"
-                                    placeholder="No of Days Covered" value="{{ old('no_of_days_covered') }}">
-                                @error('no_of_days_covered')
+                                <label for="number_of_children">Number of Children</label>
+                                <input type="text" class="form-control" id="number_of_children" name="number_of_children"
+                                    placeholder="Number of Children" value="{{ old('number_of_children') }}">
+                                @error('number_of_children')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="premium">Premium</label>
-                                <input type="text" class="form-control" id="premium" name="premium"
-                                    placeholder="Premium" value="{{ old('premium') }}">
-                                @error('premium')
+                                <label for="room_type">Room Type</label>
+                                <input type="text" class="form-control" id="room_type" name="room_type"
+                                    placeholder="Room Type" value="{{ old('room_type') }}">
+                                @error('room_type')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-sm-12 ">
-                                <label for="mr_no">MR No</label>
-                                <input type="text" class="form-control" id="mr_no" name="mr_no"
-                                    placeholder="MR No" value="{{ old('mr_no') }}">
-                                @error('mr_no')
+                                <label for="promotion">Promotion</label>
+                                <input type="text" class="form-control" id="promotion" name="promotion"
+                                    placeholder="promotion" value="{{ old('promotion') }}">
+                                @error('promotion')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="departure">Departure</label>
+                                <input type="text" class="form-control" id="departure" name="departure"
+                                    placeholder="Departure" value="{{ old('departure') }}">
+                                @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -171,85 +187,7 @@
                     </div>
                 </div>
                 <br><br>
-                <h3 class="text-center" style="font-weight: bold; margin-left: 10px;">Insured Details</h3>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <label for="name">Name </label>
-                                <input type="text" class="form-control" id="name"
-                                    name="name" placeholder="Name"
-                                    ">
-                                    {{-- value="{{ rand(100000000000, 9999999999) }} --}}
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="mobile_no">Mobile No </label>
-                                <input type="text" class="form-control" id="mobile_no" name="mobile_no"
-                                    placeholder="Mobile No" value="{{ old('mobile_no') }}">
-                                @error('mobile_no')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="address">Address </label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Address" value="{{ old('address') }}">
-                                @error('address')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
 
-
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-12 ">
-                                <label for="age">Age </label>
-                                <input type="text" class="form-control" id="age" name="age"
-                                    placeholder="Age" value="{{ old('age') }}">
-                                @error('age')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="dob">Date Of Birth </label>
-                                <input type="text" class="form-control" id="dob" name="dob"
-                                    placeholder="Date Of Birth" value="{{ old('dob') }}">
-                                @error('dob')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="pass_no">Passport No </label>
-                                <input type="text" class="form-control" id="pass_no" name="pass_no"
-                                    placeholder="Passport No" value="{{ old('pass_no') }}">
-                                @error('pass_no')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="row">
-
-                            <div class="col-sm-12 ">
-                                <label for="nationality">Nationality </label>
-                                <input type="text" class="form-control" id="nationality" name="nationality"
-                                    placeholder="Nationality" value="{{ old('nationality') }}">
-                                @error('nationality')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
                 <div class="row pt-2">
                     <div class="col-md-4 col-sm-12 offset-md-4">
                         <center>

@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Add New Insurance')
+@section('title', 'Online Booking')
 @section('css')
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
@@ -76,7 +76,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            
+
                             <div class="col-sm-12 ">
                                 <label for="class_of_insurance">Class of Insurance</label>
                                 <input type="text" class="form-control" id="class_of_insurance" name="class_of_insurance"

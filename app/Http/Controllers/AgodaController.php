@@ -14,7 +14,7 @@ class AgodaController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.home');
     }
 
     /**
@@ -35,7 +35,38 @@ class AgodaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // dd('ok');
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Check if the user has enough points
+        if ($user->point <= 0) {
+            Session::flash('error', 'You do not have enough points to submit the form.');
+            return redirect()->back();
+        }
+
+        DB::beginTransaction();
+        try {
+            $code = $this->generateCode();
+            $agoda = new Agoda();
+
+            dd($agoda);
+
+
+            $member->save();
+
+            // Decrement the user's points
+            $user->point -= 1;
+            $user->save();
+
+            DB::commit();
+            Session::flash('success', 'File Submission Successfull.');
+            return redirect()->back();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Session::flash('error', 'Something went wrong. Please try again letter');
+            return redirect()->back();
+        }
     }
 
     /**

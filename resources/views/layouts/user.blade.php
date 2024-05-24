@@ -43,7 +43,13 @@
                     <li class="active ">
                         <a href="{{ route('user.home') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
-                            <p>Add New Insurance</p>
+                            <p>Add New (Agoda)</p>
+                        </a>
+                    </li>
+                    <li class="active ">
+                        <a href="{{ route('user.home') }}">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>Add New (Booking)</p>
                         </a>
                     </li>
                     <li>

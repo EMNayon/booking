@@ -21,7 +21,13 @@ Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->
 
 Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/user/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('user.home');
+
+    // Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.agoda');
+    // Route::get('/user/dashboard', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
     Route::get('/user/file-submission', [\App\Http\Controllers\UserController::class, 'getAllFileSubmissionList'])->name('user_submission_list');
+
+    Route::post('/member/registration', [\App\Http\Controllers\AgodaController::class, 'store'])->name('submit-agoda-form');
+
 
     Route::get('/member/registration', [\App\Http\Controllers\MemberController::class, 'showMemberForm'])->name('show-member-form');
     Route::post('/member/registration', [\App\Http\Controllers\MemberController::class, 'submitMemberForm'])->name('submit-member-form');

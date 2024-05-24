@@ -66,7 +66,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/countries/delete/{id}', [\App\Http\Controllers\CountryController::class, 'destroy'])->name('delete_country');
 
 
-    // Route::get('/admin/states', [\App\Http\Controllers\StateController::class, 'index'])->name('state');
+    Route::get('/admin/states', [\App\Http\Controllers\StateController::class, 'index'])->name('state');
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
     // Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
 

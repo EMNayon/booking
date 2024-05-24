@@ -27,5 +27,18 @@ class UserTableSeeder extends Seeder
                 'password' => Hash::make('12345678')
             ]
         );
+
+        User::firstOrCreate(
+            [
+                'email' => 'bithi@gmail.com'
+            ],
+            [
+                'name' => 'Agent',
+                'phone' => '017xxxxxxxx',
+                'user_type' => User::USER_TYPE_USER,
+                'status' => User::STATUS_ACTIVE,
+                'password' => Hash::make('12345678')
+            ]
+        );
     }
 }

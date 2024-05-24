@@ -77,11 +77,11 @@
                             Country
                         </a>
 
-                        {{-- <a class="nav-link" href="{{ route('state') }}">
+                       <a class="nav-link" href="{{ route('state') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             State
                         </a>
-
+  {{--
                         <a class="nav-link" href="{{ route('city') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             City

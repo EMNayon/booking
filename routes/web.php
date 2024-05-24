@@ -38,6 +38,9 @@ Route::group(['middleware' => 'user_middleware'], function () {
 Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/home', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.home');
     Route::get('/agent/list', [\App\Http\Controllers\AgentController::class, 'index'])->name('agent_list');
+    Route::get('/agent/view-point/{id}', [\App\Http\Controllers\AgentController::class, 'viewPoint'])->name('view_point');
+    Route::post('/agent/add-point', [\App\Http\Controllers\AgentController::class, 'addPoint'])->name('add_point');
+
     Route::get('/agent/request', [\App\Http\Controllers\AgentController::class, 'requestList'])->name('agent_request');
     Route::post('/agent/status-change', [\App\Http\Controllers\AgentController::class, 'agentStatusChange'])->name('agent_status_change');
     Route::get('/admin/file-submission', [\App\Http\Controllers\FileSubmissionController::class, 'index'])->name('submission_list');
@@ -53,6 +56,20 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::get('/user/change-password/{id}', [\App\Http\Controllers\AuthController::class, 'showChangePasswordForm'])->name('show_change_password');
     Route::post('/user/change-password', [\App\Http\Controllers\AuthController::class, 'submitChangePasswordForm'])->name('submit_change_password');
+
+
+    Route::get('/admin/countries', [\App\Http\Controllers\CountryController::class, 'index'])->name('country');
+    Route::get('/admin/countries/create', [\App\Http\Controllers\CountryController::class, 'create'])->name('create_country');
+    Route::post('/admin/countries/store', [\App\Http\Controllers\CountryController::class, 'store'])->name('store_country');
+    Route::post('/admin/countries/update', [\App\Http\Controllers\CountryController::class, 'update'])->name('update_country');
+    Route::get('/admin/countries/edit/{id}', [\App\Http\Controllers\CountryController::class, 'edit'])->name('edit_country');
+    Route::get('/admin/countries/delete/{id}', [\App\Http\Controllers\CountryController::class, 'destroy'])->name('delete_country');
+
+
+    // Route::get('/admin/states', [\App\Http\Controllers\StateController::class, 'index'])->name('state');
+    // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
+    // Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
+
 });
 
 Route::group(['middleware' => 'auth'], function () {

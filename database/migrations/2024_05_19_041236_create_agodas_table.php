@@ -15,26 +15,32 @@ class CreateAgodasTable extends Migration
     {
         Schema::create('agodas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('booking_id');
-            $table->string('booking_reference_no');
-            $table->string('client');
-            $table->integer('member_id');
-            $table->string('country_of_residence');
-            $table->string('property');
-            $table->string('address');
-            $table->string('property_contact_number');
+            $table->unsignedBigInteger('booking_id')->nullable();
+            $table->string('booking_reference_no')->nullable();
+            $table->string('client')->nullable();
+            $table->integer('member_id')->nullable();
+            $table->string('country_of_residence')->nullable();
+            $table->string('property')->nullable();
+            $table->string('address')->nullable();
+            $table->string('property_contact_number')->nullable();
 
 
-            $table->string('number_of_rooms');
-            $table->string('number_of_extra_beds');
-            $table->string('number_of_adults');
-            $table->string('number_of_childern');
-            $table->string('room_type');
-            $table->string('promotion');
-            $table->string('promotion');
+            $table->string('number_of_rooms')->nullable();
+            $table->string('number_of_extra_beds')->nullable();
+            $table->string('number_of_adults')->nullable();
+            $table->string('number_of_childern')->nullable();
+            $table->string('room_type')->nullable();
+            $table->string('promotion')->nullable();
 
-            $table->string('arrival');
-            $table->string('departure');
+            $table->string('arrival')->nullable();
+            $table->string('departure')->nullable();
+
+
+            $table->string('extra-1')->nullable();
+            $table->string('extra-2')->nullable();
+            $table->string('extra-3')->nullable();
+            $table->string('extra-4')->nullable();
+            $table->string('extra-5')->nullable();
 
             $table->timestamps();
         });

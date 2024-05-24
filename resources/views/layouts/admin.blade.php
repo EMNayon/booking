@@ -70,6 +70,32 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Agent Request
                         </a>
+
+
+                        <a class="nav-link" href="{{ route('country') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Country
+                        </a>
+
+                        {{-- <a class="nav-link" href="{{ route('state') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            State
+                        </a>
+
+                        <a class="nav-link" href="{{ route('city') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            City
+                        </a>
+
+
+                        <a class="nav-link" href="{{ route('hotel') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Hotel
+                        </a> --}}
+
+
+
+
                         <div class="sb-sidenav-menu-heading">Insurance Certificates</div>
                         <a class="nav-link" href="{{ route('submission_list') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

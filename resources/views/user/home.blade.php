@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('title', 'Add New Insurance')
+@section('title', 'Online Booking')
 @section('css')
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
@@ -69,10 +69,34 @@
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
+<<<<<<< HEAD
                                 <label for="member_id">Member ID</label>
                                 <input type="text" class="form-control" id="member_id" name="member_id"
                                     placeholder="Member ID" value="{{ old('member_id') }}">
                                 @error('member_id')
+=======
+                                <label for="money_receipt_no">Money Receipt No</label>
+                                <input type="text" class="form-control" id="money_receipt_no" name="money_receipt_no"
+                                    placeholder="Money Receipt No" value="{{ old('money_receipt_no') }}">
+                                @error('money_receipt_no')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-12 ">
+                                <label for="class_of_insurance">Class of Insurance</label>
+                                <input type="text" class="form-control" id="class_of_insurance" name="class_of_insurance"
+                                    placeholder="Class of Insurance" value="{{ old('class_of_insurance') }}">
+                                @error('class_of_insurance')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="mode_of_payment">Mode Of Payment </label>
+                                <input type="text" class="form-control text-white" id="mode_of_payment" name="mode_of_payment"
+                                    placeholder="Mode Of Payment"  >
+                                @error('mode_of_payment')
+>>>>>>> a626f005cf78f72fe3798bff579cfcba9e603002
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

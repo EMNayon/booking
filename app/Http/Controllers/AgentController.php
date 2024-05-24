@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
 use App\Models\User;
 use Illuminate\Http\Request;
-use DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+
+
 class AgentController extends Controller
 {
     public function index(Request $request){
+
         if($request->ajax()){
             $data = User::where('user_type',User::USER_TYPE_USER)->orderBy('id','desc')->get();
+
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('status',function ($row){
@@ -19,7 +26,10 @@ class AgentController extends Controller
                     return date('d M y',strtotime($row->created_at));
                 })
                 ->addColumn('action',function ($row){
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('show_change_password',[$row->id]).'">Change Password</a>';
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('show_change_password',[$row->id]).'">Change Password</a>' .
+                    ' <a class="btn btn-info text-white btn-sm" href="'.route('view_point',[$row->id]).'">Add Point</a>';
+
+
                 })
                 ->make(true);
         }else{
@@ -60,5 +70,30 @@ class AgentController extends Controller
             ]);
         }
 
+    }
+
+
+    public function viewPoint($id){
+        $user = User::find($id);
+        return view('admin.agent_point',compact('user'));
+    }
+
+
+    public function addPoint(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($request->id);
+            $user->point = $user->point + request()->point;
+            $user->save();
+            DB::commit();
+            Session::flash('success','Point Added Successfully');
+            return redirect()->route('agent_list');
+        }
+        catch (\Exception $exception){
+            DB::rollBack();
+            Session::flash('error','Something went wrong. Please try again');
+            return redirect()->back();
+        }
     }
 }

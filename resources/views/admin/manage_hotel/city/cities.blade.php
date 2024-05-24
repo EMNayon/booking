@@ -1,22 +1,24 @@
 @extends('layouts.admin')
-@section('title', 'Agent List')
+@section('title', 'City List')
 @section('content')
     <div class="container-fluid px-4">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
+            <div>
                 <i class="fas fa-table me-1"></i>
-                Agent List
+                City List
+            </div>
+            <div>
+                <a class="btn btn-success text-white btn-sm" href={{route('create_city')}}>Add City</a>
+            </div>
+
             </div>
             <div class="card-body">
-                <table id="AgentListTable" class="table table-bordered">
+                <table id="cityList" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Point</th>
-                            <th>Status</th>
                             <th>Created Date</th>
                             <th>Action</th>
                         </tr>
@@ -32,11 +34,11 @@
 @section('js')
     <script>
         $(function() {
-            var table = $('#AgentListTable').DataTable({
+            var table = $('#cityList').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('agent_list') }}",
+                    url: "{{ route('city') }}",
                     data: function(e) {}
                 },
                 columns: [{
@@ -46,24 +48,6 @@
                     {
                         data: 'name',
                         name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'point',
-                        name: 'point'
-                    },
-                    {
-                        data: 'status',
-                        name: 'status',
-                        orderable: false,
-                        searchable: false
                     },
                     {
                         data: 'created_at',

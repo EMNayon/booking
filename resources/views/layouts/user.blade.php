@@ -55,7 +55,13 @@
                     <li>
                         <a href="{{ route('user_submission_list') }}">
                             <i class="tim-icons icon-atom"></i>
-                            <p>Insurance Certificates</p>
+                            <p>Agoda Confirmation List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user_submission_list') }}">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Booking Confirmation List</p>
                         </a>
                     </li>
 

@@ -81,13 +81,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             State
                         </a>
-  {{--
+
                         <a class="nav-link" href="{{ route('city') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             City
                         </a>
 
-
+  {{--
                         <a class="nav-link" href="{{ route('hotel') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Hotel

@@ -72,6 +72,16 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/states/update', [\App\Http\Controllers\StateController::class, 'update'])->name('update_state');
     Route::get('/admin/states/edit/{id}', [\App\Http\Controllers\StateController::class, 'edit'])->name('edit_state');
     Route::get('/admin/states/delete/{id}', [\App\Http\Controllers\StateController::class, 'destroy'])->name('delete_state');
+    Route::get('/admin/states/fetch-state/{id}', [\App\Http\Controllers\StateController::class, 'fetchStates'])->name('fetch_state');
+
+
+    Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
+    Route::get('/admin/cities/create', [\App\Http\Controllers\CityController::class, 'create'])->name('create_city');
+    Route::post('/admin/cities/store', [\App\Http\Controllers\CityController::class, 'store'])->name('store_city');
+    Route::post('/admin/citiess/update', [\App\Http\Controllers\CityController::class, 'update'])->name('update_city');
+    Route::get('/admin/cities/edit/{id}', [\App\Http\Controllers\CityController::class, 'edit'])->name('edit_city');
+    Route::get('/admin/cities/delete/{id}', [\App\Http\Controllers\CityController::class, 'destroy'])->name('delete_city');
+
 
 
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');

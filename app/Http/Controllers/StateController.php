@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
+use App\Models\User;
 use App\Models\State;
+use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 
 class StateController extends Controller
 {
     public function index(Request $request){
 
+
         if($request->ajax()){
             $data = State::orderBy('name','asc')->get();
+            Log::info($data);
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -18,14 +26,14 @@ class StateController extends Controller
                     return date('d M y',strtotime($row->created_at));
                 })
                 ->addColumn('action',function ($row){
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_country',[$row->id]).'">Edit</a>'.
-                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_country',[$row->id]).'">Delete</a>';
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_state',[$row->id]).'">Edit</a>'.
+                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_state',[$row->id]).'">Delete</a>';
 
                 })
                 ->make(true);
         }else{
 
-            return view('admin.manage_hotel.countries');
+            return view('admin.manage_hotel.state.states');
         }
     }
 
@@ -36,7 +44,10 @@ class StateController extends Controller
      */
     public function create()
     {
-        return view('admin.manage_hotel.create_country');
+        $countries = Country::all();
+
+
+        return view('admin.manage_hotel.state.create_state', compact('countries'));
     }
 
     /**
@@ -49,16 +60,20 @@ class StateController extends Controller
     {
         $this->validate($request,[
             'country' => 'required',
+            'state'   => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            Country::create([
-                'name' => $request->country
+
+            State::create([
+                'name' => $request->state,
+                'country_id' => $request->country
             ]);
+
             DB::commit();
-            Session::flash('success','Country Added Successfully');
-            return redirect()->route('country');
+            Session::flash('success','State Added Successfully');
+            return redirect()->route('state');
         }
         catch (\Exception $exception){
             DB::rollBack();
@@ -86,8 +101,11 @@ class StateController extends Controller
      */
     public function edit(Request $request)
     {
-        $country = Country::find($request->route('id'));
-        return view('admin.manage_hotel.edit_country', compact('country'));
+        $state = State::find($request->route('id'));
+        $countries = Country::all();
+
+
+        return view('admin.manage_hotel.state.edit_state', compact('countries', 'state'));
     }
 
     /**
@@ -97,24 +115,25 @@ class StateController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request)
     {
         $this->validate($request,[
             'country' => 'required',
-            'id' => 'required'
+            'id'      => 'required',
+            'state'   => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            $country = Country::where('id', $request->id)->first();
-            $country->name = $request->country;
-            $country->save();
+            $state = State::find($request->id);
+            $state->country_id = $request->country;
+            $state->name = $request->state;
+            $state->save();
             DB::commit();
-            Session::flash('success','Country Updated Successfully');
-            return redirect()->route('country');
+            Session::flash('success','State Updated Successfully');
+            return redirect()->route('state');
         }
         catch (\Exception $exception){
-            dd($exception->getMessage());
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
@@ -127,16 +146,16 @@ class StateController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Country $country)
+    public function destroy(State $state)
     {
 
         DB::beginTransaction();
         try {
-            $countryId = request()->route('id');
-            Country::where('id' , $countryId)->delete();
+            $stateId = request()->route('id');
+            State::where('id' , $stateId)->delete();
             DB::commit();
-            Session::flash('success','Country Deleted Successfully');
-            return redirect()->route('country');
+            Session::flash('success','State Deleted Successfully');
+            return redirect()->route('state');
         }
         catch (\Exception $exception){
 

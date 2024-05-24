@@ -67,6 +67,13 @@ Route::group(['middleware' => 'admin'], function () {
 
 
     Route::get('/admin/states', [\App\Http\Controllers\StateController::class, 'index'])->name('state');
+    Route::get('/admin/states/create', [\App\Http\Controllers\StateController::class, 'create'])->name('create_state');
+    Route::post('/admin/states/store', [\App\Http\Controllers\StateController::class, 'store'])->name('store_state');
+    Route::post('/admin/states/update', [\App\Http\Controllers\StateController::class, 'update'])->name('update_state');
+    Route::get('/admin/states/edit/{id}', [\App\Http\Controllers\StateController::class, 'edit'])->name('edit_state');
+    Route::get('/admin/states/delete/{id}', [\App\Http\Controllers\StateController::class, 'destroy'])->name('delete_state');
+
+
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
     // Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
 

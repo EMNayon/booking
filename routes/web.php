@@ -78,7 +78,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/states/update', [\App\Http\Controllers\StateController::class, 'update'])->name('update_state');
     Route::get('/admin/states/edit/{id}', [\App\Http\Controllers\StateController::class, 'edit'])->name('edit_state');
     Route::get('/admin/states/delete/{id}', [\App\Http\Controllers\StateController::class, 'destroy'])->name('delete_state');
-    Route::get('/admin/states/fetch-state/{id}', [\App\Http\Controllers\StateController::class, 'fetchStates'])->name('fetch_state');
+    Route::post('/admin/states/fetch-state', [\App\Http\Controllers\StateController::class, 'fetchStates'])->name('fetch_state');
 
 
     Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');

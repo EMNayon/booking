@@ -45,10 +45,7 @@ class CityController extends Controller
     public function create()
     {
         $countries = Country::all();
-        $states = State::all();
-        
-
-        return view('admin.manage_hotel.city.create_city', compact('countries', 'states'));
+        return view('admin.manage_hotel.city.create_city', compact('countries'));
     }
 
     /**
@@ -59,7 +56,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-
+        Log::info("storing city info "  . json_encode($request->all()));
         $this->validate($request,[
             'country' => 'required',
             'state'   => 'required',
@@ -76,9 +73,10 @@ class CityController extends Controller
 
             DB::commit();
             Session::flash('success','State Added Successfully');
-            return redirect()->route('state');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
+            Log::error("exception occurred during storing city => " . $exception->getMessage());
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
@@ -104,11 +102,8 @@ class CityController extends Controller
      */
     public function edit(Request $request)
     {
-        $state = State::find($request->route('id'));
         $countries = Country::all();
-
-
-        return view('admin.manage_hotel.state.edit_state', compact('countries', 'state'));
+        return view('admin.manage_hotel.city.edit_city', compact('countries'));
     }
 
     /**

@@ -25,22 +25,12 @@ class CreateAgodasTable extends Migration
             $table->string('property_contact_number')->nullable();
 
 
-<<<<<<< HEAD
-            $table->string('number_of_rooms');
-            $table->string('number_of_extra_beds');
-            $table->string('number_of_adults');
-            $table->string('number_of_childern');
-            $table->string('room_type');
-            $table->string('promotion');
-            // $table->string('promotion');
-=======
             $table->string('number_of_rooms')->nullable();
             $table->string('number_of_extra_beds')->nullable();
             $table->string('number_of_adults')->nullable();
             $table->string('number_of_childern')->nullable();
             $table->string('room_type')->nullable();
             $table->string('promotion')->nullable();
->>>>>>> a626f005cf78f72fe3798bff579cfcba9e603002
 
             $table->string('arrival')->nullable();
             $table->string('departure')->nullable();

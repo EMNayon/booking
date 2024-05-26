@@ -13,6 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('/admin/css/styles.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+
     @yield('css')
 </head>
 
@@ -70,9 +72,23 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Agent Request
                         </a>
+                        <li class="nav-item">
+                            <a class="nav-link n" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                                <span class="menu-title sb-nav-link-ico">Manage Hotel</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="ui-basic">
+                                <ul class="nav flex-column sub-menu " style="margin-left: 10px;">
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('country')}}">Country</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('state')}}">State</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{route('city')}}">City</a></li>
+                                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('country')}}">Hotel</a></li> --}}
+                                </ul>
+                            </div>
+                        </li>
 
 
-                        <a class="nav-link" href="{{ route('country') }}">
+                        {{-- <a class="nav-link" href="{{ route('country') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Country
                         </a>
@@ -85,7 +101,7 @@
                         <a class="nav-link" href="{{ route('city') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             City
-                        </a>
+                        </a> --}}
 
   {{--
                         <a class="nav-link" href="{{ route('hotel') }}">

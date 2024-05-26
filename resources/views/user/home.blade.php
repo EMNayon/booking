@@ -93,23 +93,63 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-sm-12">
+                                <label for="country">Country</label>
+                                <select class="form-control text-white" id="country" name="country">
+                                    <option value="" disabled selected>Select Country</option>
+                                    <option value="usa">United States</option>
+                                    <option value="canada">Canada</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <!-- Add more countries as needed -->
+                                </select>
+                                @error('country')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                            <div class="col-sm-12 ">
-                                <label for="address">Address </label>
-                                <input type="text" class="form-control text-white" id="drawn_on" name="drawn_on"
-                                    placeholder="Drawn On"  >
-                                @error('drawn_on')
+                            <div class="col-sm-12">
+                                <label for="city">City</label>
+                                <select class="form-control text-white" id="city" name="city">
+                                    <option value="" disabled selected>Select City</option>
+                                    <option value="new_york">New York</option>
+                                    <option value="los_angeles">Los Angeles</option>
+                                    <option value="chicago">Chicago</option>
+                                    <!-- Add more cities as needed -->
+                                </select>
+                                @error('city')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
-                                <label for="arrival">Arrival </label>
-                                <input type="text" class="form-control text-white" id="arrival" name="arrival"
-                                    placeholder="Arrival"  >
-                                @error('arrival')
+
+                            <div class="col-sm-12">
+                                <label for="state">State</label>
+                                <select class="form-control text-white" id="state" name="state">
+                                    <option value="" disabled selected>Select State</option>
+                                    <option value="california">California</option>
+                                    <option value="texas">Texas</option>
+                                    <option value="florida">Florida</option>
+                                    <!-- Add more states as needed -->
+                                </select>
+                                @error('state')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-sm-12">
+                                <label for="hotel">Hotel</label>
+                                <select class="form-control text-white" id="hotel" name="hotel">
+                                    <option value="" disabled selected>Select Hotel</option>
+                                    <option value="hilton">Hilton</option>
+                                    <option value="marriott">Marriott</option>
+                                    <option value="holiday_inn">Holiday Inn</option>
+                                    <!-- Add more hotels as needed -->
+                                </select>
+                                @error('hotel')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
 
                         </div>
                     </div>
@@ -172,6 +212,14 @@
                                 <input type="text" class="form-control" id="promotion" name="promotion"
                                     placeholder="promotion" value="{{ old('promotion') }}">
                                 @error('promotion')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="arrival">Arrival </label>
+                                <input type="text" class="form-control text-white" id="arrival" name="arrival"
+                                    placeholder="Arrival"  >
+                                @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

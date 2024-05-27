@@ -102,8 +102,21 @@ class CityController extends Controller
      */
     public function edit(Request $request)
     {
+        $inputCityId = $request->route('id');
+
+        $oldCity = City::where('id', $inputCityId)->first();
+
+        if($oldCity == null)
+        {
+            Session::flash('error','Invalid City to Edit');
+            return redirect()->back();
+        }
+        $oldState = State::where('id', $oldCity->state_id)->first();
+        $oldCountry = Country::where('id', $oldState->country_id)->first();
         $countries = Country::all();
-        return view('admin.manage_hotel.city.edit_city', compact('countries'));
+        $states = State::where('country_id', $oldCountry->id)->get();
+
+        return view('admin.manage_hotel.city.edit_city', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states'));
     }
 
     /**
@@ -115,21 +128,24 @@ class CityController extends Controller
      */
     public function update(Request $request)
     {
+
         $this->validate($request,[
-            'country' => 'required',
-            'id'      => 'required',
-            'state'   => 'required'
+            'old_city' => 'required',
+            'country'  => 'required',
+            'state'    => 'required',
+            'city'     => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            $state = State::find($request->id);
-            $state->country_id = $request->country;
-            $state->name = $request->state;
-            $state->save();
+            $city = City::find($request->old_city);
+            $city->state_id = $request->state;
+            $city->name = $request->city;
+            $city->save();
+
             DB::commit();
-            Session::flash('success','State Updated Successfully');
-            return redirect()->route('state');
+            Session::flash('success','City Updated Successfully');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
             DB::rollBack();
@@ -144,16 +160,16 @@ class CityController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy(City $city)
     {
 
         DB::beginTransaction();
         try {
-            $stateId = request()->route('id');
-            State::where('id' , $stateId)->delete();
+            $cityId = request()->route('id');
+            City::where('id' , $cityId)->delete();
             DB::commit();
-            Session::flash('success','State Deleted Successfully');
-            return redirect()->route('state');
+            Session::flash('success','City Deleted Successfully');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
 

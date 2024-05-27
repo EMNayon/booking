@@ -162,7 +162,7 @@ class StateController extends Controller
     public function fetchStates(Request $request)
     {
         Log::info($request->country);
-        
+
         $content = '
             <div class="form-floating mt-2">
             <select class="form-control" id="state" name="state" aria-label="State" required>

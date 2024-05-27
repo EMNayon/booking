@@ -62,7 +62,7 @@
                         </a>
                     </li>
                     <li class="active ">
-                        <a href="{{ route('user.home') }}">
+                        <a href="{{ route('user.booking') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p>Add New (Booking)</p>
                         </a>

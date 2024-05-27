@@ -165,7 +165,7 @@ class StateController extends Controller
 
         $content = '
             <div class="form-floating mt-2">
-            <select class="form-control" id="state" name="state" aria-label="State" required>
+            <select class="form-control state-select" id="state" name="state" aria-label="State" required>
                 <option value="">Select State</option>';
 
         Log::info(['country' => $request->country]);

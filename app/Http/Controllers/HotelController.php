@@ -16,12 +16,38 @@ class HotelController extends Controller
 {
     public function index(Request $request){
 
+        $cityNames = City::pluck('name', 'id')->toArray();
+        // $stateNames = State::pluck('name', 'id')->toArray();
+        // $countryNames = Country::pluck('name', 'id')->toArray();
 
         if($request->ajax()){
             $data = Hotel::orderBy('name','asc')->get();
-            Log::info($data);
+            Log::info(gettype($data));
+            $finalData = [];
 
-            return DataTables::of($data)
+            foreach($data as $singleData)
+            {
+                $temp = [
+                    'id' => $singleData->id,
+                    'name' => $singleData->name,
+                    'longitude' => $singleData->longitidue,
+                    'latitdue' => $singleData->latidude,
+                    'created_at' => $singleData->created_at,
+                    'updated_at' => $singleData->updated_at
+                ];
+                $city = City::where('id', $singleData->city_id)->first();
+                $temp['city'] = $city->name;
+
+                $state = State::where('id', $city->state_id)->first();
+                $temp['state'] = $state->name;
+
+                $country = Country::where('id', $state->country_id)->first();
+                $temp['country'] = $country->name;
+                $finalData[] = (object) $temp;
+            }
+            Log::info($finalData);
+
+            return DataTables::of($finalData)
                 ->addIndexColumn()
                 ->addColumn('created_at',function ($row){
                     return date('d M y',strtotime($row->created_at));
@@ -61,15 +87,20 @@ class HotelController extends Controller
         $this->validate($request,[
             'country' => 'required',
             'state'   => 'required',
-            'city' => 'required'
+            'city' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
+            'hotel' => 'required'
         ]);
 
         DB::beginTransaction();
         try {
 
-            city::create([
-                'name' => $request->city,
-                'state_id' => $request->state
+            Hotel::create([
+                'name' => $request->hotel,
+                'city_id' => $request->city,
+                'longitude' => $request->longitude,
+                'latitude' => $request->latitude,
             ]);
 
             DB::commit();
@@ -103,21 +134,26 @@ class HotelController extends Controller
      */
     public function edit(Request $request)
     {
-        $inputCityId = $request->route('id');
+        $inputHotelId = $request->route('id');
 
-        $oldCity = City::where('id', $inputCityId)->first();
+        $oldHotel = Hotel::where('id', $inputHotelId)->first();
 
-        if($oldCity == null)
+        if($oldHotel == null)
         {
             Session::flash('error','Invalid Hotel to Edit');
             return redirect()->back();
         }
+
+        $oldCity = City::where('id', $oldHotel->city_id)->first();
         $oldState = State::where('id', $oldCity->state_id)->first();
         $oldCountry = Country::where('id', $oldState->country_id)->first();
         $countries = Country::all();
         $states = State::where('country_id', $oldCountry->id)->get();
+        $cities = City::where('state_id', $oldState->id)->get();
 
-        return view('admin.manage_hotel.hotel.edit_hotel', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states'));
+
+
+        return view('admin.manage_hotel.hotel.edit_hotel', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states', 'cities', 'oldHotel'));
     }
 
     /**

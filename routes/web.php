@@ -87,6 +87,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/citiess/update', [\App\Http\Controllers\CityController::class, 'update'])->name('update_city');
     Route::get('/admin/cities/edit/{id}', [\App\Http\Controllers\CityController::class, 'edit'])->name('edit_city');
     Route::get('/admin/cities/delete/{id}', [\App\Http\Controllers\CityController::class, 'destroy'])->name('delete_city');
+    Route::post('/admin/cities/fetch-city', [\App\Http\Controllers\CityController::class, 'fetchCities'])->name('fetch_city');
+
 
 
 

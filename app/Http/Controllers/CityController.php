@@ -179,4 +179,31 @@ class CityController extends Controller
         }
 
     }
+
+
+
+    public function fetchCities(Request $request)
+    {
+        Log::info("fetching cities");
+        Log::info($request->state);
+
+        $content = '
+            <div class="form-floating mt-2">
+            <select class="form-control" id="city" name="city" aria-label="City" required>
+                <option value="">Select City</option>';
+
+        Log::info(['state' => $request->state]);
+        $cities = City::where('state_id', $request->state)->get();
+
+        if ($cities->count() <= 0) {
+            return '<div class="mt-2"><span class="text-danger">No City Found</span></div>';
+        }
+
+        foreach ($cities as $city) {
+            $content .= '<option name="city" value="'. $city->id . '">'.   $city->name   .'</option>';
+        }
+        $content .= '</select>';
+        return $content;
+
+    }
 }

@@ -42,7 +42,7 @@
 
 
                 <ul class="nav">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link n" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                             <span class="menu-title sb-nav-link-ico">Manage Hotel</span>
                             <i class="menu-arrow"></i>
@@ -51,23 +51,22 @@
                             <ul class="nav flex-column sub-menu " style="margin-left: 10px;">
                                 <li class="nav-item"> <a class="nav-link" href="{{route('user.home')}}">Country</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{route('user.home')}}">State</a></li>
-                                {{-- <li class="nav-item"> <a class="nav-link" href="{{route('city')}}">City</a></li> --}}
-                                {{-- <li class="nav-item"> <a class="nav-link" href="{{route('country')}}">Hotel</a></li> --}}
+
                             </ul>
                         </div>
-                    </li>
-                    {{-- <li class="active ">
+                    </li> --}}
+                    <li class="active ">
                         <a href="{{ route('user.home') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p>Add New (Agoda)</p>
                         </a>
                     </li>
                     <li class="active ">
-                        <a href="{{ route('user.home') }}">
+                        <a href="{{ route('user.booking') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p>Add New (Booking)</p>
                         </a>
-                    </li> --}}
+                    </li>
 
 
 

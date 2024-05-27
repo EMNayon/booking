@@ -97,7 +97,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/hotels/store', [\App\Http\Controllers\HotelController::class, 'store'])->name('store_hotel');
     Route::post('/admin/hotels/update', [\App\Http\Controllers\HotelController::class, 'update'])->name('update_hotel');
     Route::get('/admin/hotels/edit/{id}', [\App\Http\Controllers\HotelController::class, 'edit'])->name('edit_hotel');
-    Route::get('/admin/hotels/delete/{id}', [\App\Http\Controllers\HotelController::class, 'destroy'])->name('delete_hotel');
+    Route::post('/admin/hotels/delete/{id}', [\App\Http\Controllers\HotelController::class, 'destroy'])->name('delete_hotel');
 
 
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');

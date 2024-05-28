@@ -72,7 +72,7 @@ class CityController extends Controller
             ]);
 
             DB::commit();
-            Session::flash('success','State Added Successfully');
+            Session::flash('success','City Added Successfully');
             return redirect()->route('city');
         }
         catch (\Exception $exception){

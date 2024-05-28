@@ -4,13 +4,15 @@
     <div class="container-fluid px-4">
         <div class="card mb-4">
             @if (\Illuminate\Support\Facades\Session::has('error'))
-                <div class="alert alert-danger alert-dismissible pb-2" role="alert">
+                <div class="alert alert-danger alert-dismissible fade show pb-2" role="alert">
                     {{ \Illuminate\Support\Facades\Session::get('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             @if (\Illuminate\Support\Facades\Session::has('success'))
-                <div class="alert alert-success alert-dismissible pb-2" role="alert">
+                <div class="alert alert-success alert-dismissible fade show pb-2" role="alert">
                     {{ \Illuminate\Support\Facades\Session::get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
             <div class="card-header d-flex justify-content-between">
@@ -44,23 +46,23 @@
 
 
     <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this hotel?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this hotel?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Delete</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -149,6 +151,5 @@
                 $('#deleteModal').modal('hide');
             });
         });
-
     </script>
 @endsection

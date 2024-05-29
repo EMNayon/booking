@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agoda;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class AgodaController extends Controller
@@ -14,7 +15,12 @@ class AgodaController extends Controller
      */
     public function index()
     {
-        return view('user.home');
+        $bookingId = $this->generateBookingId();
+        $bookingReferenceNo = $this->generateBookingReferenceNo();
+        $memberId = $this->generateMemberId();
+        $countries = Country::all();
+
+        return view('user.home', compact('bookingId', 'bookingReferenceNo', 'memberId', 'countries'));
     }
 
     /**
@@ -113,4 +119,43 @@ class AgodaController extends Controller
     {
         //
     }
+
+    private function generateBookingId()
+    {
+        return $this->generateUniqueId(new Agoda(), 'booking_id');
+    }
+
+    private function generateBookingReferenceNo()
+    {
+        return $this->generateUniqueId(new Agoda(), 'booking_reference_no');
+    }
+
+    private function generateMemberId()
+    {
+        return $this->generateUniqueId(new Agoda(), 'member_id');
+    }
+
+
+    private function generateUniqueId($model, $column) {
+
+
+        while(true)
+        {
+            $min = 1000000000;
+            $max = 9999999999;
+            $uniqueId = random_int($min, $max);
+
+            $row = $model::where($column, $uniqueId)->first();
+
+            if( $row == null)
+            {
+                return $uniqueId;
+            }
+        }
+
+    }
+
+
+
+    
 }

@@ -20,7 +20,7 @@ Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf
 Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
 
 Route::group(['middleware' => 'user_middleware'], function () {
-    Route::get('/user/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('user.home');
+    Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');
 
     // Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.agoda');
     Route::get('/user/dashboard/booking', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');

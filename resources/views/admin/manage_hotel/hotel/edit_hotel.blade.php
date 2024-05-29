@@ -22,12 +22,14 @@
                                 </div>
                             @endif
 
-                            <input type="hidden" name="old_hotel" value={{$oldHotel->id}} />
+                            <input type="hidden" name="old_hotel" value={{ $oldHotel->id }} />
                             <div class="form-floating mt-2">
                                 <select class="form-control" id="country" name="country" aria-label="Country" required>
                                     <option value="">Select Country</option>
-                                    @foreach($countries as $country)
-                                        <option name="country" value={{ $country->id }}  {{$oldCountry->id == $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                                    @foreach ($countries as $country)
+                                        <option name="country" value={{ $country->id }}
+                                            {{ $oldCountry->id == $country->id ? 'selected' : '' }}>{{ $country->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <label for="country">Country</label>
@@ -39,8 +41,10 @@
                             <div class="form-floating mt-2">
                                 <select class="form-control" id="state" name="state" aria-label="State" required>
                                     <option value="">Select State</option>
-                                    @foreach($states as $state)
-                                        <option name="state" value={{ $state->id }} {{ $state->id == $oldState->id ? 'selected' : ''}}>{{ $state->name }}</option>
+                                    @foreach ($states as $state)
+                                        <option name="state" value={{ $state->id }}
+                                            {{ $state->id == $oldState->id ? 'selected' : '' }}>{{ $state->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <label for="country">State</label>
@@ -53,7 +57,7 @@
 
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="city" name="city"
-                                    placeholder="Edit City" value={{$oldCity->name}}>
+                                    placeholder="Edit City" value={{ $oldCity->name }}>
                                 <label for="state">City</label>
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
@@ -73,7 +77,6 @@
 
 @section('js')
     <script>
-
         var selectedCountry = '';
         $("#country").change(function() {
             selectedCountry = $(this).val();

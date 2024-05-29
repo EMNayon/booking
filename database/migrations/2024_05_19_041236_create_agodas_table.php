@@ -15,10 +15,10 @@ class CreateAgodasTable extends Migration
     {
         Schema::create('agodas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('booking_id')->nullable();
-            $table->string('booking_reference_no')->nullable();
+            $table->string('booking_id')->unique();
+            $table->string('booking_reference_no')->unique();
             $table->string('client')->nullable();
-            $table->integer('member_id')->nullable();
+            $table->string('member_id')->unique();
             $table->string('country_of_residence')->nullable();
 
             // $table->string('property')->nullable();

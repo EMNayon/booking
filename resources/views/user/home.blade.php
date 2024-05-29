@@ -46,7 +46,7 @@
                                 <label for="booking_id">Booking ID </label>
                                 <input type="text" class="form-control" id="booking_id"
                                     name="booking_id" placeholder="Booking ID"
-                                    ">
+                                    value={{$bookingId}} readonly>
                                     {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('booking_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -55,11 +55,21 @@
                             <div class="col-sm-12 ">
                                 <label for="booking_reference_no">Booking Reference No </label>
                                 <input type="text" class="form-control" id="booking_reference_no" name="booking_reference_no"
-                                    placeholder="Booking Reference No" value="{{ old('booking_reference_no') }}">
+                                    placeholder="Booking Reference No" value="{{ $bookingReferenceNo }}" readonly>
                                 @error('booking_reference_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-sm-12 ">
+                                <label for="member_id">Member ID</label>
+                                <input type="text" class="form-control" id="member_id" name="member_id"
+                                    placeholder="Member ID" value="{{ $memberId }}" readonly>
+                                @error('member_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="col-sm-12 ">
                                 <label for="client">Client </label>
                                 <input type="text" class="form-control" id="client" name="client"
@@ -68,14 +78,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
-                                <label for="member_id">Member ID</label>
-                                <input type="text" class="form-control" id="member_id" name="member_id"
-                                    placeholder="Member ID" value="{{ old('member_id') }}">
-                                @error('member_id')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+
 
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
@@ -85,22 +88,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
-                                <label for="property">Property </label>
-                                <input type="text" class="form-control text-white" id="property" name="property"
-                                    placeholder="Property"  >
-                                @error('property')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
                                 <select class="form-control text-white" id="country" name="country">
                                     <option value="" disabled selected>Select Country</option>
-                                    <option value="usa">United States</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="uk">United Kingdom</option>
-                                    <!-- Add more countries as needed -->
+                                    @foreach($countries as $country)
+                                    <option value={{$country->id}}>{{$country->name}}</option>
+                                    @endforeach
                                 </select>
                                 @error('country')
                                     <span class="text-danger">{{ $message }}</span>
@@ -111,10 +106,6 @@
                                 <label for="city">City</label>
                                 <select class="form-control text-white" id="city" name="city">
                                     <option value="" disabled selected>Select City</option>
-                                    <option value="new_york">New York</option>
-                                    <option value="los_angeles">Los Angeles</option>
-                                    <option value="chicago">Chicago</option>
-                                    <!-- Add more cities as needed -->
                                 </select>
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
@@ -125,9 +116,6 @@
                                 <label for="state">State</label>
                                 <select class="form-control text-white" id="state" name="state">
                                     <option value="" disabled selected>Select State</option>
-                                    <option value="california">California</option>
-                                    <option value="texas">Texas</option>
-                                    <option value="florida">Florida</option>
                                     <!-- Add more states as needed -->
                                 </select>
                                 @error('state')
@@ -139,25 +127,15 @@
                                 <label for="hotel">Hotel</label>
                                 <select class="form-control text-white" id="hotel" name="hotel">
                                     <option value="" disabled selected>Select Hotel</option>
-                                    <option value="hilton">Hilton</option>
-                                    <option value="marriott">Marriott</option>
-                                    <option value="holiday_inn">Holiday Inn</option>
-                                    <!-- Add more hotels as needed -->
                                 </select>
                                 @error('hotel')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            {{-- <h3 class="text-left" style="font-weight: bold">Insurance Details</h3> --}}
-
-
                             <div class="col-sm-12 ">
                                 <label for="property_contact_number">Property Contact Number</label>
                                 <input type="text" class="form-control text-white" id="property_contact_number" name="property_contact_number"

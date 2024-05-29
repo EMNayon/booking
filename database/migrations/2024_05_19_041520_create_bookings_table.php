@@ -29,8 +29,8 @@ class CreateBookingsTable extends Migration
             $table->string('nights')->nullable();
             $table->string('phone')->nullable();
 
-            $table->dateTime('check_in')->nullable();
-            $table->dateTime('check_out')->nullable();
+            $table->string('check_in')->nullable();
+            $table->string('check_out')->nullable();
             $table->string('guest_name')->nullable();
             $table->string('deluxe_room')->nullable();
 

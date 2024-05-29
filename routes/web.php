@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/money', function () {
@@ -21,6 +22,8 @@ Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->
 
 Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');
+    Route::post('/user/store-agoda', [\App\Http\Controllers\AgodaController::class, 'store'])->name('store_agoda');
+    Route::post('/user/store-booking', [\App\Http\Controllers\BookingController::class, 'store'])->name('store_booking');
 
     // Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.agoda');
     Route::get('/user/dashboard/booking', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
@@ -38,6 +41,11 @@ Route::group(['middleware' => 'user_middleware'], function () {
 
     Route::get('/member/{code}/edit', [\App\Http\Controllers\UserController::class, 'userMemberEdit'])->name('member_edit');
     Route::post('/member/update', [\App\Http\Controllers\UserController::class, 'userMemberUpdate'])->name('member_update');
+
+    //manage dependent drop down in the user form
+    Route::post('fetch-states', [App\Http\Controllers\LocationController::class, 'fetchStates'])->name('fetch_states');
+    Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
+    Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
 
 });
 
@@ -102,7 +110,6 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
     // Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
-
 });
 
 Route::group(['middleware' => 'auth'], function () {

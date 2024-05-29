@@ -37,16 +37,17 @@
     <div class="row">
         <div class="col-sm-12">
             <h3 class="text-left" style="font-weight: bold; margin-left: 10px;">Booking</h3>
-            <form action="{{ route('submit-member-form') }}" method="post">
+            <form action="{{ route('store_booking') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
 
-                            {{-- <div class="col-sm-12 ">
+                            <div class="col-sm-12 ">
                                 <label for="confirmation_no">Confirmation No </label>
-                                <input type="text" class="form-control text-white" id="confirmation_no" name="confirmation_no"
-                                    placeholder="Confirmation No"  >
+                                <input type="text" class="form-control text-white" id="confirmation_no"
+                                    name="confirmation_no" placeholder="Confirmation No" value={{ $confirmationNo }}
+                                    readonly>
                                 @error('confirmation_no')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -54,18 +55,18 @@
                             <div class="col-sm-12 ">
                                 <label for="pin_code">Pin Code </label>
                                 <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
-                                    placeholder="Pin Code"  >
+                                    placeholder="Pin Code" value={{ $pinCode }} readonly>
                                 @error('pin_code')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div> --}}
+                            </div>
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
                                 <select class="form-control text-white" id="country" name="country">
                                     <option value="" disabled selected>Select Country</option>
-                                    <option value="usa">United States</option>
-                                    <option value="canada">Canada</option>
-                                    <option value="uk">United Kingdom</option>
+                                    @foreach ($countries as $country)
+                                        <option value={{ $country->id }}>{{ $country->name }}</option>
+                                    @endforeach
                                     <!-- Add more countries as needed -->
                                 </select>
                                 @error('country')
@@ -73,27 +74,10 @@
                                 @enderror
                             </div>
 
-                            <div class="col-sm-12">
-                                <label for="city">City</label>
-                                <select class="form-control text-white" id="city" name="city">
-                                    <option value="" disabled selected>Select City</option>
-                                    <option value="new_york">New York</option>
-                                    <option value="los_angeles">Los Angeles</option>
-                                    <option value="chicago">Chicago</option>
-                                    <!-- Add more cities as needed -->
-                                </select>
-                                @error('city')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-12">
+                               <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <select class="form-control text-white" id="state" name="state">
                                     <option value="" disabled selected>Select State</option>
-                                    <option value="california">California</option>
-                                    <option value="texas">Texas</option>
-                                    <option value="florida">Florida</option>
                                     <!-- Add more states as needed -->
                                 </select>
                                 @error('state')
@@ -101,13 +85,23 @@
                                 @enderror
                             </div>
 
+
+                            <div class="col-sm-12">
+                                <label for="city">City</label>
+                                <select class="form-control text-white" id="city" name="city">
+                                    <option value="" disabled selected>Select City</option>
+                                    <!-- Add more cities as needed -->
+                                </select>
+                                @error('city')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
                                 <select class="form-control text-white" id="hotel" name="hotel">
                                     <option value="" disabled selected>Select Hotel</option>
-                                    <option value="hilton">Hilton</option>
-                                    <option value="marriott">Marriott</option>
-                                    <option value="holiday_inn">Holiday Inn</option>
                                     <!-- Add more hotels as needed -->
                                 </select>
                                 @error('hotel')
@@ -116,8 +110,8 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="rooms">Rooms</label>
-                                <input type="text" class="form-control" id="rooms" name="rooms"
-                                    placeholder="Room" value="{{ old('rooms') }}">
+                                <input type="text" class="form-control" id="rooms" name="rooms" placeholder="Room"
+                                    value="{{ old('rooms') }}">
                                 @error('rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -133,10 +127,9 @@
                             </div>
                             <div class="col-sm-12">
                                 <label for="phone">Phone </label>
-                                <input type="text" class="form-control" id="phone"
-                                    name="phone" placeholder="Phone Number"
-                                    ">
-                                    {{-- value="{{ rand(100000000000, 9999999999) }} --}}
+                                <input type="text" class="form-control" id="phone" name="phone"
+                                    placeholder="Phone Number">
+                                {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -187,7 +180,7 @@
                             <div class="col-sm-12 ">
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control" id="tax" name="tax"
-                                    placeholder="Tax" value="{{ old('tax') }}">
+                                    placeholder="Tax" value="15%" readonly>
                                 @error('tax')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -236,5 +229,71 @@
             }
         });
     </script>
-@endsection
 
+    <script>
+        $(document).ready(function() {
+            $('#country').change(function() {
+                var countryId = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('fetch_states') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        country_id: countryId
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#state').html(
+                            '<option value="" disabled selected>Select State</option>');
+                        $.each(data, function(index, state) {
+                            $('#state').append('<option value="' + state.id + '">' +
+                                state.name + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#state').change(function() {
+                var stateId = $(this).val();
+                $.ajax({
+                    url: '{{ route('fetch_cities') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        state_id: stateId
+                    },
+                    success: function(data) {
+                        $('#city').html(
+                            '<option value="" disabled selected>Select City</option>');
+                        $.each(data, function(index, city) {
+                            $('#city').append('<option value="' + city.id + '">' + city
+                                .name + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#city').change(function() {
+                var cityId = $(this).val();
+                $.ajax({
+                    url: '{{ route('fetch_hotels') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        city_id: cityId
+                    },
+                    success: function(data) {
+                        $('#hotel').html(
+                            '<option value="" disabled selected>Select Hotel</option>');
+                        $.each(data, function(index, hotel) {
+                            $('#hotel').append('<option value="' + hotel.id + '">' +
+                                hotel.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+@endsection

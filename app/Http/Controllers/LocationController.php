@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\State;
 use App\Models\City;
 use App\Models\Hotel;
+use App\Models\State;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LocationController extends Controller
 {

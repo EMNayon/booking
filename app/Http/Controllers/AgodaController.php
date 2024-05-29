@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Agoda;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AgodaController extends Controller
 {
@@ -41,7 +45,6 @@ class AgodaController extends Controller
      */
     public function store(Request $request)
     {
-         // dd('ok');
         // Get the authenticated user
         $user = Auth::user();
 
@@ -51,24 +54,56 @@ class AgodaController extends Controller
             return redirect()->back();
         }
 
+        $this->validate($request, [
+            'booking_id' => 'required',
+            'booking_reference_no'   => 'required',
+            'member_id' => 'required',
+            'client' => 'required',
+            'country_of_residence' => 'required',
+            'country' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'hotel' => 'required',
+            'property_contact_number' => 'required',
+            'number_of_rooms' => 'required',
+            'number_of_extra_beds' => 'required',
+            'number_of_adults' => 'required',
+            'number_of_children' => 'required',
+            'room_type' => 'required',
+            'promotion' => 'required',
+            'arrival' => 'required',
+            'departure' => 'required'
+        ]);
+
+
         DB::beginTransaction();
         try {
-            $code = $this->generateCode();
-            $agoda = new Agoda();
 
-            dd($agoda);
+            Agoda::create([
 
-
-            $member->save();
-
-            // Decrement the user's points
-            $user->point -= 1;
-            $user->save();
+                'booking_id' => $request->booking_id,
+                'booking_reference_no'   => $request->booking_reference_no,
+                'member_id' => $request->member_id,
+                'client' => $request->client,
+                'country_of_residence' => $request->country_of_residence,
+                'hotel_id' => $request->hotel_id,
+                'property_contact_number' => $request->property_contact_number,
+                'number_of_rooms' => $request->number_of_rooms,
+                'number_of_extra_beds' => $request->number_of_extra_beds,
+                'number_of_adults' => $request->number_of_adults,
+                'number_of_children' => $request->number_of_childer,
+                'room_type' => $request->room_type,
+                'promotion' => $request->promotion,
+                'arrival' => $request->arrival,
+                'departure' => $request->departure
+            ]);
 
             DB::commit();
             Session::flash('success', 'File Submission Successfull.');
             return redirect()->back();
         } catch (\Exception $exception) {
+           
+            Log::error("exception occurred during stroing agoda user info " . $exception->getMessage());
             DB::rollBack();
             Session::flash('error', 'Something went wrong. Please try again letter');
             return redirect()->back();
@@ -157,5 +192,5 @@ class AgodaController extends Controller
 
 
 
-    
+
 }

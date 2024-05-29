@@ -109,9 +109,12 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show(Booking $booking, $id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+        // dd($booking);
+        // dd("i'm here");
+        return view('user.booking_file_submission_show', compact('booking'));
     }
 
     /**
@@ -143,8 +146,35 @@ class BookingController extends Controller
      * @param  \App\Models\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $bookingId = request()->route('id');
+            dd($bookingId);
+            Hotel::where('id' , $hotelId)->delete();
+            DB::commit();
+            Session::flash('success','Hotel Deleted Successfully');
+            return response()->json(['success' => true]);
+        }
+        catch (\Exception $exception){
+
+            DB::rollBack();
+            Session::flash('error','Something went wrong. Please try again');
+            return response()->json(['success' => false], 404);
+        }
+
     }
+
+
+    public function getAllFileSubmissionList(Request $request)
+    {
+        // dd('okay');
+        // $booking = Booking::where('created_at', Auth::id())->orderBy('id', 'desc')->paginate(10);
+        $bookings = Booking::orderBy('id', 'desc')->paginate(10);
+        // dd($members);
+        // dd($bookings->hotel_id->name);
+        return view('user.booking_file_submission_list', compact('bookings'));
+    }
+
 }

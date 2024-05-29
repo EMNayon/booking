@@ -18,6 +18,8 @@
     <link href="{{ asset('/agent/css/black-dashboard.css?v=1.0.0') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('/agent/demo/demo.css') }}" rel="stylesheet" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
 
     </style>
@@ -71,13 +73,13 @@
 
 
                     <li>
-                        <a href="{{ route('user_submission_list') }}">
+                        <a href="{{ route('agoda_user_submission_list') }}">
                             <i class="tim-icons icon-atom"></i>
                             <p>Agoda Confirmation List</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('user_submission_list') }}">
+                        <a href="{{ route('booking_user_submission_list') }}">
                             <i class="tim-icons icon-atom"></i>
                             <p>Booking Confirmation List</p>
                         </a>

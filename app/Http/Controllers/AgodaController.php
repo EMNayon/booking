@@ -102,7 +102,7 @@ class AgodaController extends Controller
             Session::flash('success', 'File Submission Successfull.');
             return redirect()->back();
         } catch (\Exception $exception) {
-           
+
             Log::error("exception occurred during stroing agoda user info " . $exception->getMessage());
             DB::rollBack();
             Session::flash('error', 'Something went wrong. Please try again letter');
@@ -116,9 +116,12 @@ class AgodaController extends Controller
      * @param  \App\Models\Agoda  $agoda
      * @return \Illuminate\Http\Response
      */
-    public function show(Agoda $agoda)
+    public function show(Agoda $agoda, $id)
     {
-        //
+        $agoda = Agoda::findOrFail($id);
+        // dd($booking);
+        // dd("i'm here");
+        return view('user.agoda_file_submission_show', compact('agoda'));
     }
 
     /**
@@ -154,6 +157,16 @@ class AgodaController extends Controller
     {
         //
     }
+
+    public function getAllFileSubmissionList(Request $request)
+    {
+        // $agodas = Agoda::where('created_at', Auth::id())->orderBy('id', 'desc')->paginate(10);
+        // dd($agodas);
+        $agodas = Agoda::orderBy('id', 'desc')->paginate(10);
+
+        return view('user.agoda_file_submission_list', compact('agodas'));
+    }
+
 
     private function generateBookingId()
     {

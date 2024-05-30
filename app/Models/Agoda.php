@@ -9,4 +9,9 @@ class Agoda extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function hotel()
+    {
+        return $this->belongsTo(Hotel::class);
+    }
 }

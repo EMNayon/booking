@@ -1,9 +1,7 @@
 @extends('layouts.user')
-@section('title', 'Add New Insurance')
+@section('title', 'Add New Agodas')
 @section('css')
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-    <style>
+       <style>
         label {
             color: white;
         }
@@ -104,7 +102,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
-                                <input type="text" class="form-control text-white" id="arrival" name="arrival"
+                                <input type="text" class="form-control text-white datepicker" id="arrival" name="arrival"
                                     placeholder="Arrival"  >
                                 @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
@@ -176,8 +174,8 @@
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="departure">Departure</label>
-                                <input type="text" class="form-control" id="departure" name="departure"
+                                <label for="departure">Departure 1</label>
+                                <input type="text" class="form-control datepicker" id="departure" name="departure"
                                     placeholder="Departure" value="{{ old('departure') }}">
                                 @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
@@ -202,21 +200,17 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(function() {
             $('.datepicker').datepicker({
                 autoclose: true
             });
         });
-        $(document).on('change', '.changeVaccine', function() {
-            let id = $(this).attr('id');
-            let value = $(this).val() || 0;
-            $("#" + id + "_other").addClass('d-none');
-            if (value == "{{ \App\Models\Member::VACCINE_OTHER }}") {
-                $("#" + id + "_other").removeClass('d-none');
-            }
+
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd', // Set the desired date format
+            autoclose: true,
         });
+
     </script>
 @endsection

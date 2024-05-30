@@ -26,7 +26,7 @@
                             <tr>
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $row->guest_name }}</td>
-                                <td>{{ $row->hotel_id}}</td>
+                                <td>{{ $row->hotel->name}}</td>
                                 <td>{{ $row->phone }}</td>
                                 <td>{{ $row->rooms}} / {{ $row->nights }}</td>
                                 <td>{{ $row->price }}</td>
@@ -38,10 +38,17 @@
                                         "'>OMP</a>" !!}
                                 </td> --}}
                                 <td>
-                                    <a href="{{ route('booking_file_submission_show', ['id' => $row->id]) }}" class="" title="Show Data"><i class="bi bi-eye"></i></a>
-                                    <a href="#" title="Delete Data" >
+                                    <a href="{{ route('booking_file_submission_show', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
+                                    {{-- <a href="#" title="Delete Data" >
                                         <i class="bi bi-trash"></i>
-                                    </a>
+                                    </a> --}}
+                                    <form action="{{ route('bookings.destroy', $row->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete Data">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
 
                             </tr>

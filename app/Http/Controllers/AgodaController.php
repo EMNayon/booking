@@ -86,7 +86,7 @@ class AgodaController extends Controller
                 'member_id' => $request->member_id,
                 'client' => $request->client,
                 'country_of_residence' => $request->country_of_residence,
-                'hotel_id' => $request->hotel_id,
+                'hotel_id' => $request->hotel,
                 'property_contact_number' => $request->property_contact_number,
                 'number_of_rooms' => $request->number_of_rooms,
                 'number_of_extra_beds' => $request->number_of_extra_beds,
@@ -153,9 +153,11 @@ class AgodaController extends Controller
      * @param  \App\Models\Agoda  $agoda
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Agoda $agoda)
+    public function destroy(Agoda $agoda, $id)
     {
-        //
+        $agoda = Agoda::findOrFail($id);
+        $agoda->delete();
+        return redirect()->route('agoda_user_submission_list')->with('success', 'Agoda deleted successfully.');
     }
 
     public function getAllFileSubmissionList(Request $request)

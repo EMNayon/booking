@@ -109,8 +109,8 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="rooms">Rooms</label>
-                                <input type="text" class="form-control" id="rooms" name="rooms" placeholder="Room"
-                                    value="{{ old('rooms') }}">
+                                <input type="number" class="form-control" id="rooms" name="rooms" placeholder="Room"
+                                    value="{{ old('rooms') }}" min="1">
                                 @error('rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -118,8 +118,8 @@
 
                             <div class="col-sm-12 ">
                                 <label for="nights">Nights</label>
-                                <input type="text" class="form-control" id="nights" name="nights"
-                                    placeholder="Nights" value="{{ old('nights') }}">
+                                <input type="number" class="form-control" id="nights" name="nights"
+                                    placeholder="Nights" value="{{ old('nights') }}" min="1">
                                 @error('nights')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -278,6 +278,7 @@
             });
         });
     </script>
+
   <script>
         $(function() {
             $('.datepicker').datepicker({

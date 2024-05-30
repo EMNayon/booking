@@ -29,7 +29,7 @@
                                 <td>{{ $row->booking_id }}</td>
                                 <td>{{ $row->client }}</td>
                                 <td>{{ $row->property_contact_number }}</td>
-                                <td>{{ $row->hotel_id }}</td>
+                                <td>{{ $row->hotel->name }}</td>
                                 {{-- <td>{{ $row->created_by }}</td> --}}
                                 {{-- <td>{{ $row->name }}</td> --}}
                                 <td>{{ $row->number_of_rooms }} / {{ $row->number_of_extra_beds }}</td>
@@ -41,10 +41,14 @@
                                         "'>OMP</a>" !!}
                                 </td> --}}
                                 <td>
-                                    <a href="{{ route('agoda_file_submission_show', ['id' => $row->id]) }}" class="" title="Show Data"><i class="bi bi-eye"></i></a>
-                                    <a href="#" title="Delete Data" >
-                                        <i class="bi bi-trash"></i>
-                                    </a>
+                                    <a href="{{ route('agoda_file_submission_show', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
+                                    <form action="{{ route('agodas.destroy', $row->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete Data">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

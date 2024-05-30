@@ -150,32 +150,15 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking, $id)
     {
-        DB::beginTransaction();
-        try {
-            $bookingId = request()->route('id');
-            dd($bookingId);
-            Hotel::where('id' , $hotelId)->delete();
-            DB::commit();
-            Session::flash('success','Hotel Deleted Successfully');
-            return response()->json(['success' => true]);
-        }
-        catch (\Exception $exception){
-
-            DB::rollBack();
-            Session::flash('error','Something went wrong. Please try again');
-            return response()->json(['success' => false], 404);
-        }
-
+        $booking = Booking::findOrFail($id);
+        $booking->delete();
+        return redirect()->route('booking_user_submission_list')->with('success', 'Booking deleted successfully.');
     }
 
 
     public function getAllFileSubmissionList(Request $request)
     {
-        // dd('okay');
-        // $booking = Booking::where('created_at', Auth::id())->orderBy('id', 'desc')->paginate(10);
         $bookings = Booking::orderBy('id', 'desc')->paginate(10);
-        // dd($members);
-        // dd($bookings->hotel_id->name);
         return view('user.booking_file_submission_list', compact('bookings'));
     }
 

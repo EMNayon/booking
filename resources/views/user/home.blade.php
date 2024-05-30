@@ -1,9 +1,7 @@
 @extends('layouts.user')
 @section('title', 'Online Booking')
 @section('css')
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-    <style>
+   <style>
         label {
             color: white;
         }
@@ -149,34 +147,34 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="number_of_rooms">Number of Rooms</label>
-                                <input type="text" class="form-control text-white" id="number_of_rooms"
-                                    name="number_of_rooms" placeholder="Number of rooms" value="">
+                                <input type="number" class="form-control text-white" id="number_of_rooms"
+                                    name="number_of_rooms" placeholder="Number of rooms" value="" min="1">
                                 @error('number_of_rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="number_of_extra_beds">Number of Extra Beds</label>
-                                <input type="text" class="form-control" id="number_of_extra_beds"
+                                <input type="number" class="form-control" id="number_of_extra_beds"
                                     name="number_of_extra_beds" placeholder="Number of Extra Beds"
-                                    value="{{ old('number_of_extra_beds') }}">
+                                    value="{{ old('number_of_extra_beds') }}" min="1">
                                 @error('number_of_extra_beds')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="number_of_adults">Number of Adults</label>
-                                <input type="text" class="form-control" id="number_of_adults" name="number_of_adults"
-                                    placeholder="Number of Adults" value="{{ old('number_of_adults') }}">
+                                <input type="number" class="form-control" id="number_of_adults" name="number_of_adults"
+                                    placeholder="Number of Adults" value="{{ old('number_of_adults') }}" min="1">
                                 @error('number_of_adults')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="number_of_children">Number of Children</label>
-                                <input type="text" class="form-control" id="number_of_children"
+                                <input type="number" class="form-control" id="number_of_children"
                                     name="number_of_children" placeholder="Number of Children"
-                                    value="{{ old('number_of_children') }}">
+                                    value="{{ old('number_of_children') }}" min="1">
                                 @error('number_of_children')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -200,7 +198,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
-                                <input type="datetime" class="form-control text-white" id="arrival" name="arrival"
+                                <input type="datetime" class="form-control text-white datepicker" id="arrival" name="arrival"
                                     placeholder="Arrival">
                                 @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
@@ -208,7 +206,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="departure">Departure</label>
-                                <input type="datetime" class="form-control" id="departure" name="departure"
+                                <input type="datetime" class="form-control datepicker" id="departure" name="departure"
                                     placeholder="Departure" value="{{ old('departure') }}">
                                 @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
@@ -233,23 +231,18 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
+<script>
+    $(function() {
+        $('.datepicker').datepicker({
+            autoclose: true
         });
-        $(document).on('change', '.changeVaccine', function() {
-            let id = $(this).attr('id');
-            let value = $(this).val() || 0;
-            $("#" + id + "_other").addClass('d-none');
-            if (value == "{{ \App\Models\Member::VACCINE_OTHER }}") {
-                $("#" + id + "_other").removeClass('d-none');
-            }
-        });
-    </script>
+    });
+
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd', // Set the desired date format
+        autoclose: true,
+    });
+</script>
 
     <script>
         $(document).ready(function() {

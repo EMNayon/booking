@@ -37,8 +37,6 @@
     <div class="row">
         <div class="col-sm-12">
             <h3 class="text-left" style="font-weight: bold; margin-left: 10px;">Booking</h3>
-            <form action="{{ route('store_booking') }}" method="post">
-                @csrf
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
@@ -46,7 +44,7 @@
                             <div class="col-sm-12 ">
                                 <label for="confirmation_no">Confirmation No </label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
-                                    name="confirmation_no" placeholder="Confirmation No" value={{ $confirmationNo }}
+                                    name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->confirmation_number }}"
                                     readonly>
                                 @error('confirmation_no')
                                     <span class="text-danger">{{ $message }}</span>
@@ -55,20 +53,15 @@
                             <div class="col-sm-12 ">
                                 <label for="pin_code">Pin Code </label>
                                 <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
-                                    placeholder="Pin Code" value={{ $pinCode }} readonly>
+                                    placeholder="Pin Code" value="{{ $booking->pin_code }}" readonly>
                                 @error('pin_code')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
-                                <select class="form-control text-white" id="country" name="country">
-                                    <option value="" disabled selected>Select Country</option>
-                                    @foreach ($countries as $country)
-                                        <option value={{ $country->id }}>{{ $country->name }}</option>
-                                    @endforeach
-                                    <!-- Add more countries as needed -->
-                                </select>
+                                <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
+                                    placeholder="Pin Code" value="{{ $booking->hotel_id }}" readonly>
                                 @error('country')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -76,10 +69,9 @@
 
                                <div class="col-sm-12">
                                 <label for="state">State</label>
-                                <select class="form-control text-white" id="state" name="state">
-                                    <option value="" disabled selected>Select State</option>
-                                    <!-- Add more states as needed -->
-                                </select>
+                                <input type="text" class="form-control text-white" id="confirmation_no"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                readonly>
                                 @error('state')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -88,10 +80,9 @@
 
                             <div class="col-sm-12">
                                 <label for="city">City</label>
-                                <select class="form-control text-white" id="city" name="city">
-                                    <option value="" disabled selected>Select City</option>
-                                    <!-- Add more cities as needed -->
-                                </select>
+                                <input type="text" class="form-control text-white" id="confirmation_no"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                readonly>
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -100,18 +91,17 @@
 
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
-                                <select class="form-control text-white" id="hotel" name="hotel">
-                                    <option value="" disabled selected>Select Hotel</option>
-                                    <!-- Add more hotels as needed -->
-                                </select>
+                                <input type="text" class="form-control text-white" id="confirmation_no"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                readonly>
                                 @error('hotel')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="rooms">Rooms</label>
-                                <input type="text" class="form-control" id="rooms" name="rooms" placeholder="Room"
-                                    value="{{ old('rooms') }}">
+                                <input type="text" class="form-control text-white" id="rooms" name="rooms" placeholder="Room"
+                                    value="{{ $booking->rooms }}" readonly>
                                 @error('rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -119,16 +109,16 @@
 
                             <div class="col-sm-12 ">
                                 <label for="nights">Nights</label>
-                                <input type="text" class="form-control" id="nights" name="nights"
-                                    placeholder="Nights" value="{{ old('nights') }}">
+                                <input type="text" class="form-control text-white" id="nights" name="nights"
+                                    placeholder="Nights" value="{{ $booking->nights }}" readonly>
                                 @error('nights')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12">
                                 <label for="phone">Phone </label>
-                                <input type="text" class="form-control" id="phone" name="phone"
-                                    placeholder="Phone Number">
+                                <input type="text" class="form-control text-white" id="phone" name="phone"
+                                    placeholder="Phone Number" value="{{$booking->phone}}" readonly>
                                 {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
@@ -145,16 +135,16 @@
 
                             <div class="col-sm-12 ">
                                 <label for="check_in">Check In </label>
-                                <input type="text" class="form-control" id="check_in" name="check_in"
-                                    placeholder="Check In" value="{{ old('check_in') }}">
+                                <input type="text" class="form-control text-white" id="check_in" name="check_in"
+                                    placeholder="Check In" value="{{ $booking->check_in }}" readonly>
                                 @error('check_in')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_out">Check Out </label>
-                                <input type="text" class="form-control" id="check_out" name="check_out"
-                                    placeholder="Check Out" value="{{ old('check_out') }}">
+                                <input type="text" class="form-control text-white" id="check_out" name="check_out"
+                                    placeholder="Check Out" value="{{ $booking->check_out }}" readonly>
                                 @error('check_out')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -162,8 +152,8 @@
 
                             <div class="col-sm-12 ">
                                 <label for="guest_name">Guest Name</label>
-                                <input type="text" class="form-control" id="guest_name" name="guest_name"
-                                    placeholder="Guest Name" value="{{ old('guest_name') }}">
+                                <input type="text" class="form-control text-white" id="guest_name" name="guest_name"
+                                    placeholder="Guest Name" value="{{ $booking->guest_name }}" readonly>
                                 @error('guest_name')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -171,15 +161,15 @@
 
                             <div class="col-sm-12 ">
                                 <label for="delux_room">Delux Room</label>
-                                <input type="text" class="form-control" id="delux_room" name="delux_room"
-                                    placeholder="Delux Room" value="{{ old('delux_room') }}">
+                                <input type="text" class="form-control text-white" id="delux_room" name="delux_room"
+                                    placeholder="Delux Room" value="{{ $booking->deluxe_room }}" readonly>
                                 @error('delux_room')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="tax">Tax</label>
-                                <input type="text" class="form-control" id="tax" name="tax"
+                                <input type="text" class="form-control text-white" id="tax" name="tax"
                                     placeholder="Tax" value="15%" readonly>
                                 @error('tax')
                                     <span class="text-danger">{{ $message }}</span>
@@ -187,8 +177,8 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="price">Price </label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    placeholder="Price" value="{{ old('price') }}">
+                                <input type="text" class="form-control text-white" id="price" name="price"
+                                    placeholder="Price" value="{{ $booking->price }}" readonly>
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -196,104 +186,6 @@
                         </div>
                     </div>
                 </div>
-                <br><br>
-
-                <div class="row pt-2">
-                    <div class="col-md-4 col-sm-12 offset-md-4">
-                        <center>
-                            <button type="reset" class="btn btn-danger">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </center>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
-@endsection
-
-@section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
-        });
-        $(document).on('change', '.changeVaccine', function() {
-            let id = $(this).attr('id');
-            let value = $(this).val() || 0;
-            $("#" + id + "_other").addClass('d-none');
-            if (value == "{{ \App\Models\Member::VACCINE_OTHER }}") {
-                $("#" + id + "_other").removeClass('d-none');
-            }
-        });
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#country').change(function() {
-                var countryId = $(this).val();
-
-                $.ajax({
-                    url: '{{ route('fetch_states') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        country_id: countryId
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        $('#state').html(
-                            '<option value="" disabled selected>Select State</option>');
-                        $.each(data, function(index, state) {
-                            $('#state').append('<option value="' + state.id + '">' +
-                                state.name + '</option>');
-                        });
-                    }
-                });
-            });
-
-            $('#state').change(function() {
-                var stateId = $(this).val();
-                $.ajax({
-                    url: '{{ route('fetch_cities') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        state_id: stateId
-                    },
-                    success: function(data) {
-                        $('#city').html(
-                            '<option value="" disabled selected>Select City</option>');
-                        $.each(data, function(index, city) {
-                            $('#city').append('<option value="' + city.id + '">' + city
-                                .name + '</option>');
-                        });
-                    }
-                });
-            });
-
-            $('#city').change(function() {
-                var cityId = $(this).val();
-                $.ajax({
-                    url: '{{ route('fetch_hotels') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        city_id: cityId
-                    },
-                    success: function(data) {
-                        $('#hotel').html(
-                            '<option value="" disabled selected>Select Hotel</option>');
-                        $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '">' +
-                                hotel.name + '</option>');
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-
 @endsection

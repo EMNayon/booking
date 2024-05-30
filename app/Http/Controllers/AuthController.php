@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -80,9 +81,10 @@ class AuthController extends Controller
                 return redirect()->back();
             }
         } catch (\Exception $e) {
-
+            Log::error("Exception occurred during login => ". $e->getMessage());
             // Log the exception or handle it according to your application's requirements
-            dd($e->getMessage()); // For debugging purposes, you can display the exception message
+            Session::flash('error', 'Email and password do not match.');
+            return redirect()->back();
         }
     }
 

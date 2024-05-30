@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Add State')
+@section('title', 'Create City')
 @section('content')
     <div class="container-fluid px-4">
         <div class="row">
@@ -9,7 +9,7 @@
                         <form action="{{ route('store_city') }}" method="post">
                             @csrf
                             {{-- <input type="hidden" name="id" value="{{$user->id}}"> --}}
-                            <h1 class="h3 mb-3 fw-normal">Add State</h1>
+                            <h1 class="h3 mb-3 fw-normal">Add City</h1>
 
                             @if (\Illuminate\Support\Facades\Session::has('error'))
                                 <div class="alert alert-danger alert-dismissible pb-2" role="alert">
@@ -24,8 +24,7 @@
 
 
                             <div class="form-floating mt-2">
-                                <select class="form-control" id="country" name="country" aria-label="Country" required
-                                    onchange="fetchStates()">
+                                <select class="form-control" id="country" name="country" aria-label="Country" required>
                                     <option value="">Select Country</option>
                                     @foreach ($countries as $country)
                                         <option name="country" value={{ $country->id }}>{{ $country->name }}</option>
@@ -77,17 +76,23 @@
 
         var selectedCountry = '';
         $("#country").change(function() {
-            var selectedCountry = $(this).val();
+            selectedCountry = $(this).val();
+            fetchStates(selectedCountry);
+            console.log(selectedCountry);
         });
 
 
-        function fetchStates() {
-            $countryId = selectedCountry
-            console.log($countryId);
 
+        function fetchStates(selectedCountry) {
+            console.log('fetching....', selectedCountry)
+            let formData = {
+                'country': selectedCountry
+            }
 
             $.ajax({
-                url: '{{ route('fetch_state', ['id' => 1]) }}',
+                url: '{{ route('fetch_state') }}',
+                type: 'POST',
+                data: formData,
                 dataType: 'html',
                 success: function(data) {
                     console.log(data);

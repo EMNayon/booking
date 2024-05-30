@@ -26,8 +26,7 @@ class StateController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     return '<a class="btn btn-success text-white btn-sm" href="' . route('edit_state', [$row->id]) . '">Edit</a>' .
-                    ' <a class="btn btn-danger text-white btn-sm" href="' . route('delete_state', [$row->id]) . '">Delete</a>';
-
+                        ' <a class="btn btn-danger text-white btn-sm" href="' . route('delete_state', [$row->id]) . '">Delete</a>';
                 })
                 ->make(true);
         } else {
@@ -158,33 +157,29 @@ class StateController extends Controller
             Session::flash('error', 'Something went wrong. Please try again');
             return redirect()->back();
         }
-
     }
 
     public function fetchStates(Request $request)
     {
+        Log::info($request->country);
 
-        $content = <<<EOT
+        $content = '
             <div class="form-floating mt-2">
-            <select class="form-control" id="state" name="state" aria-label="State" required>
-                <option value="">Select State</option>
-            EOT;
+            <select class="form-control state-select" id="state" name="state" aria-label="State" required>
+                <option value="">Select State</option>';
 
+        Log::info(['country' => $request->country]);
         $states = State::where('country_id', $request->country)->get();
 
-        foreach ($states as $state) {
-            $content .= '<option name="state" value={{ '. $state->id .'}}>{{ '. $state->name  .'}}</option>';
+        if ($states->count() <= 0) {
+            return '<div class="mt-2"><span class="text-danger">No State Found</span></div>';
         }
 
-        $content .= <<<EOT
-            </select>
-            <label for="country">State</label>
-            @error('state')
-                <span class="text-danger">{{ \$message }}</span>
-            @enderror
-        </div>
-        EOT;
-        echo $content;
+        foreach ($states as $state) {
+            $content .= '<option name="state" value="'. $state->id . '">'.   $state->name   .'</option>';
+        }
+        $content .= '</select>';
+        return $content;
 
     }
 }

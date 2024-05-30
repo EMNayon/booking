@@ -45,10 +45,7 @@ class CityController extends Controller
     public function create()
     {
         $countries = Country::all();
-        $states = State::all();
-        
-
-        return view('admin.manage_hotel.city.create_city', compact('countries', 'states'));
+        return view('admin.manage_hotel.city.create_city', compact('countries'));
     }
 
     /**
@@ -59,7 +56,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-
+        Log::info("storing city info "  . json_encode($request->all()));
         $this->validate($request,[
             'country' => 'required',
             'state'   => 'required',
@@ -75,10 +72,11 @@ class CityController extends Controller
             ]);
 
             DB::commit();
-            Session::flash('success','State Added Successfully');
-            return redirect()->route('state');
+            Session::flash('success','City Added Successfully');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
+            Log::error("exception occurred during storing city => " . $exception->getMessage());
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
@@ -104,11 +102,21 @@ class CityController extends Controller
      */
     public function edit(Request $request)
     {
-        $state = State::find($request->route('id'));
+        $inputCityId = $request->route('id');
+
+        $oldCity = City::where('id', $inputCityId)->first();
+
+        if($oldCity == null)
+        {
+            Session::flash('error','Invalid City to Edit');
+            return redirect()->back();
+        }
+        $oldState = State::where('id', $oldCity->state_id)->first();
+        $oldCountry = Country::where('id', $oldState->country_id)->first();
         $countries = Country::all();
+        $states = State::where('country_id', $oldCountry->id)->get();
 
-
-        return view('admin.manage_hotel.state.edit_state', compact('countries', 'state'));
+        return view('admin.manage_hotel.city.edit_city', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states'));
     }
 
     /**
@@ -120,21 +128,24 @@ class CityController extends Controller
      */
     public function update(Request $request)
     {
+
         $this->validate($request,[
-            'country' => 'required',
-            'id'      => 'required',
-            'state'   => 'required'
+            'old_city' => 'required',
+            'country'  => 'required',
+            'state'    => 'required',
+            'city'     => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            $state = State::find($request->id);
-            $state->country_id = $request->country;
-            $state->name = $request->state;
-            $state->save();
+            $city = City::find($request->old_city);
+            $city->state_id = $request->state;
+            $city->name = $request->city;
+            $city->save();
+
             DB::commit();
-            Session::flash('success','State Updated Successfully');
-            return redirect()->route('state');
+            Session::flash('success','City Updated Successfully');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
             DB::rollBack();
@@ -149,16 +160,16 @@ class CityController extends Controller
      * @param  \App\Models\Country  $country
      * @return \Illuminate\Http\Response
      */
-    public function destroy(State $state)
+    public function destroy(City $city)
     {
 
         DB::beginTransaction();
         try {
-            $stateId = request()->route('id');
-            State::where('id' , $stateId)->delete();
+            $cityId = request()->route('id');
+            City::where('id' , $cityId)->delete();
             DB::commit();
-            Session::flash('success','State Deleted Successfully');
-            return redirect()->route('state');
+            Session::flash('success','City Deleted Successfully');
+            return redirect()->route('city');
         }
         catch (\Exception $exception){
 
@@ -166,6 +177,33 @@ class CityController extends Controller
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
         }
+
+    }
+
+
+
+    public function fetchCities(Request $request)
+    {
+        Log::info("fetching cities");
+        Log::info($request->state);
+
+        $content = '
+            <div class="form-floating mt-2">
+            <select class="form-control" id="city" name="city" aria-label="City" required>
+                <option value="">Select City</option>';
+
+        Log::info(['state' => $request->state]);
+        $cities = City::where('state_id', $request->state)->get();
+
+        if ($cities->count() <= 0) {
+            return '<div class="mt-2"><span class="text-danger">No City Found</span></div>';
+        }
+
+        foreach ($cities as $city) {
+            $content .= '<option name="city" value="'. $city->id . '">'.   $city->name   .'</option>';
+        }
+        $content .= '</select>';
+        return $content;
 
     }
 }

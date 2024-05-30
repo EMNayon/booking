@@ -19,18 +19,23 @@ class CreateBookingsTable extends Migration
             $table->string('confirmation_number')->nullable();
             $table->string('pin_code')->nullable();
 
-            $table->string('hotel_name')->nullable();
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('gps_coordinates')->nullable();
-            $table->string('check_in')->nullable();
-            $table->string('check_out')->nullable();
+            // $table->string('hotel_name')->nullable();
+            // $table->string('address')->nullable();
+            // $table->bigInteger('country_id')->nullable();
+            // $table->bigInteger('state_id')->nullable();
+            // $table->bigInteger('city_id')->nullable();
+            $table->bigInteger('hotel_id')->nullable();
             $table->string('rooms')->nullable();
             $table->string('nights')->nullable();
+            $table->string('phone')->nullable();
+
+            $table->string('check_in')->nullable();
+            $table->string('check_out')->nullable();
+            $table->string('guest_name')->nullable();
+            $table->string('deluxe_room')->nullable();
+
             $table->string('price')->nullable();
             $table->string('tax')->nullable();
-            $table->string('deluxe_room')->nullable();
-            $table->string('guest_name')->nullable();
 
             $table->string('extra-1')->nullable();
             $table->string('extra-2')->nullable();

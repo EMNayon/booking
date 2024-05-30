@@ -3,14 +3,27 @@
 @section('content')
     <div class="container-fluid px-4">
         <div class="card mb-4">
+            @if (\Illuminate\Support\Facades\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show pb-2" role="alert">
+                    {{ \Illuminate\Support\Facades\Session::get('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (\Illuminate\Support\Facades\Session::has('success'))
+                <div class="alert alert-success alert-dismissible fade show pb-2" role="alert">
+                    {{ \Illuminate\Support\Facades\Session::get('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card-header d-flex justify-content-between">
-            <div>
-                <i class="fas fa-table me-1"></i>
-                State List
-            </div>
-            <div>
-                <a class="btn btn-success text-white btn-sm" href={{route('create_state')}}>Add State</a>
-            </div>
+                <div>
+                    <i class="fas fa-table me-1"></i>
+                    State List
+                </div>
+                <div>
+                    <a class="btn btn-success text-white btn-sm" href={{ route('create_state') }}>Add State</a>
+                </div>
 
             </div>
             <div class="card-body">

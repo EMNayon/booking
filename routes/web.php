@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/money', function () {
@@ -20,10 +21,20 @@ Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf
 Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
 
 Route::group(['middleware' => 'user_middleware'], function () {
-    Route::get('/user/dashboard', [\App\Http\Controllers\UserController::class, 'index'])->name('user.home');
+    Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');
+    Route::post('/user/store-agoda', [\App\Http\Controllers\AgodaController::class, 'store'])->name('store_agoda');
+    Route::get('/user/file-submission-agoda', [\App\Http\Controllers\AgodaController::class, 'getAllFileSubmissionList'])->name('agoda_user_submission_list');
+    Route::get('/user/file-submission-agoda-show/{id}', [\App\Http\Controllers\AgodaController::class, 'show'])->name('agoda_file_submission_show');
+    Route::delete('/user/agoda-delete/{id}', [\App\Http\Controllers\AgodaController::class, 'destroy'])->name('agoda_delete');
+
+
+    Route::post('/user/store-booking', [\App\Http\Controllers\BookingController::class, 'store'])->name('store_booking');
+    Route::get('/user/dashboard/booking', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
+    Route::get('/user/file-submission-booking', [\App\Http\Controllers\BookingController::class, 'getAllFileSubmissionList'])->name('booking_user_submission_list');
+    Route::get('/user/file-submission-show/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('booking_file_submission_show');
+    Route::delete('/user/booking-delete/{id}', [\App\Http\Controllers\BookingController::class, 'destroy'])->name('booking_delete');
 
     // Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.agoda');
-    Route::get('/user/dashboard/booking', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
     Route::get('/user/file-submission', [\App\Http\Controllers\UserController::class, 'getAllFileSubmissionList'])->name('user_submission_list');
 
     Route::post('/member/registration', [\App\Http\Controllers\AgodaController::class, 'store'])->name('submit-agoda-form');
@@ -38,6 +49,11 @@ Route::group(['middleware' => 'user_middleware'], function () {
 
     Route::get('/member/{code}/edit', [\App\Http\Controllers\UserController::class, 'userMemberEdit'])->name('member_edit');
     Route::post('/member/update', [\App\Http\Controllers\UserController::class, 'userMemberUpdate'])->name('member_update');
+
+    //manage dependent drop down in the user form
+    Route::post('fetch-states', [App\Http\Controllers\LocationController::class, 'fetchStates'])->name('fetch_states');
+    Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
+    Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
 
 });
 
@@ -78,7 +94,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/states/update', [\App\Http\Controllers\StateController::class, 'update'])->name('update_state');
     Route::get('/admin/states/edit/{id}', [\App\Http\Controllers\StateController::class, 'edit'])->name('edit_state');
     Route::get('/admin/states/delete/{id}', [\App\Http\Controllers\StateController::class, 'destroy'])->name('delete_state');
-    Route::get('/admin/states/fetch-state/{id}', [\App\Http\Controllers\StateController::class, 'fetchStates'])->name('fetch_state');
+    Route::post('/admin/states/fetch-state', [\App\Http\Controllers\StateController::class, 'fetchStates'])->name('fetch_state');
 
 
     Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
@@ -87,12 +103,21 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/citiess/update', [\App\Http\Controllers\CityController::class, 'update'])->name('update_city');
     Route::get('/admin/cities/edit/{id}', [\App\Http\Controllers\CityController::class, 'edit'])->name('edit_city');
     Route::get('/admin/cities/delete/{id}', [\App\Http\Controllers\CityController::class, 'destroy'])->name('delete_city');
+    Route::post('/admin/cities/fetch-city', [\App\Http\Controllers\CityController::class, 'fetchCities'])->name('fetch_city');
 
+
+
+
+    Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
+    Route::get('/admin/hotels/create', [\App\Http\Controllers\HotelController::class, 'create'])->name('create_hotel');
+    Route::post('/admin/hotels/store', [\App\Http\Controllers\HotelController::class, 'store'])->name('store_hotel');
+    Route::post('/admin/hotels/update', [\App\Http\Controllers\HotelController::class, 'update'])->name('update_hotel');
+    Route::get('/admin/hotels/edit/{id}', [\App\Http\Controllers\HotelController::class, 'edit'])->name('edit_hotel');
+    Route::post('/admin/hotels/delete/{id}', [\App\Http\Controllers\HotelController::class, 'destroy'])->name('delete_hotel');
 
 
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');
     // Route::get('/admin/hotels', [\App\Http\Controllers\HotelController::class, 'index'])->name('hotel');
-
 });
 
 Route::group(['middleware' => 'auth'], function () {

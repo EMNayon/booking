@@ -1,11 +1,11 @@
 @extends('layouts.user')
-@section('title', 'Insurance Certificates')
+@section('title', 'Online Booking')
 @section('css')
 @endsection
 @section('content')
     <div class="card ">
         <div class="card-header">
-            <h4 class="card-title">Insurance Certificates</h4>
+            <h4 class="card-title">Online Booking</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive ps">

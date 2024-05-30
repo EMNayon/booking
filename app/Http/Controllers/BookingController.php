@@ -19,8 +19,10 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $confirmationNo = "134";
-        $pinCode = '134';
+        $confirmationNo = $this->generateConfirmationNumber();
+        $pinCode = $this->generatePinCode();
+        // $confirmationNo = "134";
+        // $pinCode = '134';
         $countries = Country::all();
 
         return view('user.booking', compact('confirmationNo', 'pinCode', 'countries'));
@@ -176,5 +178,52 @@ class BookingController extends Controller
         // dd($bookings->hotel_id->name);
         return view('user.booking_file_submission_list', compact('bookings'));
     }
+
+
+
+
+    private function generateConfirmationNumber()
+    {
+        return $this->generateUniqueId(new Booking(), 'confirmation_number');
+    }
+
+    private function generatePinCode()
+    {
+        return $this->generateUniquePinCode(new Booking(), 'pin_code');
+    }
+    private function generateUniquePinCode($model, $column) {
+        while(true)
+        {
+            $min = 1000;
+            $max = 9999;
+            $uniqueId = random_int($min, $max);
+            $row = $model::where($column, $uniqueId)->first();
+
+            if( $row == null)
+            {
+                // $formattedId = substr($uniqueId, 0, 4) . '.' . substr($uniqueId, 4, 3) . '.' . substr($uniqueId, 7, 3);
+                return $uniqueId;
+            }
+        }
+
+    }
+    private function generateUniqueId($model, $column) {
+        while(true)
+        {
+            $min = 1000000000;
+            $max = 9999999999;
+            $uniqueId = random_int($min, $max);
+            $row = $model::where($column, $uniqueId)->first();
+
+            if( $row == null)
+            {
+                $formattedId = substr($uniqueId, 0, 4) . '.' . substr($uniqueId, 4, 3) . '.' . substr($uniqueId, 7, 3);
+                return $formattedId;
+            }
+        }
+
+    }
+
+
 
 }

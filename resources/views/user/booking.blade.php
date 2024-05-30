@@ -1,8 +1,7 @@
 @extends('layouts.user')
 @section('title', 'Online Booking')
 @section('css')
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+
     <style>
         label {
             color: white;
@@ -125,6 +124,15 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            {{-- <h3 class="text-left" style="font-weight: bold">Insurance Details</h3> --}}
+
                             <div class="col-sm-12">
                                 <label for="phone">Phone </label>
                                 <input type="text" class="form-control" id="phone" name="phone"
@@ -134,18 +142,9 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            {{-- <h3 class="text-left" style="font-weight: bold">Insurance Details</h3> --}}
-
-
                             <div class="col-sm-12 ">
                                 <label for="check_in">Check In </label>
-                                <input type="text" class="form-control" id="check_in" name="check_in"
+                                <input type="text" class="form-control datepicker"  id="check_in" name="check_in"
                                     placeholder="Check In" value="{{ old('check_in') }}">
                                 @error('check_in')
                                     <span class="text-danger">{{ $message }}</span>
@@ -153,7 +152,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_out">Check Out </label>
-                                <input type="text" class="form-control" id="check_out" name="check_out"
+                                <input type="text" class="form-control datepicker" id="check_out" name="check_out"
                                     placeholder="Check Out" value="{{ old('check_out') }}">
                                 @error('check_out')
                                     <span class="text-danger">{{ $message }}</span>
@@ -179,7 +178,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="tax">Tax</label>
-                                <input type="text" class="form-control" id="tax" name="tax"
+                                <input type="text" class="form-control text-white" id="tax" name="tax"
                                     placeholder="Tax" value="15%" readonly>
                                 @error('tax')
                                     <span class="text-danger">{{ $message }}</span>
@@ -212,23 +211,7 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
-        });
-        $(document).on('change', '.changeVaccine', function() {
-            let id = $(this).attr('id');
-            let value = $(this).val() || 0;
-            $("#" + id + "_other").addClass('d-none');
-            if (value == "{{ \App\Models\Member::VACCINE_OTHER }}") {
-                $("#" + id + "_other").removeClass('d-none');
-            }
-        });
-    </script>
+
 
     <script>
         $(document).ready(function() {
@@ -295,5 +278,16 @@
             });
         });
     </script>
+  <script>
+        $(function() {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
+        });
 
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd', // Set the desired date format
+            autoclose: true,
+        });
+    </script>
 @endsection

@@ -61,7 +61,7 @@
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
                                 <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
-                                    placeholder="Pin Code" value="{{ $booking->hotel_id }}" readonly>
+                                    placeholder="Pin Code" value="{{ $booking->hotel->city->state->country->name }}" readonly>
                                 @error('country')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -70,7 +70,7 @@
                                <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
-                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->city->state->name }}"
                                 readonly>
                                 @error('state')
                                     <span class="text-danger">{{ $message }}</span>
@@ -81,7 +81,7 @@
                             <div class="col-sm-12">
                                 <label for="city">City</label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
-                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->city->name }}"
                                 readonly>
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
@@ -92,7 +92,7 @@
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
-                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel_id }}"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->name }}"
                                 readonly>
                                 @error('hotel')
                                     <span class="text-danger">{{ $message }}</span>
@@ -180,6 +180,14 @@
                                 <input type="text" class="form-control text-white" id="price" name="price"
                                     placeholder="Price" value="{{ $booking->price }}" readonly>
                                 @error('price')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="total_price">Total Price </label>
+                                <input type="text" class="form-control text-white" id="total_price" name="total_price"
+                                    placeholder="total_price" value="{{ $booking->total_price }}" readonly>
+                                @error('total_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

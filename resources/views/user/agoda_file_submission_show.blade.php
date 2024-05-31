@@ -86,7 +86,7 @@
                             <div class="col-sm-12 ">
                                 <label for="property">Property </label>
                                 <input type="text" class="form-control text-white text-white" id="property" name="property"
-                                    placeholder="Property" value="{{$agoda->property}}"  readonly>
+                                    placeholder="Property" value="{{$agoda->hotel->name}}"  readonly>
                                 @error('property')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -95,7 +95,7 @@
                             <div class="col-sm-12 ">
                                 <label for="address">Address </label>
                                 <input type="text" class="form-control text-white text-white" id="drawn_on" name="drawn_on"
-                                    placeholder="Drawn On"  value="{{$agoda->hotel_id}}" readonly>
+                                    placeholder="Drawn On"  value="{{$agoda->hotel->city->name}} , {{$agoda->hotel->city->state->name}} , {{$agoda->hotel->city->state->country->name}}" readonly>
                                 @error('drawn_on')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -105,6 +105,14 @@
                                 <input type="text" class="form-control text-white text-white" id="arrival" name="arrival"
                                     placeholder="Arrival" value="{{$agoda->arrival}}"  readonly>
                                 @error('arrival')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="price"> Price</label>
+                                <input type="text" class="form-control text-white" id="price" name="price"
+                                    placeholder="Departure" value="{{ $agoda->price }}" readonly>
+                                @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -151,7 +159,7 @@
                             <div class="col-sm-12 ">
                                 <label for="number_of_children">Number of Children</label>
                                 <input type="text" class="form-control text-white" id="number_of_children" name="number_of_children"
-                                    placeholder="Number of Children" value="{{ $agoda->number_of_children }}" readonly>
+                                    placeholder="Number of Children" value="{{ $agoda->number_of_childern }}" readonly>
                                 @error('number_of_children')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -178,6 +186,14 @@
                                 <input type="text" class="form-control text-white" id="departure" name="departure"
                                     placeholder="Departure" value="{{ $agoda->departure }}" readonly>
                                 @error('departure')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="total_price">Total Price</label>
+                                <input type="text" class="form-control text-white" id="total_price" name="total_price"
+                                    placeholder="Departure" value="{{ $agoda->total_price }}" readonly>
+                                @error('total_price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

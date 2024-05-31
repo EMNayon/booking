@@ -37,7 +37,7 @@ class CreateBookingsTable extends Migration
             $table->string('price')->nullable();
             $table->string('tax')->nullable();
 
-            $table->string('extra-1')->nullable();
+            $table->string('total_price')->nullable();
             $table->string('extra-2')->nullable();
             $table->string('extra-3')->nullable();
             $table->string('extra-4')->nullable();

@@ -56,24 +56,32 @@ class BookingController extends Controller
             return redirect()->back();
         }
 
-        $this->validate($request, [
-            "confirmation_no" => "required",
-            "pin_code"        => "required",
-            "country"         => "required",
-            "state"           => "required",
-            "city"            => "required",
-            "hotel"           => "required",
-            "rooms"           => "required",
-            "nights"          => "required",
-            "phone"           => "required",
-            "check_in"        => "required",
-            "check_out"       => "required",
-            "guest_name"      => "required",
-            "delux_room"      => "required",
-            "tax"             => "required",
-            "price"           => "required"
-        ]);
+        // $this->validate($request, [
+        //     "confirmation_no" => "required",
+        //     "pin_code"        => "required",
+        //     "country"         => "required",
+        //     "state"           => "required",
+        //     "city"            => "required",
+        //     "hotel"           => "required",
+        //     "rooms"           => "required",
+        //     "nights"          => "required",
+        //     "phone"           => "required",
+        //     "check_in"        => "required",
+        //     "check_out"       => "required",
+        //     "guest_name"      => "required",
+        //     "delux_room"      => "required",
+        //     "tax"             => "required",
+        //     "price"           => "required"
+        // ]);
 
+        $taxRate = 0.1978; // 15% tax rate
+        $price = $request->price; // The base price from the request
+
+        // Calculate the tax
+        $tax = $price * $taxRate;
+
+        // Calculate the total price
+        $total_price = $price + $tax;
 
         DB::beginTransaction();
         try {
@@ -88,10 +96,15 @@ class BookingController extends Controller
                 "check_in"        => $request->check_in,
                 "check_out"       => $request->check_out,
                 "guest_name"      => $request->guest_name,
-                "delux_room"      => $request->delux_room,
-                "tax"             => 15,
-                "price"           => $request->price
+                "deluxe_room"     => $request->delux_room,
+                'tax'             => 19.78,
+                'price'           => $price,
+                'total_price'     => $total_price
             ]);
+
+
+            $user->point -= 1;
+            $user->save();
 
             DB::commit();
             Session::flash('success', 'File Submission Successfull.');

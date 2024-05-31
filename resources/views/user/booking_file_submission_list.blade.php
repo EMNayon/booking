@@ -18,6 +18,7 @@
                             <th>Phone</th>
                             <th>Rooms / Nights</th>
                             <th>Price</th>
+                            <th>Total Price</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@
                                 <td>{{ $row->phone }}</td>
                                 <td>{{ $row->rooms}} / {{ $row->nights }}</td>
                                 <td>{{ $row->price }}</td>
+                                <td>{{ $row->total_price }}</td>
                                 {{-- <td>
                                     {!! "<a title='Money Receipt'   class='btn btn-sm btn-info text-white' href='" .
                                         route('money_receipt', [$row->phone]) .

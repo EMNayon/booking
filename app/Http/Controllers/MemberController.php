@@ -269,25 +269,7 @@ class MemberController extends Controller
     }
 
     // function to delete all files and subfolders from folder
-    private function deleteAllFilesofByPath($dir, $remove = false)
-    {
-        $structure = glob(rtrim($dir, "/") . '/*');
-        if (is_array($structure)) {
-            foreach ($structure as $file) {
-                if (is_dir($file)) {
-                    deleteAll($file, true);
-                } else if (is_file($file)) {
-                    unlink($file);
-                }
-
-            }
-        }
-        if ($remove) {
-            rmdir($dir);
-        }
-
-    }
-
+   
     public function scanResultMoney(Request $request)
     {
         $code = $request->code;

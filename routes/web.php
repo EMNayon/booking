@@ -13,12 +13,17 @@ Route::get('/money', function () {
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login.submit');
-Route::get('m', [\App\Http\Controllers\MemberController::class, 'scanResultMoney'])->name('scan');
-Route::get('m/{code}', [\App\Http\Controllers\MemberController::class, 'moneyVerifiedPdf']);
-Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
-Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
-Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
-Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
+
+// Route::get('m', [\App\Http\Controllers\MemberController::class, 'scanResultMoney'])->name('scan');
+// Route::get('m/{code}', [\App\Http\Controllers\MemberController::class, 'moneyVerifiedPdf']);
+
+Route::get('/download-pdf-agoda/{id}', [\App\Http\Controllers\PdfController::class, 'downloadAgoda'])->name('download_agoda');
+Route::get('/show-agoda/{id}', [\App\Http\Controllers\PdfController::class,'showAgoda'])->name('show_agoda');
+Route::get('/show-booking/{id}', [\App\Http\Controllers\PdfController::class, 'showBooking'])->name('show_booking');
+
+// Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
+// Route::get('/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');
+// Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
 
 Route::group(['middleware' => 'user_middleware'], function () {
     Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');

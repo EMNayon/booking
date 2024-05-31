@@ -37,7 +37,8 @@ class UserTableSeeder extends Seeder
                 'phone' => '017xxxxxxxx',
                 'user_type' => User::USER_TYPE_USER,
                 'status' => User::STATUS_ACTIVE,
-                'password' => Hash::make('12345678')
+                'password' => Hash::make('12345678'),
+                'point' => 1000000
             ]
         );
     }

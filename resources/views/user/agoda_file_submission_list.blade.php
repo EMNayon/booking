@@ -36,11 +36,12 @@
                                 {{-- <td>
                                     {!! "<a title='Money Receipt'   class='btn btn-sm btn-info text-white' href='" .
                                         route('money_receipt', [$row->code]) .
-                                        "'>MR</a><a  title='Policy Download'  class='btn btn-sm btn-info text-white' href='" .
-                                        route('policy', [$row->code]) .
-                                        "'>OMP</a>" !!}
+                                        "'>MR</a>!!}
                                 </td> --}}
+                                
                                 <td>
+                                    <a href="{{ route('show_agoda', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
+                                    <a href="{{ route('download_agoda', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Download Data"><i class="bi bi-eye"></i></a>
                                     <a href="{{ route('agoda_file_submission_show', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
                                     <form action="{{ route('agodas.destroy', $row->id) }}" method="POST" style="display:inline;">
                                         @csrf

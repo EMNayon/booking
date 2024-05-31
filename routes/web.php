@@ -19,6 +19,8 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->n
 
 Route::get('/download-pdf-agoda/{id}', [\App\Http\Controllers\PdfController::class, 'downloadAgoda'])->name('download_agoda');
 Route::get('/show-agoda/{id}', [\App\Http\Controllers\PdfController::class,'showAgoda'])->name('show_agoda');
+Route::get('/download-pdf-booking/{id}', [\App\Http\Controllers\PdfController::class, 'downloadBooking'])->name('download_booking');
+
 Route::get('/show-booking/{id}', [\App\Http\Controllers\PdfController::class, 'showBooking'])->name('show_booking');
 
 // Route::get('/policy/{code}', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('policy');

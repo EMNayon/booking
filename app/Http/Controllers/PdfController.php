@@ -6,6 +6,7 @@ use App\Models\Agoda;
 use Illuminate\Http\Request;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Booking;
 
 class PdfController extends Controller
 {
@@ -36,6 +37,21 @@ class PdfController extends Controller
         // return view('money',$data);
         // return $pdf->stream();
     }
+
+    public function downloadBooking($id)
+    {
+        
+         $booking = Booking::where('id', $id)->first();
+         $data = [
+             'booking' => $booking,
+         ];
+
+         $pdf = PDF::loadView('booking-pdf', $data);
+         $pdfName = 'test';
+         return $pdf->download($pdfName . '.pdf');
+    }
+
+
     public function showAgoda($id)
     {
         return view('agoda-pdf');

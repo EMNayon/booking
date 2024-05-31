@@ -41,6 +41,8 @@
                                 </td> --}}
                                 <td>
 
+                                    <a href="{{ route('download_booking', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
+
                                     <a href="{{ route('show_booking', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>
 
                                     <a href="{{ route('booking_file_submission_show', ['id' => $row->id]) }}" class="btn btn-sm btn-info" title="Show Data"><i class="bi bi-eye"></i></a>

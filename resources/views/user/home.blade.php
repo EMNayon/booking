@@ -191,8 +191,16 @@
                             <div class="col-sm-12 ">
                                 <label for="promotion">Promotion</label>
                                 <input type="text" class="form-control" id="promotion" name="promotion"
-                                    placeholder="promotion" value="{{ old('promotion') }}">
+                                    placeholder="Price includes 15% discount!" value="{{ old('promotion') }}">
                                 @error('promotion')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 ">
+                                <label for="price">Price</label>
+                                <input type="text" class="form-control" id="price" name="price"
+                                    placeholder="Price" value="{{ old('price') }}">
+                                @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

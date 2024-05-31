@@ -16,39 +16,82 @@ class PdfController extends Controller
         // $this->deleteAllFilesofByPath('agoda/');
 
         $agoda = Agoda::where('id', $id)->first();
+       
 
-        // $qrCode = new QrCode2(route('scan').'/'.$member->code);
-        // $output = new Output\Png();
-        // $data = $output->output($qrCode, 300, [255, 255, 255], [0, 0, 0]);
-        // $qr_filename = time() . '.png';
-        // file_put_contents('agoda/' . $qr_filename, $data);
+        $checkIn = $agoda->arrival;
 
-        //        $qrcode = base64_encode(QrCode::format('svg')->size(300)->errorCorrection('H')->generate(route('scan',[$member->code])));
-        // $qrcode = $qr_filename;
+        $checkIn = new \DateTime($agoda->arrival);
+
+        $checkInDay = $checkIn->format('l');
+        $checkInMonth = $checkIn->format('F');
+        $checkInDate = $checkIn->format('d');
+        $checkInYear = $checkIn->format('Y');
+
+
+        $checkOut = $agoda->departure;
+
+        $checkOut = new \DateTime($agoda->departure);
+
+        $checkOutDay = $checkOut->format('l');
+        $checkOutMonth = $checkOut->format('F');
+        $checkOutDate = $checkOut->format('d');
+        $checkOutYear = $checkOut->format('Y');
+       
         $data = [
             'agoda' => $agoda,
+            'check_in_day' => $checkInDay,
+            'check_in_month' => $checkInMonth,
+            'check_in_date' => $checkInDate,
+            'check_in_year' => $checkInYear,
+            'check_out_day' => $checkOutDay,
+            'check_out_month' => $checkOutMonth,
+            'check_out_date' => $checkOutDate,
+            'check_out_year' => $checkOutYear
         ];
 
         $pdf = PDF::loadView('agoda-pdf', $data);
 
-        // $pdfName = date('y_m_d', strtotime($member->created_at)) . '-' . date('y_m_d', time());
+       
         $pdfName = 'test';
         return $pdf->download($pdfName . '.pdf');
-        // return view('money',$data);
-        // return $pdf->stream();
+        
     }
 
     public function downloadBooking($id)
     {
-        
-         $booking = Booking::where('id', $id)->first();
-         $data = [
-             'booking' => $booking,
-         ];
 
-         $pdf = PDF::loadView('booking-pdf', $data);
-         $pdfName = 'test';
-         return $pdf->download($pdfName . '.pdf');
+        $booking = Booking::where('id', $id)->first();
+        $checkIn = $booking->check_in;
+
+        $checkIn = new \DateTime($booking->check_in);
+
+        $checkInDay = $checkIn->format('l');
+        $checkInMonth = $checkIn->format('F');
+        $checkInDate = $checkIn->format('d');
+
+
+        $checkOut = $booking->check_out;
+
+        $checkOut = new \DateTime($booking->check_out);
+
+        $checkOutDay = $checkOut->format('l');
+        $checkOutMonth = $checkOut->format('F');
+        $checkOutDate = $checkOut->format('d');
+
+        $data = [
+            'booking' => $booking,
+            'check_in_day' => $checkInDay,
+            'check_in_month' => $checkInMonth,
+            'check_in_date' => $checkInDate,
+            'check_out_day' => $checkOutDay,
+            'check_out_month' => $checkOutMonth,
+            'check_out_date' => $checkOutDate,
+        ];
+
+
+        $pdf = PDF::loadView('booking-pdf', $data);
+        $pdfName = 'test';
+        return $pdf->download($pdfName . '.pdf');
     }
 
 

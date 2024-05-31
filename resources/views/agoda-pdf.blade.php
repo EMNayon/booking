@@ -217,52 +217,51 @@
             <div class="left w-50">
                 <div>
                     <div class="left red w-40 agoda-left">Booking Id:</div>
-                    <div class="left w-60 agoda-right">123434343</div>
+                    <div class="left w-60 agoda-right">{{ $agoda->booking_id }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 agoda-left">Booking Reference No</div>
-                    <div class="left w-60 agoda-right">123434343</div>
+                    <div class="left w-60 agoda-right">{{ $agoda->booking_reference_no }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 agoda-left">Client</div>
-                    <div class="left w-60 agoda-right">Md Sahed</div>
+                    <div class="left w-60 agoda-right">{{ $agoda->client }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 agoda-left">Member Id:</div>
-                    <div class="left w-60 agoda-right">123434343</div>
+                    <div class="left w-60 agoda-right">{{ $agoda->member_id }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 agoda-left">Country of Residence:</div>
-                    <div class="left w-60 agoda-right">Bangladesh</div>
+                    <div class="left w-60 agoda-right">{{ $agoda->country_of_residence }}</div>
                     <div class="clear"></div>
                 </div>
 
 
                 <div>
                     <div class="left red w-40 agoda-left">Property</div>
-                    <div class="left agoda-right w-custom-60 ">The Sydney Boulevard Hotel</div>
+                    <div class="left agoda-right w-custom-60 ">{{ $agoda->hotel->name }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 agoda-left">Address</div>
-                    <div class="left  agoda-right w-custom-60">90 William street, Sydney, CBD, Sydney,
-                        Australia, NSW 2011</div>
+                    <div class="left  agoda-right w-custom-60">{{ $agoda->hotel->city->name}},{{   $agoda->hotel->city->state->name}} , {{ $agoda->hotel->city->state->country->name }}</div>
                     <div class="clear"></div>
                 </div>
 
 
                 <div>
                     <div class="left red w-40 agoda-left">Property Contact Number</div>
-                    <div class="left agoda-right w-custom-60">++61298374873</div>
+                    <div class="left agoda-right w-custom-60">{{ $agoda->property_contact_number }}</div>
                     <div class="clear"></div>
                 </div>
 
@@ -273,36 +272,36 @@
             <div class="left w-50 ash-bg promotion-main">
                 <div>
                     <div class="left red w-40 promotion-left">Number of Rooms:</div>
-                    <div class="left w-custom2-60 promotion-right">1</div>
+                    <div class="left w-custom2-60 promotion-right">{{ $agoda->number_of_rooms }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 promotion-left">Number of Extra Beds:</div>
-                    <div class="left w-custom2-60  promotion-right">0</div>
+                    <div class="left w-custom2-60  promotion-right">{{ $agoda->number_of_extra_beds }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 promotion-left">Number Of Adults:</div>
-                    <div class="left w-custom2-60  promotion-right">1</div>
+                    <div class="left w-custom2-60  promotion-right">{{ $agoda->number_of_adults }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 promotion-left">Number of Children:</div>
-                    <div class="left w-custom2-60  promotion-right">0</div>
+                    <div class="left w-custom2-60  promotion-right">{{ $agoda->number_of_childern }}</div>
                     <div class="clear"></div>
                 </div>
                 <div>
                     <div class="left red w-40 promotion-left">Room Type: </div>
-                    <div class="left w-custom2-60  promotion-right">Standard Room</div>
+                    <div class="left w-custom2-60  promotion-right">{{ $agoda->room_type }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <div class="left red w-40 promotion-left">Promotion:</div>
-                    <div class="left w-custom2-60  promotion-right">Long Stay Deal, Price includes 15% discount!
+                    <div class="left w-custom2-60  promotion-right">Long Stay Deal, Price includes {{ $agoda->promotion }} discount!
                     </div>
                     <div class="clear"></div>
                 </div>
@@ -341,7 +340,7 @@
                     <div class="left w-50">
                         <div>
                             <div class="left red w-40 ">Arrival:</div>
-                            <div class="left w-60 ">A<span class="red">gust 2, 2024</span></div>
+                            <div class="left w-60 "><span class="red">{{ $check_in_month }} {{ $check_in_date }},{{ $check_in_year }}</span></div>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -349,8 +348,8 @@
                     {{-- departure --}}
                     <div class="left w-50">
                         <div>
-                            <div class="left red w-40 ">De<span class="red">parture:</span></div>
-                            <div class="left w-60 ">August 2, 2024</span></div>
+                            <div class="left red w-40 "><span class="red">Departure:</span></div>
+                            <div class="left w-60 ">{{ $check_out_month }} {{ $check_out_date }}, {{ $check_out_year }}</span></div>
                             <div class="clear"></div>
                         </div>
                     </div>
@@ -387,13 +386,13 @@
                 <p>Remarks:</p>
             </div>
             <div>
-                <p>Included : Taxes and fees USD 78.6</p>
+                <p>Included : Taxes and fees USD {{ $agoda->total_price }}</p>
             </div>
             <div>
                 <p>You chose a future price: payment by you in USD will be due on Wednesday, July 24, 2024; On that</p>
             </div>
             <div>
-                <p>date, a USD amount will be calculated from AUD 1,309.03 and charged to you, subject to these terms
+                <p>date, a USD amount will be calculated from AUD {{ $agoda->total_price }} and charged to you, subject to these terms
                 </p>
             </div>
             <div>

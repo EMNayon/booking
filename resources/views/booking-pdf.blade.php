@@ -64,9 +64,9 @@
             <div class="w-28 right">
                 <div>
                     <p>Booking Confirmation</p>
-                    <p><span class="red">Confiramtion Number:</span> <span class="sky-blue">42718.38473.38743</span>
+                    <p><span class="red">Confiramtion Number:</span> <span class="sky-blue">{{ $booking->confirmation_number }}</span>
                     </p>
-                    <p><span class="red">Pin Code: </span><span class="sky-blue">2133</span></p>
+                    <p><span class="red">Pin Code: </span><span class="sky-blue">{{ $booking->pin_code }}</span></p>
                 </div>
             </div>
 
@@ -79,26 +79,26 @@
                 </div>
                 <div class="left"
                     style="margin-right:10px; margin-left:10px; border-right:1px solid grey; padding-right: 10px;">
-                    <p><span class="red"><b>The Omni King Edward Hotel</b> </span></p>
-                    <p><span class="red">Address:</span> 37 King Street East, M5c 1E9 Toronto</p>
-                    <p><span>Phone</span> <span>+83748378478378</span> </p>
-                    <p><span class="red">GPS Coordinates</span> <span>N 043 34343, W 83748378</span></p>
+                    <p><span class="red"><b>{{ $booking->hotel->name }}</b> </span></p>
+                    <p><span class="red">Address:</span>{{ $booking->hotel->city->name}},{{   $booking->hotel->city->state->name}} , {{ $booking->hotel->city->state->country->name }}</p>
+                    <p><span>Phone</span> <span>{{ $booking->phone }}</span> </p>
+                    <p><span class="red">GPS Coordinates</span> <span>N {{ $booking->hotel->latitude }}, W {{ $booking->hotel->longitude }}</span></p>
                 </div>
                 <div class="left" style="border-right: 1px solid grey; margin-right:15px;padding-right:15px;">
                     <div>
                         <p class="red">CHECK IN</p>
-                        <h1>15</h1>
-                        <p class="red">DECEMBER</p>
-                        <p class="red"><i>Friday</i></p>
+                        <h1>{{ $check_in_date }}</h1>
+                        <p class="red">{{ $check_in_month }}</p>
+                        <p class="red"><i>{{ $check_in_day }}</i></p>
                         <p class="red"> from 15.00</p>
                     </div>
                 </div>
                 <div class="left" style="border-right: 1px solid grey; margin-right:15px;padding-right:15px;">
                     <div>
                         <p class="red">CHECK OUT</p>
-                        <h1>22</h1>
-                        <p class="red">DECEMBER</p>
-                        <p class="red"><i>Friday</i></p>
+                        <h1>{{ $check_out_date }}</h1>
+                        <p class="red">{{ $check_out_month }}</p>
+                        <p class="red"><i>{{ $check_out_day }}</i></p>
                         <p class="red"> until 12.00</p>
                     </div>
                 </div>
@@ -106,13 +106,13 @@
                 <div class="left" style="border-right: 1px solid grey; margin-right:15px;padding-right:15px;">
                     <div>
                         <p class="red">ROOMS</p>
-                        <h1>1/</h1>
+                        <h1>{{ $booking->rooms }}/</h1>
                     </div>
                 </div>
                 <div class="left" style=" margin-right:15px;padding-right:15px;">
                     <div>
                         <p> <span class="red">NIGTHT</span><span>S</span></p>
-                        <p>7</p>
+                        <p>{{ $booking->nights }}</p>
                     </div>
                 </div>
                 <div class="clear"></div>
@@ -121,14 +121,14 @@
             <div>
                 <h1 class="red">PRICE</h1>
                 <div>
-                    <div class="left">1 room</div>
-                    <div class="right">BDT 74,222</div>
+                    <div class="left">{{ $booking->rooms }} room/s</div>
+                    <div class="right">BDT {{ $booking->price }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <h1 class="red left">Price</h1>
-                    <h1 class="right"><span class="red">approx</span>BDT 74,222</h1>
+                    <h1 class="right"><span class="red">approx</span>{{ $booking->price }}</h1>
                     <div class="clear"></div>
                 </div>
 
@@ -144,13 +144,13 @@
                         charges set by the property.</p>
                 </div>
                 <div>
-                    <p class="red left">TaX (83483%)</p>
-                    <p class="right">approx BDT88,343</p>
+                    <p class="red left">TaX ({{ $booking->tax }})</p>
+                    <p class="right">approx BDT{{ $booking->total_price }}</p>
                     <p class="clear"></p>
                 </div>
                 <div>
                     <p class="left">(taxes included)</p>
-                    <h1 class="right">You will pay 1078934.83483 in CAD</h1>
+                    <h1 class="right">You will pay 834783.3478 in CAD</h1>
                     <p>right</p>
                 </div>
 
@@ -201,8 +201,8 @@
 
                 <div>
                     <div class="left">
-                        <p class="red">Deluxe Room - 1 King Bed</p>
-                        <p><span class="red">Guest name:</span> Jahirul Islam / for 3 aduts, 2 childred, up to 0 year
+                        <p class="red">Deluxe Room - {{ $booking->deluxe_room }}</p>
+                        <p><span class="red">Guest name:</span> {{ $booking->guest_name }} / for 3 aduts, 2 childred, up to 0 year
                         </p>
                         <p><span class="red">No Meal is Included in this room rate</span></p>
 
@@ -216,7 +216,7 @@
                             • Upper floors
                             accessible by elevator • Toilet paper</p>
 
-                        <p><span class="red">Bed Size(s):</span> 1king bed (181-210cm widt)</p>
+                        <p><span class="red">Bed Size(s):</span> 1 king bed (181-210cm width)</p>
                     </div>
 
 

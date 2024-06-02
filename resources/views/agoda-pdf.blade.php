@@ -75,7 +75,7 @@
 
         .agoda {
             width: 15%;
-            margin: 0 2.1%;
+            margin: 0 2%;
 
         }
 
@@ -212,40 +212,35 @@
         </div>
 
         {{-- input fields --}}
-        <div>
+        <div >
             {{-- agoda booking info left --}}
             <div class="left w-50">
-                <div>
+                <div  style="width: 20%;">
                     <div class="left red w-40 agoda-left">Booking Id:</div>
-                    <div class="left w-60 agoda-right">{{ $agoda->booking_id }}</div>
+                    <div class="left w-60 ">{{ $agoda->booking_id }}</div>
                     <div class="clear"></div>
                 </div>
-
+{{--
                 <div>
                     <div class="left red w-40 agoda-left">Booking Reference No</div>
                     <div class="left w-60 agoda-right">{{ $agoda->booking_reference_no }}</div>
                     <div class="clear"></div>
                 </div>
-
                 <div>
                     <div class="left red w-40 agoda-left">Client</div>
                     <div class="left w-60 agoda-right">{{ $agoda->client }}</div>
                     <div class="clear"></div>
                 </div>
-
                 <div>
                     <div class="left red w-40 agoda-left">Member Id:</div>
                     <div class="left w-60 agoda-right">{{ $agoda->member_id }}</div>
                     <div class="clear"></div>
                 </div>
-
                 <div>
                     <div class="left red w-40 agoda-left">Country of Residence:</div>
                     <div class="left w-60 agoda-right">{{ $agoda->country_of_residence }}</div>
                     <div class="clear"></div>
                 </div>
-
-
                 <div>
                     <div class="left red w-40 agoda-left">Property</div>
                     <div class="left agoda-right w-custom-60 ">{{ $agoda->hotel->name }}</div>
@@ -263,7 +258,7 @@
                     <div class="left red w-40 agoda-left">Property Contact Number</div>
                     <div class="left agoda-right w-custom-60">{{ $agoda->property_contact_number }}</div>
                     <div class="clear"></div>
-                </div>
+                </div> --}}
 
 
             </div>

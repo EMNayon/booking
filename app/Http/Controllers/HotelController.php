@@ -89,23 +89,32 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         Log::info("storing hotel info "  . json_encode($request->all()));
-        $this->validate($request,[
-            'country' => 'required',
-            'state'   => 'required',
-            'city' => 'required',
-            'longitude' => 'required',
-            'latitude' => 'required',
-            'hotel' => 'required'
-        ]);
 
         DB::beginTransaction();
         try {
+            // dd($request->hasFile('hotel_image'));
+            if ($request->hasFile('hotel_image')) {
+                // dd("i'm here");
+                $image = $request->file('hotel_image');
+                $imageName = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('images/hotels'), $imageName);
+            }
+
+            // Extract longitude and latitude from google_map_add
+            $googleMapAdd = $request->google_map_add;
+            list($latitude, $longitude) = $this->extractLatLong($googleMapAdd);
 
             Hotel::create([
                 'name' => $request->hotel,
                 'city_id' => $request->city,
-                'longitude' => $request->longitude,
-                'latitude' => $request->latitude,
+                'longitude' => $longitude,
+                'latitude' => $latitude,
+                'google_map_add' => $googleMapAdd,
+                'hotel_tax' => $request->hotel_tax,
+                'hotel_type' => $request->hotel_type,
+                'hotel_price_per_night' => $request->hotel_price_per_night,
+                'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null
+
             ]);
 
             DB::commit();
@@ -222,4 +231,17 @@ class HotelController extends Controller
         }
 
     }
+
+
+    private function extractLatLong($googleMapAdd)
+{
+    // Assuming the google_map_add is in the format "latitude,longitude"
+    $coords = explode(',', $googleMapAdd);
+
+    if(count($coords) !== 2) {
+        throw new \Exception('Invalid Google Map address format. Expected "latitude,longitude".');
+    }
+
+    return [$coords[0], $coords[1]];
+}
 }

@@ -6,7 +6,7 @@
             <div class="col-sm-6 offset-sm-3">
                 <div class="card mb-4 mt-3">
                     <div class="card-body text-center">
-                        <form action="{{ route('store_hotel') }}" method="post">
+                        <form action="{{ route('store_hotel') }}" method="post"  enctype="multipart/form-data">
                             @csrf
                             {{-- <input type="hidden" name="id" value="{{$user->id}}"> --}}
                             <h1 class="h3 mb-3 fw-normal">Add Hotel</h1>
@@ -48,22 +48,42 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
                             <div class="form-floating mt-2">
-                                <input type="text" class="form-control" id="latitude" name="latitude"
-                                    placeholder="Add Latitude" required>
-                                <label for="latitude">Latitude</label>
-                                @error('latitude')
+                                <input type="text" class="form-control" id="google_map_add" name="google_map_add"
+                                    placeholder="Add Google Map Code" required>
+                                <label for="google_map_add">Hotel Google Map Add </label>
+                                @error('google_map_add')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="form-floating mt-2">
-                                <input type="text" class="form-control" id="longitude" name="longitude"
-                                    placeholder="Add Longitude" required>
-                                <label for="longitude">Longitude</label>
-                                @error('longitude')
+                                <input type="text" class="form-control" id="hotel_tax" name="hotel_tax"
+                                    placeholder="Add Hotel Tax" required>
+                                <label for="hotel_tax">Hotel Tax</label>
+                                @error('hotel_tax')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="hotel_type" name="hotel_type"
+                                    placeholder="Add Hotel Type" required>
+                                <label for="hotel_type">Room Type</label>
+                                @error('hotel_type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="hotel_price_per_night" name="hotel_price_per_night"
+                                    placeholder="Add Hotel Price" required>
+                                <label for="hotel_price_per_night">Hotel Price ( Per Night ) </label>
+                                @error('hotel_price_per_night')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="file"  class="form-control" id="hotel_image" name="hotel_image">
+                                <label for="hotel_image">Hotel Image </label>
+                                @error('hotel_image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

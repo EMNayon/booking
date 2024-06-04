@@ -99,11 +99,11 @@ class HotelController extends Controller
                 $imageName = time().'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('images/hotels'), $imageName);
             }
-
             // Extract longitude and latitude from google_map_add
             $googleMapAdd = $request->google_map_add;
             list($latitude, $longitude) = $this->extractLatLong($googleMapAdd);
 
+            
             Hotel::create([
                 'name' => $request->hotel,
                 'city_id' => $request->city,

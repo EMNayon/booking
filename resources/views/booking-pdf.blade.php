@@ -242,7 +242,7 @@
                 </div>
 
 
-                <div style="border-bottom: 1px solid black;">
+                <div style="">
                     <div class="left" style="width: 48%; padding-right: 15px;">
                         <h3>Important Information</h3>
                         <p>
@@ -277,8 +277,8 @@
                 </div>
 
 
-                <div>
-                    <div>
+                <div  style=" border-top: 1px solid black;">
+                    <div style="margin-top: 10px; width: 50%;">
                         <p><b>You can always view, change or cancel your booking online at:</b></p>
                         <p style="text-decoration: underline">your.booking.com</p>
                         <p>For any questions related to the property, you can contact The Omni

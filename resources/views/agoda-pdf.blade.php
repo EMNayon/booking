@@ -10,14 +10,17 @@
         * {
             margin: 0;
             padding: 0;
-            font-size:10px;
+            /* font-size:10px; */
+        }
+        body {
+            font-size: 10px;
         }
 
         .container {
-            width: 65%;
+            width: 90%;
             padding: 2%;
-            margin: 5% auto;
-            border: 2px solid black;
+            margin: 6% auto;
+            border-top: 1px solid black;
         }
 
         .left {
@@ -45,8 +48,8 @@
             height: 20px;
             border-radius: 50%;
             margin: 0 2px;
-
-            display: inline-block;
+            float: left;
+            /* display: inline-block; */
         }
 
         .red-bg {
@@ -169,8 +172,12 @@
     <div class="container">
         {{-- header --}}
         <div>
-            <div class="left">agoda</div>
-            <div class="right"><span>Booking</span> <span class="red">Confirmation</span></div>
+            <div class="left">
+                <h1 style="font-size: 24px;">agoda</h1>
+            </div>
+            <div class="right">
+                <h1 style="font-size: 28px;"><span>Booking</span> <span class="red">Confirmation</span></h1>
+            </div>
             <div class="clear"></div>
         </div>
 
@@ -178,12 +185,19 @@
         <div>
             <div class="left">
                 <div>
-                    <div class="tiny-circle red-bg left"></div>
-                    <div class="tiny-circle yellow-bg left"></div>
-                    <div class="tiny-circle green-bg left"></div>
-                    <div class="tiny-circle purple-bg left"></div>
-                    <div class="tiny-circle skyblue-bg left"></div>
-                    <div class="clear"></div>
+                    <div>
+                        <p class="tiny-circle red-bg left"></p>
+                        <p class="tiny-circle red-bg left"></p>
+                        <p class="tiny-circle red-bg left"></p>
+                        <p class="tiny-circle red-bg left"></p>
+                        <p class="tiny-circle red-bg left"></p>
+                        <p class="clear"></p>
+                    </div>
+                    {{-- <div class="tiny-circle yellow-bg left" ></div>
+                    <div class="tiny-circle green-bg left" ></div>
+                    <div class="tiny-circle purple-bg left" style="margin-left: 55px;"></div>
+                    <div class="tiny-circle skyblue-bg left" style="margin-left: 105px;"></div> --}}
+                    {{-- <div class="clear"></div> --}}
                 </div>
             </div>
             <div class="right">

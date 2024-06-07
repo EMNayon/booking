@@ -1,7 +1,7 @@
 @extends('layouts.user')
 @section('title', 'Online Booking')
 @section('css')
-   <style>
+    <style>
         label {
             color: white;
         }
@@ -11,11 +11,9 @@
         }
 
         .input-group {
-    display: flex;
-    align-items: center;
-}
-
-
+            display: flex;
+            align-items: center;
+        }
     </style>
 @endsection
 @section('content')
@@ -87,9 +85,15 @@
 
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
-                                <input type="text" class="form-control" id="country_of_residence"
+                                {{-- <input type="text" class="form-control" id="country_of_residence"
                                     name="country_of_residence" placeholder="Country of Residence"
-                                    value="{{ old('country_of_residence') }}">
+                                    value="{{ old('country_of_residence') }}"> --}}
+                                    <select class="form-control " id="country_of_residence" name="country_of_residence">
+                                        <option value="" disabled selected>Select Residence Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value={{ $country->id }}>{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
                                 @error('country_of_residence')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -108,7 +112,7 @@
                                 @enderror
                             </div>
 
-                              <div class="col-sm-12">
+                            <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <select class="form-control " id="state" name="state">
                                     <option value="" disabled selected>Select State</option>
@@ -165,11 +169,14 @@
                                 <label for="number_of_rooms">Number of Rooms</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button" id="button-minus">-</button>
+                                        <button class="btn btn-outline-secondary btn-minus" type="button"
+                                            id="button-minus">-</button>
                                     </div>
-                                    <input type="text" class="form-control " id="number_of_rooms" name="number_of_rooms" placeholder="Number of rooms" value="1">
+                                    <input type="text" class="form-control " id="number_of_rooms"
+                                        name="number_of_rooms" placeholder="Number of rooms" value="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button" id="button-plus">+</button>
+                                        <button class="btn btn-outline-secondary btn-plus" type="button"
+                                            id="button-plus">+</button>
                                     </div>
                                 </div>
                                 @error('number_of_rooms')
@@ -183,7 +190,9 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_extra_beds" name="number_of_extra_beds" placeholder="Number of Extra Beds" value="{{ old('number_of_extra_beds') }}" min="1">
+                                    <input type="text" class="form-control" id="number_of_extra_beds"
+                                        name="number_of_extra_beds" placeholder="Number of Extra Beds"
+                                        value="{{ old('number_of_extra_beds') }}" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
                                     </div>
@@ -199,7 +208,9 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_adults" name="number_of_adults" placeholder="Number of Adults" value="{{ old('number_of_adults') }}" min="1">
+                                    <input type="text" class="form-control" id="number_of_adults"
+                                        name="number_of_adults" placeholder="Number of Adults"
+                                        value="{{ old('number_of_adults') }}" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
                                     </div>
@@ -215,7 +226,9 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_children" name="number_of_children" placeholder="Number of Children" value="{{ old('number_of_children') }}" min="1">
+                                    <input type="text" class="form-control" id="number_of_children"
+                                        name="number_of_children" placeholder="Number of Children"
+                                        value="{{ old('number_of_children') }}" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
                                     </div>
@@ -285,18 +298,18 @@
 @endsection
 
 @section('js')
-<script>
-    $(function() {
-        $('.datepicker').datepicker({
-            autoclose: true
+    <script>
+        $(function() {
+            $('.datepicker').datepicker({
+                autoclose: true
+            });
         });
-    });
 
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd', // Set the desired date format
-        autoclose: true,
-    });
-</script>
+        $('.datepicker').datepicker({
+            format: 'yyyy-mm-dd', // Set the desired date format
+            autoclose: true,
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -365,24 +378,24 @@
     </script>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.btn-plus').click(function() {
-        var input = $(this).closest('.input-group').find('input');
-        var value = parseInt(input.val(), 10) || 0;
-        input.val(value + 1);
-    });
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-plus').click(function() {
+                var input = $(this).closest('.input-group').find('input');
+                var value = parseInt(input.val(), 10) || 0;
+                input.val(value + 1);
+            });
 
-    $('.btn-minus').click(function() {
-        var input = $(this).closest('.input-group').find('input');
-        var value = parseInt(input.val(), 10) || 0;
-        if (value > 1) { // prevent negative values
-            input.val(value - 1);
-        }
-    });
-});
-</script>
+            $('.btn-minus').click(function() {
+                var input = $(this).closest('.input-group').find('input');
+                var value = parseInt(input.val(), 10) || 0;
+                if (value > 1) { // prevent negative values
+                    input.val(value - 1);
+                }
+            });
+        });
+    </script>
 
 
 

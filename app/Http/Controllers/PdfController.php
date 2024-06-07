@@ -48,8 +48,7 @@ class PdfController extends Controller
             'check_out_date' => $checkOutDate,
             'check_out_year' => $checkOutYear
         ];
-
-        $pdf = PDF::loadView('agoda-pdf', $data);
+        $pdf = PDF::loadView('agoda-pdf2', $data);
 
 
         $pdfName = 'test';

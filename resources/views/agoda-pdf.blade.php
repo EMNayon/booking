@@ -234,7 +234,7 @@
                     <div class="left w-60 ">{{ $agoda->booking_id }}</div>
                     <div class="clear"></div>
                 </div>
-{{--
+
                 <div>
                     <div class="left red w-40 agoda-left">Booking Reference No</div>
                     <div class="left w-60 agoda-right">{{ $agoda->booking_reference_no }}</div>
@@ -272,7 +272,7 @@
                     <div class="left red w-40 agoda-left">Property Contact Number</div>
                     <div class="left agoda-right w-custom-60">{{ $agoda->property_contact_number }}</div>
                     <div class="clear"></div>
-                </div> --}}
+                </div>
 
 
             </div>

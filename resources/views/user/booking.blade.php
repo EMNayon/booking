@@ -107,23 +107,38 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12">
                                 <label for="rooms">Rooms</label>
-                                <input type="number" class="form-control" id="rooms" name="rooms" placeholder="Room"
-                                    value="{{ old('rooms') }}" min="1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                    </div>
+                                    <input type="text" class="form-control" id="rooms" name="rooms" placeholder="Rooms" value="{{ old('rooms') }}" min="1">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                    </div>
+                                </div>
                                 @error('rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12">
                                 <label for="nights">Nights</label>
-                                <input type="number" class="form-control" id="nights" name="nights"
-                                    placeholder="Nights" value="{{ old('nights') }}" min="1">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                    </div>
+                                    <input type="text" class="form-control" id="nights" name="nights" placeholder="Nights" value="{{ old('nights') }}" min="1">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                    </div>
+                                </div>
                                 @error('nights')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
 
 
 
@@ -291,4 +306,25 @@
             autoclose: true,
         });
     </script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.btn-plus').click(function() {
+        var input = $(this).closest('.input-group').find('input');
+        var value = parseInt(input.val(), 10) || 0;
+        input.val(value + 1);
+    });
+
+    $('.btn-minus').click(function() {
+        var input = $(this).closest('.input-group').find('input');
+        var value = parseInt(input.val(), 10) || 0;
+        if (value > 1) { // prevent negative values
+            input.val(value - 1);
+        }
+    });
+});
+</script>
+
 @endsection

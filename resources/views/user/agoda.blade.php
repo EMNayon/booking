@@ -124,14 +124,30 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            {{-- <div class="col-sm-12 ">
                                 <label for="number_of_rooms">Number of Rooms</label>
                                 <input type="text" class="form-control text-white" id="number_of_rooms" name="number_of_rooms"
                                     placeholder="Number of rooms" value="">
                                 @error('number_of_rooms')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
+                            {{-- <div class="col-sm-12">
+                                <label for="number_of_rooms">Number of Rooms</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
+                                    </div>
+                                    <input type="text" class="form-control text-white" id="number_of_rooms" name="number_of_rooms" placeholder="Number of rooms" value="1">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button" id="button-plus">+</button>
+                                    </div>
+                                </div>
+                                @error('number_of_rooms')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div> --}}
+
                             <div class="col-sm-12 ">
                                 <label for="number_of_extra_beds">Number of Extra Beds</label>
                                 <input type="text" class="form-control" id="number_of_extra_beds" name="number_of_extra_beds"

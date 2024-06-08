@@ -5,26 +5,28 @@
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 <div class="card mb-4 mt-3">
-                    {{--                    <div class="card-header"> --}}
-                    {{--                        <i class="fas fa-table me-1"></i> --}}
-                    {{--                        Create New Agent --}}
-                    {{--                    </div> --}}
                     <div class="card-body text-center">
                         <form action="{{ route('signup.submit') }}" method="post">
                             @csrf
                             <img class="mb-4" src="{{ asset('assets/image/bd_logo.png') }}" height="100px">
                             <h1 class="h3 mb-3 fw-normal">Add New Agent</h1>
 
-                            @if (\Illuminate\Support\Facades\Session::has('error'))
-                                <div class="alert alert-danger alert-dismissible pb-2" role="alert">
-                                    {{ \Illuminate\Support\Facades\Session::get('error') }}
-                                </div>
-                            @endif
                             @if (\Illuminate\Support\Facades\Session::has('success'))
-                                <div class="alert alert-success alert-dismissible pb-2" role="alert">
-                                    {{ \Illuminate\Support\Facades\Session::get('success') }}
-                                </div>
-                            @endif
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="tim-icons icon-simple-remove"></i>
+                                </button>
+                                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+                            </div>
+                        @endif
+                        @if (\Illuminate\Support\Facades\Session::has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                    <i class="tim-icons icon-simple-remove"></i>
+                                </button>
+                                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+                            </div>
+                        @endif
 
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="">

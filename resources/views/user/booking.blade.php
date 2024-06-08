@@ -16,21 +16,21 @@
     <div class="row">
         <div class="col-sm-12">
             @if (\Illuminate\Support\Facades\Session::has('success'))
-                <div class="alert alert-success">
-                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="tim-icons icon-simple-remove"></i>
-                    </button>
-                    <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-                </div>
-            @endif
-            @if (\Illuminate\Support\Facades\Session::has('error'))
-                <div class="alert alert-danger">
-                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="tim-icons icon-simple-remove"></i>
-                    </button>
-                    <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
-                </div>
-            @endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+            </div>
+        @endif
+        @if (\Illuminate\Support\Facades\Session::has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+            </div>
+        @endif
         </div>
     </div>
     <div class="row">
@@ -308,7 +308,7 @@
     </script>
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
     $('.btn-plus').click(function() {
@@ -325,6 +325,6 @@ $(document).ready(function() {
         }
     });
 });
-</script>
+</script> --}}
 
 @endsection

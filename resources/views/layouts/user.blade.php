@@ -43,22 +43,7 @@
                         APP
                     </a>
                 </div>
-
-
                 <ul class="nav">
-                    {{-- <li class="nav-item">
-                        <a class="nav-link n" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title sb-nav-link-ico">Manage Hotel</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="ui-basic">
-                            <ul class="nav flex-column sub-menu " style="margin-left: 10px;">
-                                <li class="nav-item"> <a class="nav-link" href="{{route('user.home')}}">Country</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{route('user.home')}}">State</a></li>
-
-                            </ul>
-                        </div>
-                    </li> --}}
                     <li class="active ">
                         <a href="{{ route('user.home') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
@@ -71,9 +56,6 @@
                             <p>Add New (Booking)</p>
                         </a>
                     </li>
-
-
-
                     <li>
                         <a href="{{ route('agoda_user_submission_list') }}">
                             <i class="tim-icons icon-atom"></i>
@@ -179,6 +161,48 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.btn-plus').click(function() {
+            var input = $(this).closest('.input-group').find('input');
+            var value = parseInt(input.val(), 10) || 0;
+            input.val(value + 1);
+        });
+        $('.btn-minus').click(function() {
+            var input = $(this).closest('.input-group').find('input');
+            var value = parseInt(input.val(), 10) || 0;
+            if (value > 1) { // prevent negative values
+                input.val(value - 1);
+            }
+        });
+    });
+</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var alertSuccess = document.querySelector('.alert-success');
+        var alertDanger = document.querySelector('.alert-danger');
+        if (alertSuccess) {
+            alertSuccess.classList.remove('show');
+            setTimeout(function() {
+                alertSuccess.remove();
+            }, 150);
+        }
+        if (alertDanger) {
+            alertDanger.classList.remove('show');
+            setTimeout(function() {
+                alertDanger.remove();
+            }, 150);
+        }
+    }, 3000);
+});
+</script>
 
     @yield('js')
 

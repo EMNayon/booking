@@ -15,40 +15,6 @@ class AuthController extends Controller
     public function showLoginForm(){
         return view('auth.login');
     }
-    // public function login(Request $request){
-    //     $this->validate($request,[
-    //         'email' => 'required',
-    //         'password' => 'required'
-    //     ]);
-    //     if(Auth::attempt(['email' => $request->email,'password' => $request->password])){
-    //         // dd('i am here');
-
-    //         if(Auth::user()->user_type == User::USER_TYPE_USER){
-    //             if( Auth::user()->status == User::STATUS_ACTIVE){
-    //                 Session::flash('success','Agent Successfully Login');
-    //                 return redirect()->route('user.home');
-    //             }else{
-    //                 Auth::logout();
-    //                 Session::flash('error','Your Account now is on pending.');
-    //                 return redirect()->route('login');
-    //             }
-    //         }
-
-    //         if(Auth::user()->user_type == User::USER_TYPE_ADMIN){
-    //             Session::flash('success','Admin Successfully Login');
-    //             return redirect()->route('admin.home');
-    //         }
-    //         else{
-    //             Auth::logout();
-    //             return redirect()->route('login');
-    //         }
-    //     }
-    //     else{
-    //         Session::flash('error','Email and password do not match.');
-    //         return redirect()->back();
-    //     }
-    // }
-
     public function login(Request $request){
 
         try {

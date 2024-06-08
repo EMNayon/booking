@@ -20,21 +20,21 @@
     <div class="row">
         <div class="col-sm-12">
             @if (\Illuminate\Support\Facades\Session::has('success'))
-                <div class="alert alert-success">
-                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="tim-icons icon-simple-remove"></i>
-                    </button>
-                    <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-                </div>
-            @endif
-            @if (\Illuminate\Support\Facades\Session::has('error'))
-                <div class="alert alert-danger">
-                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                        <i class="tim-icons icon-simple-remove"></i>
-                    </button>
-                    <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
-                </div>
-            @endif
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+            </div>
+        @endif
+        @if (\Illuminate\Support\Facades\Session::has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                </button>
+                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+            </div>
+        @endif
         </div>
     </div>
     <div class="row">
@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <label for="booking_id">Booking ID </label>
-                                <input type="text" class="form-control" id="booking_id" name="booking_id"
+                                <input type="text" class="form-control text-white" id="booking_id" name="booking_id"
                                     placeholder="Booking ID" value={{ $bookingId }} readonly>
                                 {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('booking_id')
@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="booking_reference_no">Booking Reference No </label>
-                                <input type="text" class="form-control" id="booking_reference_no"
+                                <input type="text" class="form-control text-white" id="booking_reference_no"
                                     name="booking_reference_no" placeholder="Booking Reference No"
                                     value="{{ $bookingReferenceNo }}" readonly>
                                 @error('booking_reference_no')
@@ -66,7 +66,7 @@
 
                             <div class="col-sm-12 ">
                                 <label for="member_id">Member ID</label>
-                                <input type="text" class="form-control" id="member_id" name="member_id"
+                                <input type="text" class="form-control text-white" id="member_id" name="member_id"
                                     placeholder="Member ID" value="{{ $memberId }}" readonly>
                                 @error('member_id')
                                     <span class="text-danger">{{ $message }}</span>
@@ -85,9 +85,6 @@
 
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
-                                {{-- <input type="text" class="form-control" id="country_of_residence"
-                                    name="country_of_residence" placeholder="Country of Residence"
-                                    value="{{ old('country_of_residence') }}"> --}}
                                     <select class="form-control " id="country_of_residence" name="country_of_residence">
                                         <option value="" disabled selected>Select Residence Country</option>
                                         @foreach ($countries as $country)
@@ -208,8 +205,7 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_adults"
-                                        name="number_of_adults" placeholder="Number of Adults"
+                                    <input type="text" class="form-control" id="number_of_adults" name="number_of_adults" placeholder="Number of Adults"
                                         value="{{ old('number_of_adults') }}" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
@@ -298,18 +294,7 @@
 @endsection
 
 @section('js')
-    <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
-        });
 
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd', // Set the desired date format
-            autoclose: true,
-        });
-    </script>
 
     <script>
         $(document).ready(function() {
@@ -377,25 +362,19 @@
         });
     </script>
 
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('.btn-plus').click(function() {
-                var input = $(this).closest('.input-group').find('input');
-                var value = parseInt(input.val(), 10) || 0;
-                input.val(value + 1);
-            });
-
-            $('.btn-minus').click(function() {
-                var input = $(this).closest('.input-group').find('input');
-                var value = parseInt(input.val(), 10) || 0;
-                if (value > 1) { // prevent negative values
-                    input.val(value - 1);
-                }
-            });
+<script>
+    $(function() {
+        $('.datepicker').datepicker({
+            autoclose: true
         });
-    </script>
+    });
+
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd', // Set the desired date format
+        autoclose: true,
+    });
+</script>
+
 
 
 

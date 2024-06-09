@@ -64,6 +64,7 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::post('fetch-states', [App\Http\Controllers\LocationController::class, 'fetchStates'])->name('fetch_states');
     Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
     Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
+    Route::post('fetch-taxs', [App\Http\Controllers\LocationController::class, 'fetchTax'])->name('fetch_tax');
 
 });
 

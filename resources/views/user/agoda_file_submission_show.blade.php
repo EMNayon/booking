@@ -116,6 +116,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-sm-12 ">
+                                <label for="tax"> Tax</label>
+                                <input type="text" class="form-control text-white" id="tax" name="tax"
+                                    placeholder="Tax" value="{{ $agoda->tax }}" readonly>
+                                @error('tax')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
                         </div>
                     </div>

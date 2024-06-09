@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/agent/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('/agent/mg/favicon.png') }}">
     <title>
-       Bangladesh Agent Panel
+        Bangladesh Agent Panel
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
@@ -19,7 +19,8 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('/agent/demo/demo.css') }}" rel="stylesheet" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
     <style>
@@ -104,7 +105,7 @@
                                         Log out
                                     </p>
                                 </a>
-                                @if(Auth::check())
+                                @if (Auth::check())
                                     @php
                                         $user = Auth::user();
                                         $points = $user->point; // Assuming the points column is in the users table
@@ -113,8 +114,8 @@
                                 <ul class="dropdown-menu dropdown-navbar">
                                     <li class="nav-link"><a href="{{ route('logout') }}"
                                             class="nav-item dropdown-item">Log out</a></li>
-                                    <li class="nav-link"><a href=""
-                                            class="nav-item dropdown-item">User Point : {{ $points }}</a></li>
+                                    <li class="nav-link"><a href="" class="nav-item dropdown-item">User Point :
+                                            {{ $points }}</a></li>
                                 </ul>
                             </li>
                             <li class="separator d-lg-none"></li>
@@ -159,50 +160,50 @@
             });
     </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.btn-plus').click(function() {
-            var input = $(this).closest('.input-group').find('input');
-            var value = parseInt(input.val(), 10) || 0;
-            input.val(value + 1);
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.btn-plus').click(function() {
+                var input = $(this).closest('.input-group').find('input');
+                var value = parseInt(input.val(), 10) || 0;
+                input.val(value + 1);
+            });
+            $('.btn-minus').click(function() {
+                var input = $(this).closest('.input-group').find('input');
+                var value = parseInt(input.val(), 10) || 0;
+                if (value > 1) { // prevent negative values
+                    input.val(value - 1);
+                }
+            });
         });
-        $('.btn-minus').click(function() {
-            var input = $(this).closest('.input-group').find('input');
-            var value = parseInt(input.val(), 10) || 0;
-            if (value > 1) { // prevent negative values
-                input.val(value - 1);
-            }
+    </script>
+
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var alertSuccess = document.querySelector('.alert-success');
+                var alertDanger = document.querySelector('.alert-danger');
+                if (alertSuccess) {
+                    alertSuccess.classList.remove('show');
+                    setTimeout(function() {
+                        alertSuccess.remove();
+                    }, 150);
+                }
+                if (alertDanger) {
+                    alertDanger.classList.remove('show');
+                    setTimeout(function() {
+                        alertDanger.remove();
+                    }, 150);
+                }
+            }, 3000);
         });
-    });
-</script>
-
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(function() {
-        var alertSuccess = document.querySelector('.alert-success');
-        var alertDanger = document.querySelector('.alert-danger');
-        if (alertSuccess) {
-            alertSuccess.classList.remove('show');
-            setTimeout(function() {
-                alertSuccess.remove();
-            }, 150);
-        }
-        if (alertDanger) {
-            alertDanger.classList.remove('show');
-            setTimeout(function() {
-                alertDanger.remove();
-            }, 150);
-        }
-    }, 3000);
-});
-</script>
+    </script>
 
     @yield('js')
 

@@ -20,14 +20,6 @@ class CreateAgodasTable extends Migration
             $table->string('client')->nullable();
             $table->string('member_id')->unique();
             $table->string('country_of_residence')->nullable();
-
-            // $table->string('property')->nullable();
-            // $table->string('address')->nullable();
-
-
-            // $table->bigInteger('country_id')->nullable();
-            // $table->bigInteger('state_id')->nullable();
-            // $table->bigInteger('city_id')->nullable();
             $table->bigInteger('hotel_id')->nullable();
             $table->string('property_contact_number')->nullable();
 
@@ -45,7 +37,7 @@ class CreateAgodasTable extends Migration
 
             $table->string('price')->nullable();
             $table->string('total_price')->nullable();
-            $table->string('extra-3')->nullable();
+            $table->string('tax')->nullable();
             $table->string('extra-4')->nullable();
             $table->string('extra-5')->nullable();
 

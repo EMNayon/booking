@@ -194,7 +194,7 @@
                             <div class="col-sm-12 ">
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control text-white" id="tax" name="tax"
-                                    placeholder="Tax" value="15%" readonly>
+                                    placeholder="Tax" readonly>
                                 @error('tax')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -285,11 +285,16 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '">' +
+                            $('#hotel').append('<option value="' + hotel.id + '" data-tax="' + hotel.hotel_tax + '">' +
                                 hotel.name + '</option>');
                         });
                     }
                 });
+            });
+
+            $('#hotel').change(function() {
+                var tax = $('#hotel option:selected').data('tax');
+                $('#tax').val(tax + '%');
             });
         });
     </script>

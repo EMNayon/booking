@@ -54,27 +54,11 @@ class AgodaController extends Controller
             return redirect()->back();
         }
 
-        // $this->validate($request, [
-        //     'booking_id' => 'required',
-        //     'booking_reference_no'   => 'required',
-        //     'member_id' => 'required',
-        //     'client' => 'required',
-        //     'country_of_residence' => 'required',
-        //     'country' => 'required',
-        //     'state' => 'required',
-        //     'city' => 'required',
-        //     'hotel' => 'required',
-        //     'property_contact_number' => 'required',
-        //     'number_of_rooms' => 'required',
-        //     'number_of_extra_beds' => 'required',
-        //     'number_of_adults' => 'required',
-        //     'number_of_childern' => 'required',
-        //     'room_type' => 'required',
-        //     'promotion' => 'required',
-        //     'arrival' => 'required',
-        //     'departure' => 'required'
-        // ]);
-        $taxRate = 0.15;
+        $taxInput = $request->tax;
+        $taxRate = trim($taxInput, "% ");
+        $taxRate = (float) $taxRate / 100;
+
+        // dd($taxRate);
         $price = $request->price;
         $promotionPercentage = $request->promotion ?? 0;
         $promotionAmount = $price * ($promotionPercentage / 100);
@@ -104,7 +88,7 @@ class AgodaController extends Controller
                 'number_of_childern'      => $request->number_of_children,
                 'room_type'               => $request->room_type,
                 'promotion'               => $promotionPercentage,
-                'tax'                     => 15,
+                'tax'                     => $taxInput,
                 'price'                   => $price,
                 'total_price'             => $total_price,
                 'arrival'                 => $request->arrival,

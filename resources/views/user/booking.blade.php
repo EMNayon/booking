@@ -127,11 +127,11 @@
                                 <label for="nights">Nights</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary btn-minus" id="btn-minus" type="button">-</button>
                                     </div>
                                     <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="1" min="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary btn-plus" id="btn-plus" type="button">+</button>
                                     </div>
                                 </div>
                                 @error('nights')
@@ -292,7 +292,7 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '" data-tax="' + hotel.hotel_tax + '">' +
+                            $('#hotel').append('<option value="' + hotel.id + '" data-price="' + hotel.hotel_price_per_night + '" data-tax="' + hotel.hotel_tax + '">' +
                                 hotel.name + '</option>');
                         });
                     }
@@ -301,8 +301,40 @@
 
             $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');
+                var pricePerNight =  $('#hotel option:selected').data('price');
                 $('#tax').val(tax + '%');
+                $('#price_per_night').val(pricePerNight);
+                calculateTotalPrice();
             });
+
+             // Increment or decrement nights and calculate total price
+        $('#btn-plus').click(function() {
+            var nights = parseInt($('#nights').val());
+            $('#nights').val(nights + 1);
+            calculateTotalPrice();
+        });
+
+        $('#btn-minus').click(function() {
+            var nights = parseInt($('#nights').val());
+            if (nights > 1) {
+                $('#nights').val(nights - 1);
+                calculateTotalPrice();
+            }
+        });
+
+        $('#nights').on('input', function() {
+            calculateTotalPrice();
+        });
+
+        // Calculate total price based on nights and price per night
+        function calculateTotalPrice() {
+            var nights = parseInt($('#nights').val());
+            var pricePerNight = parseFloat($('#price_per_night').val());
+            if (!isNaN(nights) && !isNaN(pricePerNight)) {
+                var totalPrice = nights * pricePerNight;
+                $('#total_price').val(totalPrice.toFixed(2));
+            }
+        }
         });
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
@@ -322,7 +354,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+{{-- <script>
     $(document).ready(function() {
         // Function to fetch price per night via AJAX
         function fetchPricePerNight() {
@@ -379,7 +411,7 @@
         // Initial fetch of price per night based on default hotel selection
         fetchPricePerNight();
     });
-</script>
+</script> --}}
 
 
 

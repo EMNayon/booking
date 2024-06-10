@@ -89,6 +89,7 @@ class AgodaController extends Controller
                 'room_type'               => $request->room_type,
                 'promotion'               => $promotionPercentage,
                 'tax'                     => $taxInput,
+                'guest_name'              => $request->guest_name,
                 'price'                   => $price,
                 'total_price'             => $total_price,
                 'arrival'                 => $request->arrival,
@@ -119,9 +120,11 @@ class AgodaController extends Controller
     public function show(Agoda $agoda, $id)
     {
         $agoda = Agoda::findOrFail($id);
-        // dd($booking);
+        $countries = Country::pluck('name', 'id')->toArray();
+
+        // dd($countries);
         // dd("i'm here");
-        return view('user.agoda_file_submission_show', compact('agoda'));
+        return view('user.agoda_file_submission_show', compact('agoda','countries'));
     }
 
     /**

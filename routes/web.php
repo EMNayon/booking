@@ -1,13 +1,23 @@
 <?php
 
-use App\Http\Controllers\LocationController;
+use Exception;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\LocationController;
 
 Route::get('/money', function () {
     return view('money');
 });
 
+Route::get('/migration', function(){
+    try{
+        Artisan::call('migrate');
+        echo 'Migration done';
+    }catch(Exception $ex){
+        dd($ex->getMessage());
+    }
 
+})
 // Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
 
 

@@ -38,7 +38,7 @@ class CreateAgodasTable extends Migration
             $table->string('price')->nullable();
             $table->string('total_price')->nullable();
             $table->string('tax')->nullable();
-            $table->string('extra-4')->nullable();
+            $table->string('guest_name')->nullable();
             $table->string('extra-5')->nullable();
 
             $table->timestamps();

@@ -149,6 +149,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-sm-12 ">
+                                <label for="guest_name">Guest Name</label>
+                                <input type="text" class="form-control text-white" id="guest_name" name="guest_name"
+                                    placeholder="Guest Name">
+                                @error('guest_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-6">

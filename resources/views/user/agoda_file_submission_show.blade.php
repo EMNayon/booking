@@ -78,7 +78,7 @@
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
                                 <input type="text" class="form-control text-white" id="country_of_residence" name="country_of_residence"
-                                    placeholder="Country of Residence" value="{{ $agoda->country_of_residence }}" readonly>
+                                    placeholder="Country of Residence" value="{{ isset($countries[$agoda->country_of_residence]) ? $countries[$agoda->country_of_residence] : ''   }}" readonly>
                                 @error('country_of_residence')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

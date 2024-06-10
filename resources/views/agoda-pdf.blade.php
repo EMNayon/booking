@@ -252,7 +252,7 @@
                 </div>
                 <div>
                     <div class="left red w-40 agoda-left">Country of Residence:</div>
-                    <div class="left w-60 agoda-right">{{ $agoda->country_of_residence }}</div>
+                    <div class="left w-60 agoda-right">{{isset($countries[$agoda->country_of_residence]) ? $countries[$agoda->country_of_residence] : ''   }}</div>
                     <div class="clear"></div>
                 </div>
                 <div>

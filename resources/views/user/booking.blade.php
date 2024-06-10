@@ -129,7 +129,7 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" id="btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="1" min="1">
+                                    <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="0" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" id="btn-plus" type="button">+</button>
                                     </div>
@@ -310,7 +310,9 @@
              // Increment or decrement nights and calculate total price
         $('#btn-plus').click(function() {
             var nights = parseInt($('#nights').val());
-            $('#nights').val(nights + 1);
+            // var result = nights-1;
+            // console.log(result);
+            $('#nights').val(nights+1);
             calculateTotalPrice();
         });
 

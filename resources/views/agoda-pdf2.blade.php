@@ -41,7 +41,7 @@
         <!-- header -->
         <div>
             <div class="left">
-                <img src="./public/images/hotels/agoda.jpg" alt="" style="width: 50px; height: 50px" />
+                <img src="{{$agodaImg}}" alt="" style="width: 50px; height: 50px" />
             </div>
             <div class="right">
                 <h1 style="text-align: right; font-size: 16px">
@@ -104,7 +104,7 @@
                             Country Of Residence
                         </td>
                         <td>
-                            <p style="font-size: 10px;">{{$agoda->country_of_residence}}</p>
+                            <p style="font-size: 10px;">{{isset($countries[$agoda->country_of_residence]) ? $countries[$agoda->country_of_residence] : ''   }}</p>
                         </td>
                     </tr>
                     <tr>
@@ -201,8 +201,7 @@
 
         <!-- paragraph section -->
         <div style="background-color: #d3d3d3; margin-top: 5px;padding: 3px 2px;">
-            <p style="font-size: 10px;padding: 1px;">Cancellation Policy: Risk-free booking! You can cancel until July
-                25, 2024 and pay nothing! Any cancellation received
+            <p style="font-size: 10px;padding: 1px;">Cancellation Policy: Risk-free booking! You can cancel until {{ $checkInBefore7DaysMonth }} {{ $checkInBefore7DaysDate }},{{ $checkInBefore7DaysYear }} and pay nothing! Any cancellation received
                 within 7 days prior to the arrival date will
                 incur the first night's charge. Any cancellation received within 1 day prior to the arrival date will be
                 charged for the
@@ -252,7 +251,9 @@
                     </div>
 
                 </div>
-                <div style="" class="left">section 3</div>
+                <div style="" class="left">
+                    <img src="{{ $signature }}" alt="" style="width: 200px; margin-left: 20px;" >
+                </div>
                 <div class="clear"></div>
             </div>
 
@@ -266,7 +267,7 @@
                 date, a USD amount will be calculated from <span class="red">{{$agoda->total_price}}</span> and charged to you,
                 subject to <a href="#">these terms</a>
                 affecting your price.</p>
-            <p style="font-size:10px;"><span class="red">Guest List:</span>Md Alamin</p>
+            <p style="font-size:10px;"><span class="red">Guest List:</span> {{ $agoda->guest_name}} </p>
             <p style="font-size: 10px;"><b>All special requests are subject to availability upon arrival</b></p>
         </div>
 

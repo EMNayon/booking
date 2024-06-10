@@ -129,7 +129,7 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="nights" name="nights" placeholder="Nights" value="{{ old('nights') }}" min="1">
+                                    <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="1" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
                                     </div>
@@ -200,13 +200,20 @@
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
-                                <label for="price">Price </label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    placeholder="Price" value="{{ old('price') }}">
+                                <label for="price_per_night">Price per Night</label>
+                                <input type="text" class="form-control" id="price_per_night" name="price_per_night" placeholder="Price per Night" readonly>
+                                {{-- <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="1" min="1"> --}}
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                                <!-- Total price display -->
+                                <div class="col-sm-12 ">
+                            <div class="form-group">
+                                <label for="total_price">Total Price</label>
+                                <input type="text" class="form-control" id="total_price" name="total_price" placeholder="Total Price" readonly>
+                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -313,23 +320,67 @@
     </script>
 
 
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $('.btn-plus').click(function() {
-        var input = $(this).closest('.input-group').find('input');
-        var value = parseInt(input.val(), 10) || 0;
-        input.val(value + 1);
-    });
 
-    $('.btn-minus').click(function() {
-        var input = $(this).closest('.input-group').find('input');
-        var value = parseInt(input.val(), 10) || 0;
-        if (value > 1) { // prevent negative values
-            input.val(value - 1);
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Function to fetch price per night via AJAX
+        function fetchPricePerNight() {
+            var hotelId = $('#hotel').val();
+            console.log(hotelId);
+
+            $.ajax({
+                url: '{{ route('get_price_per_night') }}',
+                type: 'POST', // Use GET or POST as per your route definition
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: hotelId
+                },
+                success: function(data) {
+                    $('#price_per_night').val(data.price_per_night.toFixed(2));
+                    // calculateTotalPrice();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching price per night:', error);
+                }
+            });
         }
+
+        // Calculate total price based on nights input
+        function calculateTotalPrice() {
+            var nights = $('#nights').val();
+            var pricePerNight = $('#price_per_night').val();
+            var totalPrice = parseFloat(nights) * parseFloat(pricePerNight);
+
+            $('#total_price').val(totalPrice.toFixed(2)); // Update total price input
+        }
+
+        // Fetch price per night when hotel selection changes
+        $('#hotel').change(function() {
+            fetchPricePerNight();
+        });
+        // Calculate total price when nights input changes
+        $('#nights').on('input', function() {
+            calculateTotalPrice();
+        });
+        // Increment/decrement nights
+        $('.btn-plus').click(function() {
+            $('#nights').val(parseInt($('#nights').val()) + 1);
+            calculateTotalPrice();
+        });
+        $('.btn-minus').click(function() {
+            var currentValue = parseInt($('#nights').val());
+            if (currentValue > 1) {
+                $('#nights').val(currentValue - 1);
+                calculateTotalPrice();
+            }
+        });
+
+        // Initial fetch of price per night based on default hotel selection
+        fetchPricePerNight();
     });
-});
-</script> --}}
+</script>
+
+
 
 @endsection

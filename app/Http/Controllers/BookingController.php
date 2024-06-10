@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Country;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -21,10 +22,7 @@ class BookingController extends Controller
     {
         $confirmationNo = $this->generateConfirmationNumber();
         $pinCode = $this->generatePinCode();
-        // $confirmationNo = "134";
-        // $pinCode = '134';
         $countries = Country::all();
-
         return view('user.booking', compact('confirmationNo', 'pinCode', 'countries'));
     }
 
@@ -38,12 +36,7 @@ class BookingController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
 
@@ -101,12 +94,7 @@ class BookingController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Booking $booking, $id)
     {
         $booking = Booking::findOrFail($id);
@@ -115,35 +103,18 @@ class BookingController extends Controller
         return view('user.booking_file_submission_show', compact('booking'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Booking $booking)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Booking $booking)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Booking  $booking
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Booking $booking, $id)
     {
         $booking = Booking::findOrFail($id);
@@ -201,6 +172,16 @@ class BookingController extends Controller
             }
         }
 
+    }
+
+    public function getPricePerNight(Request $request)
+    {
+        $hotelId = $request->id;
+        $hotel = Hotel::findOrFail($hotelId);
+        // dd($hotel);
+        return response()->json([
+            'price_per_night' => $hotel->hotel_price_per_night,
+        ]);
     }
 
 

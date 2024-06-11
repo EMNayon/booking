@@ -79,7 +79,8 @@
 
         <div style="background-color: #f8f4f4;padding:12px;border-top: 2px solid black; ">
             <div style="border-bottom: 1px solid gray; ">
-                <div class="left" style="width:80px; height:80px; background-color:green; margin-right:5px; margin-bottom: 10px;">logo
+                <div class="left" style="width:80px; height:80px; background-color:green; margin-right:5px; margin-bottom: 10px;">
+                    <img src="{{$booking->hotel->hotel_image}}" alt="" width="80px" height="80px;">
                 </div>
                 <div class="left" style="margin-right:10px; margin-left:10px;  line-height: 1.6;">
                     <h3><span class="red"><b>{{ $booking->hotel->name }}</b> </span></h3>
@@ -202,7 +203,9 @@
                         here.</p>
                 </div>
 
-                <div style="height:300px;width:100%;border-top:1px solid  black; border-bottom:1px solid black;"></div>
+                <div style="height:300px;width:100%;border-top:1px solid  black; border-bottom:1px solid black;">
+                    <img src="{{$booking->hotel->google_map_image}}" alt="" width="690px" height="300px">
+                </div>
 
                 <div style="border-bottom: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; margin-bottom: 5px;">
                     <div class="left" style="width: 65%; ">

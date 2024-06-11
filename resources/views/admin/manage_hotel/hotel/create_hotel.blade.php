@@ -81,6 +81,13 @@
                                 @enderror
                             </div>
                             <div class="form-floating mt-2">
+                                <input type="file"  class="form-control" id="google_map_image" name="google_map_image">
+                                <label for="google_map_image">Google Map Image </label>
+                                @error('google_map_image')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
                                 <input type="file"  class="form-control" id="hotel_image" name="hotel_image">
                                 <label for="hotel_image">Hotel Image </label>
                                 @error('hotel_image')

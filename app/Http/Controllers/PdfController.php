@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agoda;
+use App\Models\Hotel;
+use App\Models\Booking;
+
 use App\Models\Country;
 use Illuminate\Http\Request;
-
 use Barryvdh\DomPDF\Facade\Pdf;
-use App\Models\Booking;
 
 class PdfController extends Controller
 {

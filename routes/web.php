@@ -1,6 +1,6 @@
 <?php
 
-use Exception;
+// use Exception;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LocationController;
@@ -17,7 +17,7 @@ Route::get('/migration', function(){
         dd($ex->getMessage());
     }
 
-})
+});
 // Route::get('/money_receipt/{code}', [\App\Http\Controllers\MemberController::class, 'moneyReceiptPdf'])->name('money_receipt');
 
 

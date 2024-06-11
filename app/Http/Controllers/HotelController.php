@@ -99,11 +99,18 @@ class HotelController extends Controller
                 $imageName = time().'.'.$image->getClientOriginalExtension();
                 $image->move(public_path('images/hotels'), $imageName);
             }
+
+            if ($request->hasFile('google_map_image')) {
+                // dd("i'm here");
+                $image = $request->file('google_map_image');
+                $googleMapImage = time().'.'.$image->getClientOriginalExtension();
+                $image->move(public_path('images/hotels'), $googleMapImage);
+            }
             // Extract longitude and latitude from google_map_add
             $googleMapAdd = $request->google_map_add;
             list($latitude, $longitude) = $this->extractLatLong($googleMapAdd);
 
-            
+
             Hotel::create([
                 'name' => $request->hotel,
                 'city_id' => $request->city,
@@ -113,7 +120,8 @@ class HotelController extends Controller
                 'hotel_tax' => $request->hotel_tax,
                 'hotel_type' => $request->hotel_type,
                 'hotel_price_per_night' => $request->hotel_price_per_night,
-                'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null
+                'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null,
+                'google_map_image' => isset($googleMapImage) ? 'images/hotels/'.$googleMapImage : null
 
             ]);
 

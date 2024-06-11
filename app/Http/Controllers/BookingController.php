@@ -55,7 +55,7 @@ class BookingController extends Controller
         $taxRate = (float) $taxRate / 100;
 
         // dd($taxRate);
-        $price = $request->price;
+        $price = $request->total_price;
         $tax = $price * $taxRate;
         $total_price = $price + $tax;
 

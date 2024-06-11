@@ -159,7 +159,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_in">Check In </label>
-                                <input type="text" class="form-control datepicker"  id="check_in" name="check_in"
+                                <input type="text" class="form-control datetimepicker"  id="check_in" name="check_in"
                                     placeholder="Check In" value="{{ old('check_in') }}">
                                 @error('check_in')
                                     <span class="text-danger">{{ $message }}</span>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_out">Check Out </label>
-                                <input type="text" class="form-control datepicker" id="check_out" name="check_out"
+                                <input type="text" class="form-control datetimepicker" id="check_out" name="check_out"
                                     placeholder="Check Out" value="{{ old('check_out') }}">
                                 @error('check_out')
                                     <span class="text-danger">{{ $message }}</span>
@@ -339,17 +339,13 @@
         }
         });
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> --}}
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+</script>
   <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                autoclose: true
-            });
-        });
-
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd', // Set the desired date format
-            autoclose: true,
+        $(".datetimepicker").each(function () {
+            $(this).datetimepicker();
         });
     </script>
 

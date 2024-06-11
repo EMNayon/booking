@@ -94,7 +94,7 @@
                         <h1 style="font-size: 24px;">{{ $check_in_date }}</h1>
                         <h3 class="red" style="font-weight: bold;">{{ $check_in_month }}</h3>
                         <p class="red"><i>{{ $check_in_day }}</i></p>
-                        <p class="red"> from 15.00</p>
+                        <p class="red"> from {{$check_in_time}}</p>
                     </div>
                 </div>
                 <div class="left" style="border-right: 1px solid grey; margin-right:15px;padding-right:15px; text-align:center;">
@@ -103,7 +103,7 @@
                         <h1 style="font-size: 24px;">{{ $check_out_date }}</h1>
                         <h3 class="red" style="font-weight: bold;">{{ $check_out_month }}</h3>
                         <p class="red"><i>{{ $check_out_day }}</i></p>
-                        <p class="red"> until 12.00</p>
+                        <p class="red"> until {{$check_out_time}}</p>
                     </div>
                 </div>
 

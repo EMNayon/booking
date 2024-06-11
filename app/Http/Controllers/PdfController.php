@@ -76,8 +76,7 @@ class PdfController extends Controller
         ];
         $pdf = PDF::loadView('agoda-pdf2', $data);
 
-
-        $pdfName = 'test';
+        $pdfName = date('y_m_d',strtotime($agoda->created_at)).'_'.$agoda->booking_id;
         return $pdf->download($pdfName . '.pdf');
 
     }
@@ -89,33 +88,37 @@ class PdfController extends Controller
         $checkIn = $booking->check_in;
 
         $checkIn = new \DateTime($booking->check_in);
+        // dd($checkIn);
 
         $checkInDay = $checkIn->format('l');
         $checkInMonth = $checkIn->format('F');
         $checkInDate = $checkIn->format('d');
-
+        $checkInTime = $checkIn->format('h:i:s A');
 
         $checkOut = $booking->check_out;
-
         $checkOut = new \DateTime($booking->check_out);
 
         $checkOutDay = $checkOut->format('l');
         $checkOutMonth = $checkOut->format('F');
         $checkOutDate = $checkOut->format('d');
+        $checkOutTime = $checkOut->format('h:i:s A');
 
         $data = [
             'booking' => $booking,
             'check_in_day' => $checkInDay,
             'check_in_month' => $checkInMonth,
             'check_in_date' => $checkInDate,
+            'check_in_time' => $checkInTime,
             'check_out_day' => $checkOutDay,
             'check_out_month' => $checkOutMonth,
             'check_out_date' => $checkOutDate,
+            'check_out_time' => $checkOutTime
         ];
 
 
         $pdf = PDF::loadView('booking-pdf', $data);
-        $pdfName = 'test';
+        // $pdfName = 'test';
+        $pdfName = date('y_m_d',strtotime($booking->created_at)).'_'.$booking->confirmation_number;
         return $pdf->download($pdfName . '.pdf');
     }
 

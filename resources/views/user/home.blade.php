@@ -277,7 +277,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
-                                <input type="datetime" class="form-control  datepicker" id="arrival" name="arrival"
+                                <input type="datetime" class="form-control  datetimepicker" id="arrival" name="arrival"
                                     placeholder="Arrival">
                                 @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
@@ -285,7 +285,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="departure">Departure</label>
-                                <input type="datetime" class="form-control datepicker" id="departure" name="departure"
+                                <input type="datetime" class="form-control datetimepicker" id="departure" name="departure"
                                     placeholder="Departure" value="{{ old('departure') }}">
                                 @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
@@ -384,19 +384,14 @@
 
         });
     </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script>
-    $(function() {
-        $('.datepicker').datepicker({
-            autoclose: true
-        });
-    });
-
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd', // Set the desired date format
-        autoclose: true,
-    });
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
 </script>
+  <script>
+        $(".datetimepicker").each(function () {
+            $(this).datetimepicker();
+        });
+    </script>
 
 
 

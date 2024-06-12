@@ -41,10 +41,10 @@
         <!-- header -->
         <div>
             <div class="left">
-                <img src="{{$agodaImg}}" alt="" style="width: 50px; height: 50px" />
+                <img src="{{$agodaImg}}" alt="" style="width: 80px; height: 50px" />
             </div>
             <div class="right">
-                <h1 style="text-align: right; font-size: 16px">
+                <h1 style="text-align: right; font-size: 24px">
                     Booking <span class="red">Confirmation</span>
                 </h1>
                 <p style="color: #232323; font-size: 8px">
@@ -66,8 +66,8 @@
                 <span style="font-size: 10px; color: white;margin-right:50px;">agoda</span>
         </div>
 
-        <div style="margin-top:15px;">
-            <div class="left" style="padding-right: 20px; width:44%">
+        <div style="margin-top:5px;">
+            <div class="left" style="padding-right: 5px; width:40%">
                 <table style="padding-top: 10px;">
                     <tr>
                         <td class="red" style="font-size: 10px; padding: 3px 0px;">
@@ -140,11 +140,11 @@
                     </tr>
                 </table>
             </div>
-            <div class="right" style="background-color: #d3d3d3; width:44%;padding: 0px 20px;">
+            <div class="right" style="background-color: #d3d3d3; width:54%;padding: 0px 5px;">
                 <table style="padding: 10px;">
                     <tr>
                         <td class="red" style="font-size: 10px">Number of Rooms</td>
-                        <td style="width: 150px;">
+                        <td style="width: 230px;">
                             <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;"> {{$agoda->number_of_rooms}}
                             </div>
                         </td>
@@ -182,20 +182,13 @@
                         <td class="red" style="font-size: 10px">Promotion</td>
                         <td>
                             <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">
-                                {{$agoda->promotion}}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p style="font-size: 10px;">For Full Promotion details and conditions see confirmation email
-                            </p>
+                                Long Stay Deal. Price includes {{$agoda->promotion}}% discount!</div>
                         </td>
                     </tr>
 
-
-
-                </table>
-            </div>
+                    </table>
+                <p style="font-size: 10px; margin-bottom:10px;">For Full Promotion details and conditions see confirmation email</p>
+                    </div>
             <div class="clear"></div>
         </div>
 

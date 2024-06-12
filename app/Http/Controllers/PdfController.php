@@ -44,12 +44,14 @@ class PdfController extends Controller
         $checkOutDate  = $checkOut->format('d');
         $checkOutYear  = $checkOut->format('Y');
 
+
+
         $signaturePathInfo   = pathinfo(public_path('images/hotels/signature_agoda.png'));
         $signature_extension = $signaturePathInfo['extension'];
         $signature           = base64_encode(file_get_contents($signaturePathInfo['dirname'] . "/" . $signaturePathInfo['basename']));
         $signature           = "data:image/" . $signature_extension . ";base64," . $signature;
 
-        $agodaPathInfo   = pathinfo(public_path('images/hotels/agoda.jpg'));
+        $agodaPathInfo   = pathinfo(public_path('images/hotels/agoda.png'));
         $agoda_extension = $agodaPathInfo['extension'];
         $agodaImg         = base64_encode(file_get_contents($agodaPathInfo['dirname'] . "/" . $agodaPathInfo['basename']));
         $agodaImg          = "data:image/" . $agoda_extension . ";base64," . $agodaImg;

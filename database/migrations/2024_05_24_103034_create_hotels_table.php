@@ -16,6 +16,8 @@ class CreateHotelsTable extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('hotel_address');
+            $table->string('hotel_mobile_number');
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('google_map_add')->nullable();

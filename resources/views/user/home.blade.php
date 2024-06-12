@@ -163,9 +163,8 @@
                         <div class="row">
                             <div class="col-sm-12 ">
                                 <label for="property_contact_number">Property Contact Number</label>
-
-                                <input type="text" class="form-control" id="property_contact_number"
-                                    name="property_contact_number" placeholder="Property Contact Number" value="">
+                                <input type="text" class="form-control text-white" id="property_contact_number"
+                                    name="property_contact_number" placeholder="Property Contact Number" readonly>
                                 @error('property_contact_number')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -250,13 +249,36 @@
                                 @enderror
                             </div>
 
+                                @php
+                            // Define available room types
+                                $roomTypes = [
+                                    'Single',
+                                    'Double',
+                                    'Suite',
+                                    'Deluxe Suite'
+                                ];
+                                @endphp
+
                             <div class="col-sm-12 ">
-                                <label for="room_type">Room Type</label>
+                                {{-- <label for="room_type">Room Type</label>
                                 <input type="text" class="form-control" id="room_type" name="room_type"
                                     placeholder="Room Type" value="{{ old('room_type') }}">
                                 @error('room_type')
                                     <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                @enderror --}}
+
+                                <div class="form-floating mt-2">
+                                    <label for="hotel_type">Room Type</label>
+                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
+                                        <option value="" disabled selected>Select Room Type</option>
+                                        @foreach ($roomTypes as $roomType)
+                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('hotel_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="col-sm-12 ">
@@ -267,14 +289,14 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            {{-- <div class="col-sm-12 ">
                                 <label for="price">Price</label>
                                 <input type="text" class="form-control" id="price" name="price"
                                     placeholder="Price" value="{{ old('price') }}">
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
                                 <input type="datetime" class="form-control  datetimepicker" id="arrival" name="arrival"
@@ -369,7 +391,7 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '"  data-tax="' + hotel.hotel_tax + '">' +
+                            $('#hotel').append('<option value="' + hotel.id + '"  data-tax="' + hotel.hotel_tax + '" data-property_contact_number="' + hotel.hotel_mobile_number + '">' +
                                 hotel.name + '</option>');
                         });
                     }
@@ -379,6 +401,10 @@
             $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');
                 $('#tax').val(tax + '%');
+            });
+            $('#hotel').change(function() {
+                var property_contact_number = $('#hotel option:selected').data('property_contact_number');
+                $('#property_contact_number').val(property_contact_number);
             });
 
 

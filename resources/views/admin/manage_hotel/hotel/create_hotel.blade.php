@@ -43,15 +43,31 @@
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="hotel" name="hotel"
                                     placeholder="Add Hotel" required>
-                                <label for="hotel">Hotel</label>
+                                <label for="hotel">Hotel Name</label>
                                 @error('hotel')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="hotel_address" name="hotel_address"
+                                    placeholder="Add Hotel Address" required>
+                                <label for="hotel_address">Hotel Address</label>
+                                @error('hotel_address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="hotel_mobile_number" name="hotel_mobile_number"
+                                    placeholder="Add Hotel Address" required>
+                                <label for="hotel_mobile_number">Hotel Mobile Number</label>
+                                @error('hotel_mobile_number')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="google_map_add" name="google_map_add"
                                     placeholder="Add Google Map Code" required>
-                                <label for="google_map_add">Hotel Google Map Add </label>
+                                <label for="google_map_add">Hotel Google Map Code </label>
                                 @error('google_map_add')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -64,13 +80,34 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            @php
+                            // Define available room types
+                                $roomTypes = [
+                                    'Single',
+                                    'Double',
+                                    'Suite',
+                                    'Deluxe Suite'
+                                ];
+                                @endphp
                             <div class="form-floating mt-2">
-                                <input type="text" class="form-control" id="hotel_type" name="hotel_type"
+                                {{-- <input type="text" class="form-control" id="hotel_type" name="hotel_type"
                                     placeholder="Add Hotel Type" required>
                                 <label for="hotel_type">Room Type</label>
                                 @error('hotel_type')
                                     <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                @enderror --}}
+                                <div class="form-floating mt-2">
+                                    {{-- <label for="hotel_type">Room Type</label> --}}
+                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
+                                        <option value="" disabled selected>Select Room Type</option>
+                                        @foreach ($roomTypes as $roomType)
+                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('hotel_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="hotel_price_per_night" name="hotel_price_per_night"

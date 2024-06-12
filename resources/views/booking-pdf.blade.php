@@ -205,6 +205,7 @@
 
                 <div style="height:300px;width:100%;border-top:1px solid  black; border-bottom:1px solid black;">
                     <img src="{{$booking->hotel->google_map_image}}" alt="" width="690px" height="300px">
+                    {{-- <img  src="data:image/png;base64,{{ $base64Image }}" alt=""> --}}
                 </div>
 
                 <div style="border-bottom: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; margin-bottom: 5px;">

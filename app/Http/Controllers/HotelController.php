@@ -92,20 +92,19 @@ class HotelController extends Controller
 
         DB::beginTransaction();
         try {
-            // dd($request->hasFile('hotel_image'));
+
             if ($request->hasFile('hotel_image')) {
-                // dd("i'm here");
-                $image = $request->file('hotel_image');
-                $imageName = time().'.'.$image->getClientOriginalExtension();
-                $image->move(public_path('images/hotels'), $imageName);
+                $hotel_image = $request->file('hotel_image');
+                $imageName = time() . '_hotel.' . $hotel_image->getClientOriginalExtension();
+                $hotel_image->move(public_path('images/hotels'), $imageName);
             }
 
             if ($request->hasFile('google_map_image')) {
-                // dd("i'm here");
                 $image = $request->file('google_map_image');
-                $googleMapImage = time().'.'.$image->getClientOriginalExtension();
+                $googleMapImage = time() . '_map.' . $image->getClientOriginalExtension();
                 $image->move(public_path('images/hotels'), $googleMapImage);
             }
+
             // Extract longitude and latitude from google_map_add
             $googleMapAdd = $request->google_map_add;
             list($latitude, $longitude) = $this->extractLatLong($googleMapAdd);
@@ -114,6 +113,8 @@ class HotelController extends Controller
             Hotel::create([
                 'name' => $request->hotel,
                 'city_id' => $request->city,
+                'hotel_address' => $request->hotel_address,
+                'hotel_mobile_number' => $request->hotel_mobile_number,
                 'longitude' => $longitude,
                 'latitude' => $latitude,
                 'google_map_add' => $googleMapAdd,

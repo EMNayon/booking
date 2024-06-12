@@ -96,7 +96,7 @@ class AgodaController extends Controller
                 'departure'               => $request->departure
             ]);
 
-            $user->point -= 1;
+            $user->point -= 100;
             $user->save();
 
             DB::commit();

@@ -62,7 +62,10 @@ class CountryController extends Controller
         DB::beginTransaction();
         try {
             Country::create([
-                'name' => $request->country
+                'name' => $request->country,
+                'country_code' => $request->country_code,
+                'currency_prefix' => $request->currency_prefix,
+                'currency_icon' => $request->currency_icon
             ]);
             DB::commit();
             Session::flash('success','Country Added Successfully');
@@ -147,7 +150,7 @@ class CountryController extends Controller
             return redirect()->route('country');
         }
         catch (\Exception $exception){
-            
+
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();

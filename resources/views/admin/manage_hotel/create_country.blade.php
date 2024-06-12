@@ -29,6 +29,28 @@
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="country_code" name="country_code" placeholder="Add country_code" min=0>
+                                <label for="country_code">Country Code</label>
+                                @error('country_code')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="currency_prefix" name="currency_prefix" placeholder="Add currency_prefix" min=0>
+                                <label for="currency_prefix">Currency Prefix (BDT)</label>
+                                @error('currency_prefix')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="currency_icon" name="currency_icon" placeholder="Add currency_icon" min=0>
+                                <label for="currency_icon">Currency Icon (৳)</label>
+                                @error('currency_icon')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+
 
 
                             <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Add Country</button>

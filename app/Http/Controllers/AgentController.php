@@ -27,7 +27,7 @@ class AgentController extends Controller
                 })
                 ->addColumn('action',function ($row){
                     return '<a class="btn btn-success text-white btn-sm" href="'.route('show_change_password',[$row->id]).'">Change Password</a>' .
-                    ' <a class="btn btn-info text-white btn-sm" href="'.route('view_point',[$row->id]).'">Add Point</a>';
+                    ' <a class="btn btn-info text-white btn-sm" href="'.route('view_point',[$row->id]).'">Add BDT</a>';
 
 
                 })

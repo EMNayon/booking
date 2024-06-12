@@ -260,22 +260,15 @@
                                 @endphp
 
                             <div class="col-sm-12 ">
-                                {{-- <label for="room_type">Room Type</label>
-                                <input type="text" class="form-control" id="room_type" name="room_type"
-                                    placeholder="Room Type" value="{{ old('room_type') }}">
-                                @error('room_type')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
-
                                 <div class="form-floating mt-2">
-                                    <label for="hotel_type">Room Type</label>
-                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
+                                    <label for="room_type">Room Type</label>
+                                    <select class="form-control" id="room_type" name="room_type" required>
                                         <option value="" disabled selected>Select Room Type</option>
                                         @foreach ($roomTypes as $roomType)
                                             <option value="{{ $roomType }}">{{ $roomType }}</option>
                                         @endforeach
                                     </select>
-                                    @error('hotel_type')
+                                    @error('room_type')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -289,14 +282,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    placeholder="Price" value="{{ old('price') }}">
-                                @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
                                 <input type="datetime" class="form-control  datetimepicker" id="arrival" name="arrival"

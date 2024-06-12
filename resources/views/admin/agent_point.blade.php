@@ -9,7 +9,7 @@
                         <form action="{{route('add_point')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" value="{{$user->id}}">
-                            <h1 class="h3 mb-3 fw-normal">Add Point</h1>
+                            <h1 class="h3 mb-3 fw-normal">Add BDT</h1>
 
                             @if(\Illuminate\Support\Facades\Session::has('error'))
                                 <div class="alert alert-danger alert-dismissible pb-2" role="alert">
@@ -31,14 +31,14 @@
 
                             <div class="form-floating mt-2">
                                 <input type="number" class="form-control" id="point" name="point" placeholder="Point" min=0>
-                                <label for="point">Point</label>
+                                <label for="point">BDT</label>
                                 @error('point')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
 
 
-                            <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Add Point</button>
+                            <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Add BDT</button>
                         </form>
                     </div>
                 </div>

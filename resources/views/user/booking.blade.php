@@ -16,21 +16,21 @@
     <div class="row">
         <div class="col-sm-12">
             @if (\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-            </div>
-        @endif
-        @if (\Illuminate\Support\Facades\Session::has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
-            </div>
-        @endif
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+                </div>
+            @endif
+            @if (\Illuminate\Support\Facades\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+                </div>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -72,8 +72,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-                               <div class="col-sm-12">
+                            <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <select class="form-control text-white" id="state" name="state">
                                     <option value="" disabled selected>Select State</option>
@@ -83,8 +82,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
                             <div class="col-sm-12">
                                 <label for="city">City</label>
                                 <select class="form-control text-white" id="city" name="city">
@@ -95,8 +92,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
                                 <select class="form-control text-white" id="hotel" name="hotel">
@@ -111,11 +106,14 @@
                                 <label for="rooms">Rooms</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary btn-minus" id="rooms-minus"
+                                            type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="rooms" name="rooms" placeholder="Rooms" value="{{ old('rooms') }}" min="1">
+                                    <input type="text" class="form-control" id="rooms" name="rooms"
+                                        placeholder="Rooms" value="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary btn-plus" id="rooms-plus"
+                                            type="button">+</button>
                                     </div>
                                 </div>
                                 @error('rooms')
@@ -127,11 +125,14 @@
                                 <label for="nights">Nights</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" id="btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary btn-minus" id="nights-minus"
+                                            type="button">-</button>
                                     </div>
-                                    <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="0" min="1">
+                                    <input type="number" class="form-control" id="nights" name="nights"
+                                        placeholder="Nights" value="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" id="btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary btn-plus" id="nights-plus"
+                                            type="button">+</button>
                                     </div>
                                 </div>
                                 @error('nights')
@@ -140,14 +141,10 @@
                             </div>
 
 
-
-
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            {{-- <h3 class="text-left" style="font-weight: bold">Insurance Details</h3> --}}
-
                             <div class="col-sm-12">
                                 <label for="phone">Phone </label>
                                 <input type="text" class="form-control" id="phone" name="phone"
@@ -159,7 +156,7 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_in">Check In </label>
-                                <input type="text" class="form-control datetimepicker"  id="check_in" name="check_in"
+                                <input type="text" class="form-control datetimepicker" id="check_in" name="check_in"
                                     placeholder="Check In" value="{{ old('check_in') }}">
                                 @error('check_in')
                                     <span class="text-danger">{{ $message }}</span>
@@ -167,8 +164,8 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="check_out">Check Out </label>
-                                <input type="text" class="form-control datetimepicker" id="check_out" name="check_out"
-                                    placeholder="Check Out" value="{{ old('check_out') }}">
+                                <input type="text" class="form-control datetimepicker" id="check_out"
+                                    name="check_out" placeholder="Check Out" value="{{ old('check_out') }}">
                                 @error('check_out')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -201,19 +198,20 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="price_per_night">Price per Night</label>
-                                <input type="text" class="form-control" id="price_per_night" name="price_per_night" placeholder="Price per Night" readonly>
-                                {{-- <input type="number" class="form-control" id="nights" name="nights" placeholder="Nights" value="1" min="1"> --}}
+                                <input type="text" class="form-control text-white" id="price_per_night"
+                                    name="price_per_night" placeholder="Price per Night" readonly>
                                 @error('price')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                                <!-- Total price display -->
-                                <div class="col-sm-12 ">
-                            <div class="form-group">
-                                <label for="total_price">Total Price</label>
-                                <input type="text" class="form-control" id="total_price" name="total_price" placeholder="Total Price" readonly>
+                            <!-- Total price display -->
+                            <div class="col-sm-12 ">
+                                <div class="form-group">
+                                    <label for="total_price">Total Price</label>
+                                    <input type="text" class="form-control text-white" id="total_price"
+                                        name="total_price" placeholder="Total Price" readonly>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
                 </div>
@@ -237,6 +235,13 @@
 
     <script>
         $(document).ready(function() {
+
+            $(document).off('click', '#nights-plus');
+        $(document).off('click', '#nights-minus');
+        $(document).off('click', '#rooms-plus');
+        $(document).off('click', '#rooms-minus');
+
+        
             $('#country').change(function() {
                 var countryId = $(this).val();
 
@@ -292,7 +297,9 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '" data-price="' + hotel.hotel_price_per_night + '" data-tax="' + hotel.hotel_tax + '">' +
+                            $('#hotel').append('<option value="' + hotel.id +
+                                '" data-price="' + hotel.hotel_price_per_night +
+                                '" data-tax="' + hotel.hotel_tax + '">' +
                                 hotel.name + '</option>');
                         });
                     }
@@ -301,116 +308,65 @@
 
             $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');
-                var pricePerNight =  $('#hotel option:selected').data('price');
+                var pricePerNight = $('#hotel option:selected').data('price');
                 $('#tax').val(tax + '%');
                 $('#price_per_night').val(pricePerNight);
                 calculateTotalPrice();
             });
 
-             // Increment or decrement nights and calculate total price
-        $('#btn-plus').click(function() {
-            var nights = parseInt($('#nights').val());
-            // var result = nights-1;
-            // console.log(result);
-            $('#nights').val(nights+1);
-            calculateTotalPrice();
-        });
-
-        $('#btn-minus').click(function() {
-            var nights = parseInt($('#nights').val());
-            if (nights > 1) {
-                $('#nights').val(nights - 1);
+            $('#nights-plus').click(function() {
+                var nights = parseInt($('#nights').val()) || 0;
+                $('#nights').val(nights + 1);
                 calculateTotalPrice();
-            }
-        });
+            });
 
-        $('#nights').on('input', function() {
-            calculateTotalPrice();
-        });
+            $('#nights-minus').click(function() {
+                var nights = parseInt($('#nights').val()) || 0;
+                if (nights > 1) {
+                    $('#nights').val(nights - 1);
+                    calculateTotalPrice();
+                }
+            });
 
-        // Calculate total price based on nights and price per night
-        function calculateTotalPrice() {
-            var nights = parseInt($('#nights').val());
-            var pricePerNight = parseFloat($('#price_per_night').val());
-            if (!isNaN(nights) && !isNaN(pricePerNight)) {
-                var totalPrice = nights * pricePerNight;
-                $('#total_price').val(totalPrice.toFixed(2));
+            $('#rooms-plus').click(function() {
+                var rooms = parseInt($('#rooms').val()) || 0;
+                $('#rooms').val(rooms + 1);
+                calculateTotalPrice();
+            });
+
+            $('#rooms-minus').click(function() {
+                var rooms = parseInt($('#rooms').val()) || 0;
+                if (rooms > 1) {
+                    $('#rooms').val(rooms - 1);
+                    calculateTotalPrice();
+                }
+            });
+
+            $('#nights, #rooms, #price_per_night').on('input', function() {
+                calculateTotalPrice();
+            });
+
+            function calculateTotalPrice() {
+                var nights = parseInt($('#nights').val()) || 0;
+                var rooms = parseInt($('#rooms').val()) || 0;
+                var pricePerNight = parseFloat($('#price_per_night').val()) || 0;
+
+                if (!isNaN(nights) && !isNaN(rooms) && !isNaN(pricePerNight)) {
+                    var totalPrice = nights * rooms * pricePerNight;
+                    $('#total_price').val(totalPrice.toFixed(2));
+                }
             }
-        }
         });
     </script>
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> --}}
-<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-</script>
-  <script>
-        $(".datetimepicker").each(function () {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script>
+        $(".datetimepicker").each(function() {
             $(this).datetimepicker();
         });
     </script>
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{{-- <script>
-    $(document).ready(function() {
-        // Function to fetch price per night via AJAX
-        function fetchPricePerNight() {
-            var hotelId = $('#hotel').val();
-            console.log(hotelId);
-
-            $.ajax({
-                url: '{{ route('get_price_per_night') }}',
-                type: 'POST', // Use GET or POST as per your route definition
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: hotelId
-                },
-                success: function(data) {
-                    $('#price_per_night').val(data.price_per_night.toFixed(2));
-                    // calculateTotalPrice();
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error fetching price per night:', error);
-                }
-            });
-        }
-
-        // Calculate total price based on nights input
-        function calculateTotalPrice() {
-            var nights = $('#nights').val();
-            var pricePerNight = $('#price_per_night').val();
-            var totalPrice = parseFloat(nights) * parseFloat(pricePerNight);
-
-            $('#total_price').val(totalPrice.toFixed(2)); // Update total price input
-        }
-
-        // Fetch price per night when hotel selection changes
-        $('#hotel').change(function() {
-            fetchPricePerNight();
-        });
-        // Calculate total price when nights input changes
-        $('#nights').on('input', function() {
-            calculateTotalPrice();
-        });
-        // Increment/decrement nights
-        $('.btn-plus').click(function() {
-            $('#nights').val(parseInt($('#nights').val()) + 1);
-            calculateTotalPrice();
-        });
-        $('.btn-minus').click(function() {
-            var currentValue = parseInt($('#nights').val());
-            if (currentValue > 1) {
-                $('#nights').val(currentValue - 1);
-                calculateTotalPrice();
-            }
-        });
-
-        // Initial fetch of price per night based on default hotel selection
-        fetchPricePerNight();
-    });
-</script> --}}
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 @endsection

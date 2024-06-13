@@ -236,12 +236,12 @@
     <script>
         $(document).ready(function() {
 
-            $(document).off('click', '#nights-plus');
+        $(document).off('click', '#nights-plus');
         $(document).off('click', '#nights-minus');
         $(document).off('click', '#rooms-plus');
         $(document).off('click', '#rooms-minus');
 
-        
+
             $('#country').change(function() {
                 var countryId = $(this).val();
 

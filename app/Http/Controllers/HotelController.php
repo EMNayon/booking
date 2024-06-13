@@ -8,6 +8,7 @@ use App\Models\City;
 use DataTables;
 use App\Models\State;
 use App\Models\Country;
+use App\Models\RoomType;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -77,7 +78,9 @@ class HotelController extends Controller
     public function create()
     {
         $countries = Country::all();
-        return view('admin.manage_hotel.hotel.create_hotel', compact('countries'));
+        $room_types = RoomType::all();
+        // dd($hotel_types);
+        return view('admin.manage_hotel.hotel.create_hotel', compact('countries','room_types'));
     }
 
     /**
@@ -119,7 +122,7 @@ class HotelController extends Controller
                 'latitude' => $latitude,
                 'google_map_add' => $googleMapAdd,
                 'hotel_tax' => $request->hotel_tax,
-                'hotel_type' => $request->hotel_type,
+                'room_type_id' => $request->room_type,
                 'hotel_price_per_night' => $request->hotel_price_per_night,
                 'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null,
                 'google_map_image' => isset($googleMapImage) ? 'images/hotels/'.$googleMapImage : null

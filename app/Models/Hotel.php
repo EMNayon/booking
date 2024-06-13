@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\City;
+use App\Models\RoomType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Hotel extends Model
 {
@@ -13,5 +15,8 @@ class Hotel extends Model
     public function city()
     {
         return $this->belongsTo(City::class);
+    }
+    public function roomTypes(){
+        return $this->hasMany(RoomType::class);
     }
 }

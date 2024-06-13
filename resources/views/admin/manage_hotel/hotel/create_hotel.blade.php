@@ -80,34 +80,17 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @php
-                            // Define available room types
-                                $roomTypes = [
-                                    'Single',
-                                    'Double',
-                                    'Suite',
-                                    'Deluxe Suite'
-                                ];
-                                @endphp
                             <div class="form-floating mt-2">
-                                {{-- <input type="text" class="form-control" id="hotel_type" name="hotel_type"
-                                    placeholder="Add Hotel Type" required>
-                                <label for="hotel_type">Room Type</label>
-                                @error('hotel_type')
+                                <select class="form-control" id="room_type" name="room_type" aria-label="room_type" required>
+                                    <option value="">Select Room Type</option>
+                                    @foreach ($room_types as $room_type)
+                                        <option name="room_type" value={{ $room_type->id }}>{{ $room_type->title }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="room_type">Room Type</label>
+                                @error('room_type')
                                     <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
-                                <div class="form-floating mt-2">
-                                    {{-- <label for="hotel_type">Room Type</label> --}}
-                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
-                                        <option value="" disabled selected>Select Room Type</option>
-                                        @foreach ($roomTypes as $roomType)
-                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('hotel_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
+                                @enderror
                             </div>
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="hotel_price_per_night" name="hotel_price_per_night"

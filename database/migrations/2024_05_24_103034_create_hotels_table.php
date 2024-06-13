@@ -25,6 +25,7 @@ class CreateHotelsTable extends Migration
             $table->string('hotel_type')->nullable();
             $table->string('hotel_price_per_night')->nullable();
             $table->string('hotel_image')->nullable();
+            $table->string('room_type_id')->nullable();
             $table->foreignId('city_id')->constrained('cities', 'id');
             $table->timestamps();
         });

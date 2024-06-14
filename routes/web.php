@@ -76,6 +76,7 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
     Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
     Route::post('fetch-price', [App\Http\Controllers\BookingController::class, 'getPricePerNight'])->name('get_price_per_night');
+    Route::post('fetch-room-types', [RoomTypeController::class, 'fetchRoomTypes'])->name('fetch_room_types');
 
 });
 
@@ -150,7 +151,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     Route::post('/admin/assign-room-type', [RoomTypeController::class, 'assignRoomType'])->name('assign_room_type');
 
-    Route::post('/admin/fetch_room_types', [RoomTypeController::class, 'fetch_room_types'])->name('fetch_room_types');
+
 
 
 

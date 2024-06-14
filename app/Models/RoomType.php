@@ -13,4 +13,9 @@ class RoomType extends Model
     // public function hotels(){
     //     return $this->belongsToMany(Hotel::class);
     // }
+
+    // public function agoda()
+    // {
+    //     return $this->hasMany(Agoda::class);
+    // }
 }

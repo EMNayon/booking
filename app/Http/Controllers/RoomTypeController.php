@@ -241,6 +241,7 @@ class RoomTypeController extends Controller
             ->join('room_types', 'hotel_room_type.room_type_id', '=', 'room_types.id')
             ->get();
             
+
             return response()->json($result);
 
         }catch(Exception $e)

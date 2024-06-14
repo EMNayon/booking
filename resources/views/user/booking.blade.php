@@ -179,14 +179,16 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="col-sm-12 ">
-                                <label for="delux_room">Delux Room</label>
-                                <input type="text" class="form-control" id="delux_room" name="delux_room"
-                                    placeholder="Delux Room" value="{{ old('delux_room') }}">
-                                @error('delux_room')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                                <div class="form-floating mt-2">
+                                    <label for="room_type">Room Type</label>
+                                    <select class="form-control" id="room_type" name="room_type">
+                                        <option value="" disabled selected>Select Room Type</option>
+                                    </select>
+                                    @error('room_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="tax">Tax</label>
@@ -236,10 +238,10 @@
     <script>
         $(document).ready(function() {
 
-        $(document).off('click', '#nights-plus');
-        $(document).off('click', '#nights-minus');
-        $(document).off('click', '#rooms-plus');
-        $(document).off('click', '#rooms-minus');
+            $(document).off('click', '#nights-plus');
+            $(document).off('click', '#nights-minus');
+            $(document).off('click', '#rooms-plus');
+            $(document).off('click', '#rooms-minus');
 
 
             $('#country').change(function() {
@@ -307,12 +309,40 @@
             });
 
             $('#hotel').change(function() {
+                var hotelId = $(this).val();
+                $.ajax({
+                    url: '{{ route('fetch_room_types') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        hotel_id: hotelId
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#room_type').html(
+                            '<option value="" disabled selected>Select Room Type</option>');
+                        $.each(data, function(index, item) {
+                            $('#room_type').append('<option value="' + item
+                                .room_type_id + '" data-price="' + item
+                                .room_price_per_night + '">' + item.title +
+                                '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');
-                var pricePerNight = $('#hotel option:selected').data('price');
                 $('#tax').val(tax + '%');
+                calculateTotalPrice();
+            });
+
+            $('#room_type').change(function() {
+                var pricePerNight = $('#room_type option:selected').data('price');
                 $('#price_per_night').val(pricePerNight);
                 calculateTotalPrice();
             });
+
 
             $('#nights-plus').click(function() {
                 var nights = parseInt($('#nights').val()) || 0;

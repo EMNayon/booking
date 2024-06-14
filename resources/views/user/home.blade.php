@@ -249,24 +249,12 @@
                                 @enderror
                             </div>
 
-                                @php
-                            // Define available room types
-                                $roomTypes = [
-                                    'Single',
-                                    'Double',
-                                    'Suite',
-                                    'Deluxe Suite'
-                                ];
-                                @endphp
 
                             <div class="col-sm-12 ">
                                 <div class="form-floating mt-2">
                                     <label for="room_type">Room Type</label>
                                     <select class="form-control" id="room_type" name="room_type" required>
                                         <option value="" disabled selected>Select Room Type</option>
-                                        @foreach ($roomTypes as $roomType)
-                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
-                                        @endforeach
                                     </select>
                                     @error('room_type')
                                         <span class="text-danger">{{ $message }}</span>
@@ -391,6 +379,29 @@
                 var property_contact_number = $('#hotel option:selected').data('property_contact_number');
                 $('#property_contact_number').val(property_contact_number);
             });
+
+            $('#hotel').change(function() {
+                var hotelId = $(this).val();
+                $.ajax({
+                    url: '{{ route('fetch_room_types') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        hotel_id: hotelId
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#room_type').html(
+                            '<option value="" disabled selected>Select Room Type</option>');
+                        $.each(data, function(index, roomType) {
+                            console.log(roomType);
+                            // $('#room_type').append('<option value="' + roomType.id '">' +
+                            //     roomType.title + '</option>');
+                        });
+                    }
+                });
+            });
+
 
 
         });

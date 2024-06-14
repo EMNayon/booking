@@ -233,25 +233,21 @@ class RoomTypeController extends Controller
     }
 
 
-    public function fetch_room_types(Request $request)
+    public function fetchRoomTypes(Request $request)
     {
-        
-        try
-        {
-            Log::info($request->all());
+        try{
+            
             $result = DB::table('hotel_room_type')
             ->where('hotel_id', $request->hotel_id)
-
             ->join('room_types', 'hotel_room_type.room_type_id', 'room_types.id')
-
             ->get();
-            Log::info($result);
+
             return response()->json($result);
 
         }catch(Exception $e)
         {
             Log::error($e->getMessage());
-            dd($e->getMessage());
+            return redirect()->back();
         }
     }
 }

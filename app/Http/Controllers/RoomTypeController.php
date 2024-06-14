@@ -210,21 +210,20 @@ class RoomTypeController extends Controller
 
         try {
             $hotel = Hotel::find($id);
+
             if ($hotel == null) {
                 return redirect()->route('hotel');
             }
-
-
-            $result = DB::table('hotel_room_type')->join('hotels', 'hotel_room_type.hotel_id', 'hotels.id')
+            $result = DB::table('hotel_room_type')
             ->join('room_types', 'hotel_room_type.room_type_id', 'room_types.id')
-            ->where('hotels.status', '1')
+            ->where('hotel_id', $hotel->id)
             ->get();
-            // dd($result);
+        
             // $packageInfos = HotelRoomType::with(['roomTypes'])->where('hotel_id', $id)->get();
 
             return view('admin.manage_hotel.room_types.room_type_of_hotel', compact('hotel', 'result'));
         } catch (\Exception $exception) {
-
+            dd($exception->getMessage());
             Log::error($exception->getMessage());
             DB::rollBack();
             Session::flash('error', 'Something went wrong. Please try again');
@@ -236,7 +235,7 @@ class RoomTypeController extends Controller
     public function fetchRoomTypes(Request $request)
     {
         try{
-            
+
             $result = DB::table('hotel_room_type')
             ->where('hotel_id', $request->hotel_id)
             ->join('room_types', 'hotel_room_type.room_type_id', 'room_types.id')

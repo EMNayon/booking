@@ -167,12 +167,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.btn-plus').click(function() {
+            $('#button-plus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val(), 10) || 0;
                 input.val(value + 1);
             });
-            $('.btn-minus').click(function() {
+            $('#button-minus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val(), 10) || 0;
                 if (value > 1) { // prevent negative values

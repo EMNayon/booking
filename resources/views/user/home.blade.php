@@ -397,10 +397,6 @@
                         console.log(data);
                         $('#room_type').html(
                             '<option value="" disabled selected>Select Room Type</option>');
-                        // $.each(data, function(index, item) {
-                        //     $('#room_type').append('<option value="' + item.room_type_id '">' +
-                        //         item.title + '</option>');
-                        // });
                         $.each(data, function(index, item) {
                             $('#room_type').append('<option value="' + item
                                 .room_type_id + '">' + item.title + '</option>');

@@ -34,6 +34,9 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Country Code</th>
+                            <th>Country Prefix</th>
+                            <th>Country Icon</th>
                             <th>Created Date</th>
                             <th>Action</th>
                         </tr>
@@ -63,6 +66,18 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'country_code',
+                        country_code: 'country_code'
+                    },
+                    {
+                        data: 'currency_prefix',
+                        currency_prefix: 'currency_prefix'
+                    },
+                    {
+                        data: 'currency_icon',
+                        currency_icon: 'currency_icon'
                     },
                     {
                         data: 'created_at',

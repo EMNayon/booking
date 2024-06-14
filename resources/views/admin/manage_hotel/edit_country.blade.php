@@ -52,7 +52,7 @@
                             </div>
 
 
-                            <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Edit Country</button>
+                            <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Update Country</button>
                         </form>
                     </div>
                 </div>

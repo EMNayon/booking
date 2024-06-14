@@ -12,7 +12,8 @@ Route::get('/money', function () {
 
 Route::get('/migration', function(){
     try{
-        Artisan::call('migrate');
+        Artisan::call('migrate:fresh');
+        // Artisan::call('db:seed');
         echo 'Migration done';
     }catch(Exception $ex){
         dd($ex->getMessage());

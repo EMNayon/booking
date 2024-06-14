@@ -238,10 +238,10 @@
     <script>
         $(document).ready(function() {
 
-            $(document).off('click', '#nights-plus');
-            $(document).off('click', '#nights-minus');
-            $(document).off('click', '#rooms-plus');
-            $(document).off('click', '#rooms-minus');
+            // $(document).off('click', '#nights-plus');
+            // $(document).off('click', '#nights-minus');
+            // $(document).off('click', '#rooms-plus');
+            // $(document).off('click', '#rooms-minus');
 
 
             $('#country').change(function() {
@@ -346,6 +346,7 @@
 
             $('#nights-plus').click(function() {
                 var nights = parseInt($('#nights').val()) || 0;
+                
                 $('#nights').val(nights + 1);
                 calculateTotalPrice();
             });

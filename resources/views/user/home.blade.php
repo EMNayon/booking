@@ -382,6 +382,7 @@
                     }
                 });
             });
+            
 
             $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');

@@ -73,10 +73,10 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Agent Request
                         </a>
-                        {{-- <a class="nav-link" href="{{ route('room_type') }}">
+                        <a class="nav-link" href="{{ route('room_types') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                             Add Room Type
-                        </a> --}}
+                        </a>
                         <a class="nav-link" href="{{ route('hotel') }}">
                             <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
                             Add New Hotel

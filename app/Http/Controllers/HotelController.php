@@ -53,15 +53,17 @@ class HotelController extends Controller
                 ->addColumn('created_at',function ($row){
                     return date('d M y',strtotime($row->created_at));
                 })
-                // ->addColumn('action',function ($row){
-                //     return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_hotel',[$row->id]).'">Edit</a>'.
-                //     ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_hotel',[$row->id]).'">Delete</a>';
-
-                // })
-                ->addColumn('action', function ($row) {
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_hotel', [$row->id]).'">Edit</a>' .
-                       ' <button class="btn btn-danger text-white btn-sm delete-btn" data-id="'.$row->id.'" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>';
+                ->addColumn('action',function ($row){
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_hotel',[$row->id]).'">Edit</a>'.
+                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_hotel',[$row->id]).'">Delete</a>' .
+                    ' <a class="btn btn-info text-white btn-sm" href="' . route('add_room_type', [$row->id]) . '">Assign Room Type</a>'.
+                    ' <a class="btn btn-warning text-white btn-sm" href="' . route('hotel_room_type_list', [$row->id]) . '">Room Type List</a>'
+                    ;
                 })
+                // ->addColumn('action', function ($row) {
+                //     return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_hotel', [$row->id]).'">Edit</a>' .
+                //        ' <button class="btn btn-danger text-white btn-sm delete-btn" data-id="'.$row->id.'" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>';
+                // })
 
                 ->make(true);
         }else{
@@ -78,9 +80,7 @@ class HotelController extends Controller
     public function create()
     {
         $countries = Country::all();
-        $room_types = RoomType::all();
-        // dd($hotel_types);
-        return view('admin.manage_hotel.hotel.create_hotel', compact('countries','room_types'));
+        return view('admin.manage_hotel.hotel.create_hotel', compact('countries'));
     }
 
     /**
@@ -91,6 +91,7 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+
         Log::info("storing hotel info "  . json_encode($request->all()));
 
         DB::beginTransaction();
@@ -112,7 +113,6 @@ class HotelController extends Controller
             $googleMapAdd = $request->google_map_add;
             list($latitude, $longitude) = $this->extractLatLong($googleMapAdd);
 
-
             Hotel::create([
                 'name' => $request->hotel,
                 'city_id' => $request->city,
@@ -122,12 +122,12 @@ class HotelController extends Controller
                 'latitude' => $latitude,
                 'google_map_add' => $googleMapAdd,
                 'hotel_tax' => $request->hotel_tax,
-                'room_type_id' => $request->room_type,
-                'hotel_price_per_night' => $request->hotel_price_per_night,
+                // 'hotel_price_per_night' => $request->hotel_price_per_night,
                 'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null,
                 'google_map_image' => isset($googleMapImage) ? 'images/hotels/'.$googleMapImage : null
 
             ]);
+
 
             DB::commit();
             Session::flash('success','Hotel Added Successfully');

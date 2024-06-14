@@ -24,7 +24,6 @@ class CreateHotelsTable extends Migration
             $table->string('hotel_tax')->nullable();
             $table->string('google_map_image')->nullable();
             $table->string('hotel_image')->nullable();
-            $table->string('google_map_image')->nullable();
             $table->foreignId('city_id')->constrained('cities', 'id');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

@@ -72,7 +72,7 @@ class BookingController extends Controller
                 "check_in"            => $request->check_in,
                 "check_out"           => $request->check_out,
                 "guest_name"          => $request->guest_name,
-                "deluxe_room"         => $request->delux_room,
+                "room_type"         => $request->room_type,
                 'tax'                 => $taxRate,
                 'price'               => $price,
                 'total_price'         => $total_price

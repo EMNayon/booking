@@ -127,19 +127,19 @@
                 <h2 class="red">PRICE</h2>
                 <div>
                     <div class="left">{{ $booking->rooms }} room</div>
-                    <div class="right" style="color: gray;">BDT {{ $booking->price }}</div>
+                    <div class="right" style="color: gray;">{{ $country->currency_prefix }} {{ $booking->price }}</div>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <h2 class="red left">Price</h2>
-                    <h1 class="right" style="color: gray"><span class="red" style="font-size: 16px;">approx </span>BDT {{ $booking->price }}</h1>
+                    <h1 class="right" style="color: gray"><span class="red" style="font-size: 16px;">approx </span>{{ $country->currency_prefix }} {{ $booking->price }}</h1>
                     <div class="clear"></div>
                 </div>
 
                 <div>
                     <p class="left">(for 1 guest)</p>
-                    <p class="right" style="color: gray;">CAD 90.343</p>
+                    <p class="right" style="color: gray;">{{$country->currency_prefix}} {{ $booking->price }}</p>
                     <p class="clear"></p>
                 </div>
                 <div>
@@ -149,13 +149,13 @@
                         charges set by the property.</p>
                 </div>
                 <div>
-                    <p class="red left">TaX ({{ $booking->tax }})</p>
-                    <p class="right" style="color: gray;"><span style="color: black;">approx.</span> BDT {{ $booking->total_price }}</p>
+                    <p class="red left">TaX ({{ $booking->tax * 100 }} %)</p>
+                    <p class="right" style="color: gray;"><span style="color: black;">approx.</span> {{$country->currency_prefix}} {{ $booking->price }}</p>
                     <p class="clear"></p>
                 </div>
                 <div>
                     <p class="left">(taxes included)</p>
-                    <p class="right" style="font-size: 14px; color:gray;">You'll pay 834783.3478 in CAD</p>
+                    <p class="right" style="font-size: 14px; color:gray;">You'll pay {{$booking->total_price}} in {{$country->currency_prefix}}</p>
                     <p class="clear"></p>
                 </div>
 
@@ -184,9 +184,9 @@
                 </div>
 
                 <div style="border-bottom:1px solid grey;">
-                    <p style="margin-bottom: 5px;">You'll pay The Omni King Edward Hotel in CAD according to the exchange rate on the day of
+                    <p style="margin-bottom: 5px;">You'll pay The Omni King Edward Hotel in {{ $country->currency_prefix }} according to the exchange rate on the day of
                         payment. <br>
-                        The amount displayed in BDT is just an estimate based on <b>today's</b> exchange rate for CAD.</p>
+                        The amount displayed in BDT is just an estimate based on <b>today's</b> exchange rate for {{ $country->currency_prefix }}.</p>
                 </div>
 
                 <div>
@@ -211,7 +211,7 @@
                 <div style="border-bottom: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; margin-bottom: 5px;">
                     <div class="left" style="width: 65%; ">
                         <div style="border-right:1px solid black; margin-top:5px;">
-                            <h2 class="red">Deluxe Room - {{ $booking->deluxe_room }}</h2>
+                            <h2 class="red">Deluxe Room - {{ $booking->room_type }}</h2>
                         <p><span class="red"><b>Guest name : </b></span> {{ $booking->guest_name }} / for 3 aduts, 2
                             childred, up to 0 year
                         </p>
@@ -237,8 +237,8 @@
 
                         <p class="red"><b>Cancelation cost :</b></p>
 
-                        <p style="font-size: 9px;">until December 12, 2023 11:59 PM [EST]: CAD 0</p>
-                        <p style="font-size: 9px;">from December 13, 2023 12:00 AM [EST]: <span class="red">CAD 324.78 –</span></p>
+                        <p style="font-size: 9px;">until December 12, 2023 11:59 PM [EST]: {{$country->currency_prefix}} 0</p>
+                        <p style="font-size: 9px;">from December 13, 2023 12:00 AM [EST]: <span class="red">{{$country->currency_prefix}} 324.78 –</span></p>
                         <p class="red">
                             Changing the dates of your stay isn't possible.</p>
                     </div>
@@ -250,8 +250,8 @@
                     <div class="left" style="width: 48%; padding-right: 15px;">
                         <h3>Important Information</h3>
                         <p>
-                            Credit card is required at check in for incidentals at 150 CAD. For Debit
-                            Card paying customers, full room and tax plus 250 CAD for standard
+                            Credit card is required at check in for incidentals at 150 {{ $country->currency_prefix }}. For Debit
+                            Card paying customers, full room and tax plus 250 {{ $country->currency_prefix }} for standard
                             rooms and 500 CAD for suites will be obtained for security deposit at
                             check in.
                         </p>
@@ -268,10 +268,10 @@
                         <p ><b>Guest parking</b></p>
                         <ul style="margin-left: 10px;">
                             <li> Public parking is possible on site (reservation is not needed) and
-                                costs CAD 60 per day.</li>
+                                costs {{ $country->currency_prefix }} 60 per day.</li>
 
                             <li>
-                                WiFi is available in the rooms and costs CAD 14.95 per 24 hours.
+                                WiFi is available in the rooms and costs {{ $country->currency_prefix }} 14.95 per 24 hours.
                             </li>
                         </ul>
 

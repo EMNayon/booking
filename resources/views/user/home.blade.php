@@ -265,7 +265,7 @@
 
                             <div class="col-sm-12 ">
                                 <label for="promotion">Promotion</label>
-                                <input type="text" class="form-control" id="promotion" name="promotion"
+                                <input type="number" class="form-control" id="promotion" name="promotion"
                                     placeholder="Price includes 15% discount!" value="{{ old('promotion') }}">
                                 @error('promotion')
                                     <span class="text-danger">{{ $message }}</span>

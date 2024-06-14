@@ -218,7 +218,7 @@ class RoomTypeController extends Controller
             ->join('room_types', 'hotel_room_type.room_type_id', 'room_types.id')
             ->where('hotel_id', $hotel->id)
             ->get();
-        
+
             // $packageInfos = HotelRoomType::with(['roomTypes'])->where('hotel_id', $id)->get();
 
             return view('admin.manage_hotel.room_types.room_type_of_hotel', compact('hotel', 'result'));
@@ -238,9 +238,9 @@ class RoomTypeController extends Controller
 
             $result = DB::table('hotel_room_type')
             ->where('hotel_id', $request->hotel_id)
-            ->join('room_types', 'hotel_room_type.room_type_id', 'room_types.id')
+            ->join('room_types', 'hotel_room_type.room_type_id', '=', 'room_types.id')
             ->get();
-
+            
             return response()->json($result);
 
         }catch(Exception $e)

@@ -20,21 +20,21 @@
     <div class="row">
         <div class="col-sm-12">
             @if (\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-            </div>
-        @endif
-        @if (\Illuminate\Support\Facades\Session::has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
-            </div>
-        @endif
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+                </div>
+            @endif
+            @if (\Illuminate\Support\Facades\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+                </div>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -85,12 +85,12 @@
 
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
-                                    <select class="form-control " id="country_of_residence" name="country_of_residence">
-                                        <option value="" disabled selected>Select Residence Country</option>
-                                        @foreach ($countries as $country)
-                                            <option value={{ $country->id }}>{{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <select class="form-control " id="country_of_residence" name="country_of_residence">
+                                    <option value="" disabled selected>Select Residence Country</option>
+                                    @foreach ($countries as $country)
+                                        <option value={{ $country->id }}>{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('country_of_residence')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -220,7 +220,8 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_adults" name="number_of_adults" placeholder="Number of Adults"
+                                    <input type="text" class="form-control" id="number_of_adults"
+                                        name="number_of_adults" placeholder="Number of Adults"
                                         value="{{ old('number_of_adults') }}" min="1">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
@@ -272,16 +273,16 @@
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
-                                <input type="datetime" class="form-control  datetimepicker" id="arrival" name="arrival"
-                                    placeholder="Arrival">
+                                <input type="datetime" class="form-control  datetimepicker" id="arrival"
+                                    name="arrival" placeholder="Arrival">
                                 @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="departure">Departure</label>
-                                <input type="datetime" class="form-control datetimepicker" id="departure" name="departure"
-                                    placeholder="Departure" value="{{ old('departure') }}">
+                                <input type="datetime" class="form-control datetimepicker" id="departure"
+                                    name="departure" placeholder="Departure" value="{{ old('departure') }}">
                                 @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -364,7 +365,10 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '"  data-tax="' + hotel.hotel_tax + '" data-property_contact_number="' + hotel.hotel_mobile_number + '">' +
+                            $('#hotel').append('<option value="' + hotel.id +
+                                '"  data-tax="' + hotel.hotel_tax +
+                                '" data-property_contact_number="' + hotel
+                                .hotel_mobile_number + '">' +
                                 hotel.name + '</option>');
                         });
                     }
@@ -394,10 +398,9 @@
                         console.log(data);
                         $('#room_type').html(
                             '<option value="" disabled selected>Select Room Type</option>');
-                        $.each(data, function(index, roomType) {
-                            console.log(roomType);
-                            // $('#room_type').append('<option value="' + roomType.id '">' +
-                            //     roomType.title + '</option>');
+                        $.each(data, function(index, item) {
+                            $('#room_type').append('<option value="' + item
+                                .room_type_id + '">' + item.title + '</option>');
                         });
                     }
                 });
@@ -407,11 +410,10 @@
 
         });
     </script>
-<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-</script>
-  <script>
-        $(".datetimepicker").each(function () {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script>
+        $(".datetimepicker").each(function() {
             $(this).datetimepicker();
         });
     </script>

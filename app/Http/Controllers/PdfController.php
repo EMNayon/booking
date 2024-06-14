@@ -7,6 +7,7 @@ use App\Models\Hotel;
 use App\Models\Booking;
 
 use App\Models\Country;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -18,6 +19,9 @@ class PdfController extends Controller
         // $this->deleteAllFilesofByPath('agoda/');
 
         $agoda     = Agoda::where('id', $id)->first();
+        $roomType = RoomType::where('id', $agoda->room_type)->first();
+        $roomTypeTitle = $roomType->title;
+
         $countries = Country::pluck('name', 'id')->toArray();
 
         $checkIn = $agoda->arrival;
@@ -74,7 +78,8 @@ class PdfController extends Controller
             'checkInBefore7DaysDay' => $checkInBefore7DaysDate,
             'checkInBefore7DaysMonth' => $checkInBefore7DaysMonth,
             'checkInBefore7DaysDate' => $checkInBefore7DaysDate,
-            'checkInBefore7DaysYear' => $checkInBefore7DaysYear
+            'checkInBefore7DaysYear' => $checkInBefore7DaysYear,
+            'roomTypeTitle' => $roomTypeTitle
         ];
         $pdf = PDF::loadView('agoda-pdf2', $data);
 

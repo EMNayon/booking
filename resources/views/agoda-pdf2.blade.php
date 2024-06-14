@@ -175,7 +175,7 @@
                         <td class="red" style="font-size: 10px">Room Type</td>
                         <td>
                             <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px; min-height: 10px;">
-                                {{$agoda->room_type}}</div>
+                                {{$roomTypeTitle}}</div>
                         </td>
                     </tr>
                     <tr>

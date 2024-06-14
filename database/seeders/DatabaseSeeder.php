@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Database\Seeders\StateSeeder;
 use Database\Seeders\CountrySeeder;
+use Database\Seeders\RoomTypeSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StateSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(HotelSeeder::class);
+        $this->call(RoomTypeSeeder::class);
     }
 }

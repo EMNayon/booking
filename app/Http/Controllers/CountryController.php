@@ -72,6 +72,7 @@ class CountryController extends Controller
             return redirect()->route('country');
         }
         catch (\Exception $exception){
+            
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
@@ -125,7 +126,6 @@ class CountryController extends Controller
             return redirect()->route('country');
         }
         catch (\Exception $exception){
-            dd($exception->getMessage());
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();

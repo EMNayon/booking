@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class RoomType extends Model
 {
     use HasFactory;
-
-    public function hotels(){
-        return $this->belongsToMany(Hotel::class);
-    }
+    protected $guarded = ['id'];
+    // public function hotels(){
+    //     return $this->belongsToMany(Hotel::class);
+    // }
 }

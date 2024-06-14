@@ -80,26 +80,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="form-floating mt-2">
-                                <select class="form-control" id="room_type" name="room_type" aria-label="room_type" required>
-                                    <option value="">Select Room Type</option>
-                                    @foreach ($room_types as $room_type)
-                                        <option name="room_type" value={{ $room_type->id }}>{{ $room_type->title }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="room_type">Room Type</label>
-                                @error('room_type')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-floating mt-2">
-                                <input type="text" class="form-control" id="hotel_price_per_night" name="hotel_price_per_night"
-                                    placeholder="Add Hotel Price" required>
-                                <label for="hotel_price_per_night">Hotel Price ( Per Night ) </label>
-                                @error('hotel_price_per_night')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                           
                             <div class="form-floating mt-2">
                                 <input type="file"  class="form-control" id="google_map_image" name="google_map_image">
                                 <label for="google_map_image">Google Map Image </label>

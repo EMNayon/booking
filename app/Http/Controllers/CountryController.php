@@ -26,9 +26,7 @@ class CountryController extends Controller
                     return date('d M y',strtotime($row->created_at));
                 })
                 ->addColumn('action',function ($row){
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_country',[$row->id]).'">Edit</a>'.
-                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_country',[$row->id]).'">Delete</a>';
-
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_country',[$row->id]).'">Edit</a>';
                 })
                 ->make(true);
         }else{
@@ -72,7 +70,7 @@ class CountryController extends Controller
             return redirect()->route('country');
         }
         catch (\Exception $exception){
-            
+
             DB::rollBack();
             Session::flash('error','Something went wrong. Please try again');
             return redirect()->back();
@@ -120,6 +118,9 @@ class CountryController extends Controller
         try {
             $country       = Country::where('id', $request->id)->first();
             $country->name = $request->country;
+            $country->country_code = $request->country_code;
+            $country->currency_prefix = $request->currency_prefix;
+            $country->currency_icon = $request->currency_icon;
             $country->save();
             DB::commit();
             Session::flash('success','Country Updated Successfully');

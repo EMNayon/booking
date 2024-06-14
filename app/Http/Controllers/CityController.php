@@ -26,8 +26,7 @@ class CityController extends Controller
                     return date('d M y',strtotime($row->created_at));
                 })
                 ->addColumn('action',function ($row){
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_city',[$row->id]).'">Edit</a>'.
-                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_city',[$row->id]).'">Delete</a>';
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_city',[$row->id]).'">Edit</a>';
 
                 })
                 ->make(true);

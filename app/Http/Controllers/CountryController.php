@@ -37,7 +37,7 @@ class CountryController extends Controller
         }
     }
 
-    /**
+        /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -47,7 +47,7 @@ class CountryController extends Controller
         return view('admin.manage_hotel.create_country');
     }
 
-    /**
+        /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -62,10 +62,10 @@ class CountryController extends Controller
         DB::beginTransaction();
         try {
             Country::create([
-                'name' => $request->country,
-                'country_code' => $request->country_code,
+                'name'            => $request->country,
+                'country_code'    => $request->country_code,
                 'currency_prefix' => $request->currency_prefix,
-                'currency_icon' => $request->currency_icon
+                'currency_icon'   => $request->currency_icon
             ]);
             DB::commit();
             Session::flash('success','Country Added Successfully');
@@ -78,7 +78,7 @@ class CountryController extends Controller
         }
     }
 
-    /**
+        /**
      * Display the specified resource.
      *
      * @param  \App\Models\Country  $country
@@ -86,10 +86,10 @@ class CountryController extends Controller
      */
     public function show(Country $country)
     {
-        //
+            //
     }
 
-    /**
+        /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Country  $country
@@ -101,7 +101,7 @@ class CountryController extends Controller
         return view('admin.manage_hotel.edit_country', compact('country'));
     }
 
-    /**
+        /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -112,12 +112,12 @@ class CountryController extends Controller
     {
         $this->validate($request,[
             'country' => 'required',
-            'id' => 'required'
+            'id'      => 'required'
         ]);
 
         DB::beginTransaction();
         try {
-            $country = Country::where('id', $request->id)->first();
+            $country       = Country::where('id', $request->id)->first();
             $country->name = $request->country;
             $country->save();
             DB::commit();
@@ -132,7 +132,7 @@ class CountryController extends Controller
         }
     }
 
-    /**
+        /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Country  $country

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class BookingController extends Controller
 {
-    /**
+      /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,29 +21,29 @@ class BookingController extends Controller
     public function index()
     {
         $confirmationNo = $this->generateConfirmationNumber();
-        $pinCode = $this->generatePinCode();
-        $countries = Country::all();
+        $pinCode        = $this->generatePinCode();
+        $countries      = Country::all();
         return view('user.booking', compact('confirmationNo', 'pinCode', 'countries'));
     }
 
-    /**
+      /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+          //
     }
 
 
     public function store(Request $request)
     {
 
-        // Get the authenticated user
+          // Get the authenticated user
         $user = Auth::user();
 
-        // Check if the user has enough points
+          // Check if the user has enough points
         if ($user->point <= 0) {
             Session::flash('error', 'You do not have enough points to submit the form.');
             return redirect()->back();
@@ -54,9 +54,9 @@ class BookingController extends Controller
         $taxRate = trim($taxRate, "% ");
         $taxRate = (float) $taxRate / 100;
 
-        // dd($taxRate);
-        $price = $request->total_price;
-        $tax = $price * $taxRate;
+          // dd($taxRate);
+        $price       = $request->total_price;
+        $tax         = $price * $taxRate;
         $total_price = $price + $tax;
 
         DB::beginTransaction();
@@ -64,18 +64,18 @@ class BookingController extends Controller
 
             Booking::create([
                 "confirmation_number" => $request->confirmation_no,
-                "pin_code"        => $request->pin_code,
-                "hotel_id"           => $request->hotel,
-                "rooms"           => $request->rooms,
-                "nights"          => $request->nights,
-                "phone"           => $request->phone,
-                "check_in"        => $request->check_in,
-                "check_out"       => $request->check_out,
-                "guest_name"      => $request->guest_name,
-                "deluxe_room"     => $request->delux_room,
-                'tax'             => $taxRate,
-                'price'           => $price,
-                'total_price'     => $total_price
+                "pin_code"            => $request->pin_code,
+                "hotel_id"            => $request->hotel,
+                "rooms"               => $request->rooms,
+                "nights"              => $request->nights,
+                "phone"               => $request->phone,
+                "check_in"            => $request->check_in,
+                "check_out"           => $request->check_out,
+                "guest_name"          => $request->guest_name,
+                "deluxe_room"         => $request->delux_room,
+                'tax'                 => $taxRate,
+                'price'               => $price,
+                'total_price'         => $total_price
             ]);
 
 
@@ -98,21 +98,21 @@ class BookingController extends Controller
     public function show(Booking $booking, $id)
     {
         $booking = Booking::findOrFail($id);
-        // dd($booking);
-        // dd("i'm here");
+          // dd($booking);
+          // dd("i'm here");
         return view('user.booking_file_submission_show', compact('booking'));
     }
 
 
     public function edit(Booking $booking)
     {
-        //
+          //
     }
 
 
     public function update(Request $request, Booking $booking)
     {
-        //
+          //
     }
 
     public function destroy(Booking $booking, $id)
@@ -144,14 +144,14 @@ class BookingController extends Controller
     private function generateUniquePinCode($model, $column) {
         while(true)
         {
-            $min = 1000;
-            $max = 9999;
+            $min      = 1000;
+            $max      = 9999;
             $uniqueId = random_int($min, $max);
-            $row = $model::where($column, $uniqueId)->first();
+            $row      = $model::where($column, $uniqueId)->first();
 
             if( $row == null)
             {
-                // $formattedId = substr($uniqueId, 0, 4) . '.' . substr($uniqueId, 4, 3) . '.' . substr($uniqueId, 7, 3);
+                  // $formattedId = substr($uniqueId, 0, 4) . '.' . substr($uniqueId, 4, 3) . '.' . substr($uniqueId, 7, 3);
                 return $uniqueId;
             }
         }
@@ -160,10 +160,10 @@ class BookingController extends Controller
     private function generateUniqueId($model, $column) {
         while(true)
         {
-            $min = 1000000000;
-            $max = 9999999999;
+            $min      = 1000000000;
+            $max      = 9999999999;
             $uniqueId = random_int($min, $max);
-            $row = $model::where($column, $uniqueId)->first();
+            $row      = $model::where($column, $uniqueId)->first();
 
             if( $row == null)
             {
@@ -177,8 +177,8 @@ class BookingController extends Controller
     public function getPricePerNight(Request $request)
     {
         $hotelId = $request->id;
-        $hotel = Hotel::findOrFail($hotelId);
-        // dd($hotel);
+        $hotel   = Hotel::findOrFail($hotelId);
+          // dd($hotel);
         return response()->json([
             'price_per_night' => $hotel->hotel_price_per_night,
         ]);

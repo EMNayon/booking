@@ -167,7 +167,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             $('.button-plus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
@@ -177,16 +177,12 @@
             $('.button-minus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val(), 10) || 0;
-                if (value > 1) { // prevent negative values
+                if (value > 0) { // prevent negative values
                     input.val(value - 1);
                 }
             });
         });
-    </script> --}}
-
-
-
-
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {

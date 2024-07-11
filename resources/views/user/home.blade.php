@@ -207,7 +207,7 @@
                                     </div>
                                     <input type="text" class="form-control" id="number_of_extra_beds"
                                         name="number_of_extra_beds" placeholder="Number of Extra Beds"
-                                        value="{{ old('number_of_extra_beds') }}" min="1">
+                                        value="{{ old('number_of_extra_beds') }}" min="0">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>
@@ -225,7 +225,7 @@
                                     </div>
                                     <input type="text" class="form-control" id="number_of_adults"
                                         name="number_of_adults" placeholder="Number of Adults"
-                                        value="{{ old('number_of_adults') }}" min="1">
+                                        value="{{ old('number_of_adults') }}" min="0">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>
@@ -243,7 +243,7 @@
                                     </div>
                                     <input type="text" class="form-control" id="number_of_children"
                                         name="number_of_children" placeholder="Number of Children"
-                                        value="{{ old('number_of_children') }}" min="1">
+                                        value="{{ old('number_of_children') }}" min="0">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>

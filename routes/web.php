@@ -40,7 +40,7 @@ Route::get('/show-booking/{id}', [\App\Http\Controllers\PdfController::class, 's
 // Route::get('/p', [\App\Http\Controllers\MemberController::class, 'policyPdf'])->name('scanp');
 
 Route::group(['middleware' => 'user_middleware'], function () {
-    Route::get('/user/dashboard', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');
+    Route::get('/user/dashboard/agoda', [\App\Http\Controllers\AgodaController::class, 'index'])->name('user.home');
     Route::post('/user/store-agoda', [\App\Http\Controllers\AgodaController::class, 'store'])->name('store_agoda');
     Route::get('/user/file-submission-agoda', [\App\Http\Controllers\AgodaController::class, 'getAllFileSubmissionList'])->name('agoda_user_submission_list');
     Route::get('/user/file-submission-agoda-show/{id}', [\App\Http\Controllers\AgodaController::class, 'show'])->name('agoda_file_submission_show');
@@ -48,7 +48,7 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::delete('/agodas/{id}', [\App\Http\Controllers\AgodaController::class, 'destroy'])->name('agodas.destroy');
 
 
-    Route::get('/user/dashboard/booking', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
+    Route::get('/user/dashboard', [\App\Http\Controllers\BookingController::class, 'index'])->name('user.booking');
     Route::post('/user/store-booking', [\App\Http\Controllers\BookingController::class, 'store'])->name('store_booking');
     Route::get('/user/file-submission-booking', [\App\Http\Controllers\BookingController::class, 'getAllFileSubmissionList'])->name('booking_user_submission_list');
     Route::get('/user/file-submission-show/{id}', [\App\Http\Controllers\BookingController::class, 'show'])->name('booking_file_submission_show');

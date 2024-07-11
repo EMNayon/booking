@@ -27,7 +27,7 @@ class AuthController extends Controller
                 if (Auth::user()->user_type == User::USER_TYPE_USER) {
                     if (Auth::user()->status == User::STATUS_ACTIVE) {
                         Session::flash('success', 'Agent Successfully Login');
-                        return redirect()->route('user.home');
+                        return redirect()->route('user.booking');
                     } else {
                         Auth::logout();
                         Session::flash('error', 'Your Account now is on pending.');

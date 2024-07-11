@@ -17,12 +17,21 @@ class CountrySeeder extends Seeder
     {
         Country::create([
             'name' => 'Bangladesh',
+            'country_code' => '+880',
+            'currency_prefix' => 'BDT',
+            'currency_icon' => '৳'
         ]);
         Country::create([
-            'name' => 'Pakistan'
+            'name' => 'Pakistan',
+            'country_code' => '+92',
+            'currency_prefix' => 'PKR',
+            'currency_icon' => '₨'
         ]);
         Country::create([
-            'name' => 'India'
+            'name' => 'India',
+            'country_code' => '+91',
+            'currency_prefix' => 'INR',
+            'currency_icon' => '₹'
         ]);
     }
 }

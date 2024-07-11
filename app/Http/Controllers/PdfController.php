@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Agoda;
 use App\Models\Hotel;
+use App\Models\State;
 use App\Models\Booking;
-
 use App\Models\Country;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -18,6 +20,9 @@ class PdfController extends Controller
         // $this->deleteAllFilesofByPath('agoda/');
 
         $agoda     = Agoda::where('id', $id)->first();
+        $roomType = RoomType::where('id', $agoda->room_type)->first();
+        $roomTypeTitle = $roomType->title;
+
         $countries = Country::pluck('name', 'id')->toArray();
 
         $checkIn = $agoda->arrival;
@@ -74,7 +79,8 @@ class PdfController extends Controller
             'checkInBefore7DaysDay' => $checkInBefore7DaysDate,
             'checkInBefore7DaysMonth' => $checkInBefore7DaysMonth,
             'checkInBefore7DaysDate' => $checkInBefore7DaysDate,
-            'checkInBefore7DaysYear' => $checkInBefore7DaysYear
+            'checkInBefore7DaysYear' => $checkInBefore7DaysYear,
+            'roomTypeTitle' => $roomTypeTitle
         ];
         $pdf = PDF::loadView('agoda-pdf2', $data);
 
@@ -87,6 +93,12 @@ class PdfController extends Controller
     {
 
         $booking = Booking::where('id', $id)->first();
+
+        $hotel = Hotel::where('id', $booking->hotel_id)->first();
+        $city = City::where('id', $hotel->city_id)->first();
+        $state = State::where('id', $city->state_id)->first();
+        $country = Country::where('id', $state->country_id)->first();
+
         $checkIn = $booking->check_in;
 
         $checkIn = new \DateTime($booking->check_in);
@@ -114,7 +126,8 @@ class PdfController extends Controller
             'check_out_day' => $checkOutDay,
             'check_out_month' => $checkOutMonth,
             'check_out_date' => $checkOutDate,
-            'check_out_time' => $checkOutTime
+            'check_out_time' => $checkOutTime,
+            'country' => $country
         ];
 
 

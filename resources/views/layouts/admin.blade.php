@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
-    
+
     @yield('css')
 </head>
 
@@ -73,9 +73,17 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Agent Request
                         </a>
+                        <a class="nav-link" href="{{ route('room_types') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                            Add Room Type
+                        </a>
+                        <a class="nav-link" href="{{ route('hotel') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
+                            Add New Hotel
+                        </a>
                         <li class="nav-item">
                             <a class="nav-link n" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                                <span class="menu-title sb-nav-link-ico">Manage Hotel</span>
+                                <span class="menu-title sb-nav-link-ico">Manage Country</span>
                                 <i class="menu-arrow"></i>
                             </a>
                             <div class="collapse" id="ui-basic">
@@ -83,7 +91,7 @@
                                     <li class="nav-item"> <a class="nav-link" href="{{route('country')}}">Country</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('state')}}">State</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('city')}}">City</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="{{route('hotel')}}">Hotel</a></li>
+                                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('hotel')}}">Hotel</a></li> --}}
                                 </ul>
                             </div>
                         </li>

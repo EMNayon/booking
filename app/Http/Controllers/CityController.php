@@ -26,8 +26,7 @@ class CityController extends Controller
                     return date('d M y',strtotime($row->created_at));
                 })
                 ->addColumn('action',function ($row){
-                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_city',[$row->id]).'">Edit</a>'.
-                    ' <a class="btn btn-danger text-white btn-sm" href="'.route('delete_city',[$row->id]).'">Delete</a>';
+                    return '<a class="btn btn-success text-white btn-sm" href="'.route('edit_city',[$row->id]).'">Edit</a>';
 
                 })
                 ->make(true);
@@ -37,7 +36,7 @@ class CityController extends Controller
         }
     }
 
-    /**
+      /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -48,7 +47,7 @@ class CityController extends Controller
         return view('admin.manage_hotel.city.create_city', compact('countries'));
     }
 
-    /**
+      /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -60,14 +59,14 @@ class CityController extends Controller
         $this->validate($request,[
             'country' => 'required',
             'state'   => 'required',
-            'city' => 'required'
+            'city'    => 'required'
         ]);
 
         DB::beginTransaction();
         try {
 
             city::create([
-                'name' => $request->city,
+                'name'     => $request->city,
                 'state_id' => $request->state
             ]);
 
@@ -83,7 +82,7 @@ class CityController extends Controller
         }
     }
 
-    /**
+      /**
      * Display the specified resource.
      *
      * @param  \App\Models\Country  $country
@@ -91,10 +90,10 @@ class CityController extends Controller
      */
     public function show(Country $country)
     {
-        //
+          //
     }
 
-    /**
+      /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Country  $country
@@ -111,15 +110,15 @@ class CityController extends Controller
             Session::flash('error','Invalid City to Edit');
             return redirect()->back();
         }
-        $oldState = State::where('id', $oldCity->state_id)->first();
+        $oldState   = State::where('id', $oldCity->state_id)->first();
         $oldCountry = Country::where('id', $oldState->country_id)->first();
-        $countries = Country::all();
-        $states = State::where('country_id', $oldCountry->id)->get();
+        $countries  = Country::all();
+        $states     = State::where('country_id', $oldCountry->id)->get();
 
         return view('admin.manage_hotel.city.edit_city', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states'));
     }
 
-    /**
+      /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -138,9 +137,9 @@ class CityController extends Controller
 
         DB::beginTransaction();
         try {
-            $city = City::find($request->old_city);
+            $city           = City::find($request->old_city);
             $city->state_id = $request->state;
-            $city->name = $request->city;
+            $city->name     = $request->city;
             $city->save();
 
             DB::commit();
@@ -154,7 +153,7 @@ class CityController extends Controller
         }
     }
 
-    /**
+      /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Country  $country
@@ -188,9 +187,9 @@ class CityController extends Controller
         Log::info($request->state);
 
         $content = '
-            <div class="form-floating mt-2">
-            <select class="form-control" id="city" name="city" aria-label="City" required>
-                <option value="">Select City</option>';
+            <div    class = "form-floating mt-2">
+            <select class = "form-control" id = "city" name = "city" aria-label = "City" required>
+            <option value = "">Select City</option>';
 
         Log::info(['state' => $request->state]);
         $cities = City::where('state_id', $request->state)->get();

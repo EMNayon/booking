@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Country List')
+@section('title', 'Room Type List')
 @section('content')
     <div class="container-fluid px-4">
         <div class="card mb-4">
@@ -21,26 +21,36 @@
             <div class="card-header d-flex justify-content-between">
                 <div>
                     <i class="fas fa-table me-1"></i>
-                    Country List
+                    Room Type List
                 </div>
                 <div>
-                    <a class="btn btn-success text-white btn-sm" href={{ route('create_country') }}>Add Country</a>
+                    <a class="btn btn-success text-white btn-sm" href={{ route('hotel') }}>Back</a>
                 </div>
 
             </div>
             <div class="card-body">
-                <table id="countryList" class="table table-bordered">
+                <div>
+                    <h3 style="text-align: center">Hotel : {{$hotel->name}}</h3>
+                </div>
+                <table id="roomTypeList" class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Country Code</th>
-                            <th>Country Prefix</th>
-                            <th>Country Icon</th>
-                            <th>Created Date</th>
-                            <th>Action</th>
+                            <th>Room Type</th>
+                            <th>Price Per Night</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
+
+                    <tbody>
+                        @foreach ($result as $item)
+                         <tr>
+                            <td>{{$item->title}}</td>
+                            <td>{{$item->room_price_per_night}}</td>
+                            <td>{{$item->description}}</td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
 
                 </table>
             </div>
@@ -49,16 +59,16 @@
 
 
 @endsection
-@section('js')
+{{-- @section('js')
     <script>
         $(function() {
-            var table = $('#countryList').DataTable({
-                processing: true,
+            var table = $('#roomTypeList').DataTable({
+                processing: false,
                 serverSide: true,
-                ajax: {
-                    url: "{{ route('country') }}",
-                    data: function(e) {}
-                },
+                // ajax: {
+                //     url: "{{ route('country') }}",
+                //     data: function(e) {}
+                // },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex'
@@ -66,18 +76,6 @@
                     {
                         data: 'name',
                         name: 'name'
-                    },
-                    {
-                        data: 'country_code',
-                        country_code: 'country_code'
-                    },
-                    {
-                        data: 'currency_prefix',
-                        currency_prefix: 'currency_prefix'
-                    },
-                    {
-                        data: 'currency_icon',
-                        currency_icon: 'currency_icon'
                     },
                     {
                         data: 'created_at',
@@ -94,4 +92,4 @@
 
         });
     </script>
-@endsection
+@endsection --}}

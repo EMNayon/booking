@@ -15,7 +15,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>Point</th>
+                            <th>BDT</th>
                             <th>Status</th>
                             <th>Created Date</th>
                             <th>Action</th>

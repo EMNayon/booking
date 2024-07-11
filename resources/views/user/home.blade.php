@@ -20,21 +20,21 @@
     <div class="row">
         <div class="col-sm-12">
             @if (\Illuminate\Support\Facades\Session::has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
-            </div>
-        @endif
-        @if (\Illuminate\Support\Facades\Session::has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
-                    <i class="tim-icons icon-simple-remove"></i>
-                </button>
-                <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
-            </div>
-        @endif
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Success - </b> {{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+                </div>
+            @endif
+            @if (\Illuminate\Support\Facades\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                        <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span><b> Failed - </b> {{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+                </div>
+            @endif
         </div>
     </div>
     <div class="row">
@@ -85,12 +85,12 @@
 
                             <div class="col-sm-12 ">
                                 <label for="country_of_residence">Country of Residence</label>
-                                    <select class="form-control " id="country_of_residence" name="country_of_residence">
-                                        <option value="" disabled selected>Select Residence Country</option>
-                                        @foreach ($countries as $country)
-                                            <option value={{ $country->id }}>{{ $country->name }}</option>
-                                        @endforeach
-                                    </select>
+                                <select class="form-control " id="country_of_residence" name="country_of_residence">
+                                    <option value="" disabled selected>Select Residence Country</option>
+                                    @foreach ($countries as $country)
+                                        <option value={{ $country->id }}>{{ $country->name }}</option>
+                                    @endforeach
+                                </select>
                                 @error('country_of_residence')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -141,6 +141,17 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-sm-12 ">
+                                <div class="form-floating mt-2">
+                                    <label for="room_type">Room Type</label>
+                                    <select class="form-control" id="room_type" name="room_type" >
+                                        <option value="" disabled selected>Select Room Type</option>
+                                    </select>
+                                    @error('room_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-sm-12 " hidden>
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control text-white" id="tax" name="tax"
@@ -169,25 +180,17 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="number_of_rooms">Number of Rooms</label>
-                                <input type="number" class="form-control text-white" id="number_of_rooms"
-                                    name="number_of_rooms" placeholder="Number of rooms" value="" min="1">
-                                @error('number_of_rooms')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
                             <div class="col-sm-12">
                                 <label for="number_of_rooms">Number of Rooms</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button"
+                                        <button class="btn btn-outline-secondary button-minus" type="button"
                                             id="button-minus">-</button>
                                     </div>
                                     <input type="text" class="form-control " id="number_of_rooms"
                                         name="number_of_rooms" placeholder="Number of rooms" value="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button"
+                                        <button class="btn btn-outline-secondary button-plus" type="button"
                                             id="button-plus">+</button>
                                     </div>
                                 </div>
@@ -200,13 +203,13 @@
                                 <label for="number_of_extra_beds">Number of Extra Beds</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary button-minus" type="button">-</button>
                                     </div>
                                     <input type="text" class="form-control" id="number_of_extra_beds"
                                         name="number_of_extra_beds" placeholder="Number of Extra Beds"
                                         value="{{ old('number_of_extra_beds') }}" min="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>
                                 </div>
                                 @error('number_of_extra_beds')
@@ -218,12 +221,13 @@
                                 <label for="number_of_adults">Number of Adults</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary button-minus" type="button">-</button>
                                     </div>
-                                    <input type="text" class="form-control" id="number_of_adults" name="number_of_adults" placeholder="Number of Adults"
+                                    <input type="text" class="form-control" id="number_of_adults"
+                                        name="number_of_adults" placeholder="Number of Adults"
                                         value="{{ old('number_of_adults') }}" min="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>
                                 </div>
                                 @error('number_of_adults')
@@ -235,62 +239,40 @@
                                 <label for="number_of_children">Number of Children</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+                                        <button class="btn btn-outline-secondary button-minus" type="button">-</button>
                                     </div>
                                     <input type="text" class="form-control" id="number_of_children"
                                         name="number_of_children" placeholder="Number of Children"
                                         value="{{ old('number_of_children') }}" min="1">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                                        <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                                     </div>
                                 </div>
                                 @error('number_of_children')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
-                                <div class="form-floating mt-2">
-                                    <label for="hotel_type">Room Type</label>
-                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
-                                        <option value="" disabled selected>Select Room Type</option>
-                                        @foreach ($roomTypes as $roomType)
-                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('hotel_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="col-sm-12 ">
                                 <label for="promotion">Promotion</label>
-                                <input type="text" class="form-control" id="promotion" name="promotion"
+                                <input type="number" class="form-control" id="promotion" name="promotion"
                                     placeholder="Price includes 15% discount!" value="{{ old('promotion') }}">
                                 @error('promotion')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12 ">
-                                <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" name="price"
-                                    placeholder="Price" value="{{ old('price') }}">
-                                @error('price')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
                             <div class="col-sm-12 ">
                                 <label for="arrival">Arrival </label>
-                                <input type="datetime" class="form-control  datetimepicker" id="arrival" name="arrival"
-                                    placeholder="Arrival">
+                                <input type="datetime" class="form-control  datetimepicker" id="arrival"
+                                    name="arrival" placeholder="Arrival">
                                 @error('arrival')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 ">
                                 <label for="departure">Departure</label>
-                                <input type="datetime" class="form-control datetimepicker" id="departure" name="departure"
-                                    placeholder="Departure" value="{{ old('departure') }}">
+                                <input type="datetime" class="form-control datetimepicker" id="departure"
+                                    name="departure" placeholder="Departure" value="{{ old('departure') }}">
                                 @error('departure')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -373,12 +355,16 @@
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
-                            $('#hotel').append('<option value="' + hotel.id + '"  data-tax="' + hotel.hotel_tax + '" data-property_contact_number="' + hotel.hotel_mobile_number + '">' +
+                            $('#hotel').append('<option value="' + hotel.id +
+                                '"  data-tax="' + hotel.hotel_tax +
+                                '" data-property_contact_number="' + hotel
+                                .hotel_mobile_number + '">' +
                                 hotel.name + '</option>');
                         });
                     }
                 });
             });
+
 
             $('#hotel').change(function() {
                 var tax = $('#hotel option:selected').data('tax');
@@ -389,14 +375,32 @@
                 $('#property_contact_number').val(property_contact_number);
             });
 
-
+            $('#hotel').change(function() {
+                var hotelId = $(this).val();
+                $.ajax({
+                    url: '{{ route('fetch_room_types') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        hotel_id: hotelId
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        $('#room_type').html(
+                            '<option value="" disabled selected>Select Room Type</option>');
+                        $.each(data, function(index, item) {
+                            $('#room_type').append('<option value="' + item
+                                .room_type_id + '">' + item.title + '</option>');
+                        });
+                    }
+                });
+            });
         });
     </script>
-<script src=
-"https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-</script>
-  <script>
-        $(".datetimepicker").each(function () {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script>
+        $(".datetimepicker").each(function() {
             $(this).datetimepicker();
         });
     </script>

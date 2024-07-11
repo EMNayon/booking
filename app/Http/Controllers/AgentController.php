@@ -27,7 +27,7 @@ class AgentController extends Controller
                 })
                 ->addColumn('action',function ($row){
                     return '<a class="btn btn-success text-white btn-sm" href="'.route('show_change_password',[$row->id]).'">Change Password</a>' .
-                    ' <a class="btn btn-info text-white btn-sm" href="'.route('view_point',[$row->id]).'">Add Point</a>';
+                    ' <a class="btn btn-info text-white btn-sm" href="'.route('view_point',[$row->id]).'">Add BDT</a>';
 
 
                 })
@@ -58,7 +58,7 @@ class AgentController extends Controller
 
     public function agentStatusChange(Request $request){
         try {
-            $user = User::find($request->id);
+            $user         = User::find($request->id);
             $user->status = $request->status;
             $user->save();
             return response()->json([
@@ -83,7 +83,7 @@ class AgentController extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = User::find($request->id);
+            $user        = User::find($request->id);
             $user->point = $user->point + request()->point;
             $user->save();
             DB::commit();

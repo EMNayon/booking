@@ -80,43 +80,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            @php
-                            // Define available room types
-                                $roomTypes = [
-                                    'Single',
-                                    'Double',
-                                    'Suite',
-                                    'Deluxe Suite'
-                                ];
-                                @endphp
-                            <div class="form-floating mt-2">
-                                {{-- <input type="text" class="form-control" id="hotel_type" name="hotel_type"
-                                    placeholder="Add Hotel Type" required>
-                                <label for="hotel_type">Room Type</label>
-                                @error('hotel_type')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
-                                <div class="form-floating mt-2">
-                                    {{-- <label for="hotel_type">Room Type</label> --}}
-                                    <select class="form-control" id="hotel_type" name="hotel_type" required>
-                                        <option value="" disabled selected>Select Room Type</option>
-                                        @foreach ($roomTypes as $roomType)
-                                            <option value="{{ $roomType }}">{{ $roomType }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('hotel_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-floating mt-2">
-                                <input type="text" class="form-control" id="hotel_price_per_night" name="hotel_price_per_night"
-                                    placeholder="Add Hotel Price" required>
-                                <label for="hotel_price_per_night">Hotel Price ( Per Night ) </label>
-                                @error('hotel_price_per_night')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                           
                             <div class="form-floating mt-2">
                                 <input type="file"  class="form-control" id="google_map_image" name="google_map_image">
                                 <label for="google_map_image">Google Map Image </label>

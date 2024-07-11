@@ -32,7 +32,7 @@ class CreateBookingsTable extends Migration
             $table->string('check_in')->nullable();
             $table->string('check_out')->nullable();
             $table->string('guest_name')->nullable();
-            $table->string('deluxe_room')->nullable();
+            $table->string('room_type')->nullable();
 
             $table->string('price')->nullable();
             $table->string('tax')->nullable();

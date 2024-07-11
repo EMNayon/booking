@@ -145,7 +145,7 @@
                     <tr>
                         <td class="red" style="font-size: 10px">Number of Rooms</td>
                         <td style="width: 230px;">
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;"> {{$agoda->number_of_rooms}}
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;min-height: 10px;"> {{$agoda->number_of_rooms}}
                             </div>
                         </td>
                     </tr>
@@ -153,35 +153,35 @@
                     <tr>
                         <td class="red" style="font-size: 10px">Number of Extra Beds</td>
                         <td>
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">{{$agoda->number_of_extra_beds}}
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;min-height: 10px;">{{$agoda->number_of_extra_beds}}
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="red" style="font-size: 10px">Number of Adults</td>
                         <td>
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">{{$agoda->number_of_adults}}
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;min-height: 10px;">{{$agoda->number_of_adults}}
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="red" style="font-size: 10px">Number of Children</td>
                         <td>
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">{{$agoda->number_of_childern}}
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;min-height: 10px;">{{$agoda->number_of_childern}}
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td class="red" style="font-size: 10px">Room Type</td>
                         <td>
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">
-                                {{$agoda->room_type}}</div>
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px; min-height: 10px;">
+                                {{$roomTypeTitle}}</div>
                         </td>
                     </tr>
                     <tr>
                         <td class="red" style="font-size: 10px">Promotion</td>
                         <td>
-                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px;">
+                            <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px; min-height: 10px;">
                                 Long Stay Deal. Price includes {{$agoda->promotion}}% discount!</div>
                         </td>
                     </tr>

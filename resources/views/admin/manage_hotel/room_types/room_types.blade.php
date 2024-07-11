@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Country List')
+@section('title', 'Room Type List')
 @section('content')
     <div class="container-fluid px-4">
         <div class="card mb-4">
@@ -21,23 +21,20 @@
             <div class="card-header d-flex justify-content-between">
                 <div>
                     <i class="fas fa-table me-1"></i>
-                    Country List
+                    Room Type List
                 </div>
                 <div>
-                    <a class="btn btn-success text-white btn-sm" href={{ route('create_country') }}>Add Country</a>
+                    <a class="btn btn-success text-white btn-sm" href={{ route('create_room_type') }}>Add Room Type</a>
                 </div>
 
             </div>
             <div class="card-body">
-                <table id="countryList" class="table table-bordered">
+                <table id="roomTypeList" class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Country Code</th>
-                            <th>Country Prefix</th>
-                            <th>Country Icon</th>
-                            <th>Created Date</th>
+                            <th>Title</th>
+                            <th>Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -52,11 +49,11 @@
 @section('js')
     <script>
         $(function() {
-            var table = $('#countryList').DataTable({
+            var table = $('#roomTypeList').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('country') }}",
+                    url: "{{ route('room_types') }}",
                     data: function(e) {}
                 },
                 columns: [{
@@ -64,24 +61,12 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'name',
-                        name: 'name'
+                        data: 'title',
+                        name: 'title'
                     },
                     {
-                        data: 'country_code',
-                        country_code: 'country_code'
-                    },
-                    {
-                        data: 'currency_prefix',
-                        currency_prefix: 'currency_prefix'
-                    },
-                    {
-                        data: 'currency_icon',
-                        currency_icon: 'currency_icon'
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
+                        data: 'description',
+                        name: 'description'
                     },
                     {
                         data: 'action',

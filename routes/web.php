@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\RoomTypeController;
 
 Route::get('/money', function () {
     return view('money');
@@ -11,7 +12,8 @@ Route::get('/money', function () {
 
 Route::get('/migration', function(){
     try{
-        Artisan::call('migrate');
+        Artisan::call('migrate:fresh');
+        // Artisan::call('db:seed');
         echo 'Migration done';
     }catch(Exception $ex){
         dd($ex->getMessage());
@@ -75,6 +77,7 @@ Route::group(['middleware' => 'user_middleware'], function () {
     Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
     Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
     Route::post('fetch-price', [App\Http\Controllers\BookingController::class, 'getPricePerNight'])->name('get_price_per_night');
+    Route::post('fetch-room-types', [RoomTypeController::class, 'fetchRoomTypes'])->name('fetch_room_types');
 
 });
 
@@ -134,7 +137,23 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/hotels/store', [\App\Http\Controllers\HotelController::class, 'store'])->name('store_hotel');
     Route::post('/admin/hotels/update', [\App\Http\Controllers\HotelController::class, 'update'])->name('update_hotel');
     Route::get('/admin/hotels/edit/{id}', [\App\Http\Controllers\HotelController::class, 'edit'])->name('edit_hotel');
-    Route::post('/admin/hotels/delete/{id}', [\App\Http\Controllers\HotelController::class, 'destroy'])->name('delete_hotel');
+    Route::get('/admin/hotels/delete/{id}', [\App\Http\Controllers\HotelController::class, 'destroy'])->name('delete_hotel');
+
+    Route::get('/admin/room-type/room-types', [RoomTypeController::class, 'index'])->name('room_types');
+    Route::get('/admin/room-type/create', [RoomTypeController::class, 'create'])->name('create_room_type');
+    Route::post('/admin/room-type/store', [RoomTypeController::class, 'store'])->name('store_room_type');
+    Route::get('/admin/room-type/edit/{id}', [RoomTypeController::class, 'edit'])->name('edit_room_type');
+    Route::post('/admin/rom-type/update', [RoomTypeController::class, 'update'])->name('update_room_type');
+    Route::delete('/admin/room-type/delete/{id}', [RoomTypeController::class, 'destroy'])->name('delete_room_type');
+
+
+    Route::get('/admin/add-room-type/{id}', [RoomTypeController::class, 'addRoomType'])->name('add_room_type');
+    Route::get('/admin/hotel-room-type-list/{id}', [RoomTypeController::class, 'roomTypeListOfHotel'])->name('hotel_room_type_list');
+
+    Route::post('/admin/assign-room-type', [RoomTypeController::class, 'assignRoomType'])->name('assign_room_type');
+
+
+
 
 
     // Route::get('/admin/cities', [\App\Http\Controllers\CityController::class, 'index'])->name('city');

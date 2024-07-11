@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountriesTable extends Migration
+class CreateHotelRoomType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('hotel_room_type', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('country_code')->nullable();
-            $table->string('currency_prefix')->nullable();
-            $table->string('currency_icon')->nullable();
+            $table->bigInteger('hotel_id');
+            $table->bigInteger('room_type_id');
+            $table->decimal('room_price_per_night');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('hotel_room_type');
     }
 }

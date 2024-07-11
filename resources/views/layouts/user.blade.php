@@ -36,7 +36,7 @@
             <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
       -->
-            <div class="sidebar-wrapper">
+            <div class="sidebar-wrapper" style="background-color: #6e6767">
                 <div class="logo">
                     <a href="javascript:void(0)" class="simple-text logo-mini">
                         QR
@@ -165,14 +165,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
-            $('.btn-plus').click(function() {
+            $('.button-plus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val(), 10) || 0;
                 input.val(value + 1);
             });
-            $('.btn-minus').click(function() {
+            $('.button-minus').click(function() {
                 var input = $(this).closest('.input-group').find('input');
                 var value = parseInt(input.val(), 10) || 0;
                 if (value > 1) { // prevent negative values
@@ -180,7 +180,7 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
 
 

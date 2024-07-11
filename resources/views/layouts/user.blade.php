@@ -47,21 +47,15 @@
                 </div>
                 <ul class="nav">
                     <li class="active ">
-                        <a href="{{ route('user.home') }}">
-                            <i class="tim-icons icon-chart-pie-36"></i>
-                            <p>Add New (Agoda)</p>
-                        </a>
-                    </li>
-                    <li class="active ">
                         <a href="{{ route('user.booking') }}">
                             <i class="tim-icons icon-chart-pie-36"></i>
                             <p>Add New (Booking)</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('agoda_user_submission_list') }}">
-                            <i class="tim-icons icon-atom"></i>
-                            <p>Agoda Confirmation List</p>
+                    <li class="active ">
+                        <a href="{{ route('user.home') }}">
+                            <i class="tim-icons icon-chart-pie-36"></i>
+                            <p>Add New (Agoda)</p>
                         </a>
                     </li>
                     <li>
@@ -70,6 +64,14 @@
                             <p>Booking Confirmation List</p>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{ route('agoda_user_submission_list') }}">
+                            <i class="tim-icons icon-atom"></i>
+                            <p>Agoda Confirmation List</p>
+                        </a>
+                    </li>
+
 
                 </ul>
             </div>

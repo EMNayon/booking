@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" hidden>
                                 <label for="booking_id">Booking ID </label>
                                 <input type="text" class="form-control text-white" id="booking_id" name="booking_id"
                                     placeholder="Booking ID" value={{ $bookingId }} readonly>
@@ -54,7 +54,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="booking_reference_no">Booking Reference No </label>
                                 <input type="text" class="form-control text-white" id="booking_reference_no"
                                     name="booking_reference_no" placeholder="Booking Reference No"
@@ -64,7 +64,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="member_id">Member ID</label>
                                 <input type="text" class="form-control text-white" id="member_id" name="member_id"
                                     placeholder="Member ID" value="{{ $memberId }}" readonly>
@@ -141,7 +141,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control text-white" id="tax" name="tax"
                                     placeholder="Tax" readonly>
@@ -161,7 +161,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="property_contact_number">Property Contact Number</label>
                                 <input type="text" class="form-control text-white" id="property_contact_number"
                                     name="property_contact_number" placeholder="Property Contact Number" readonly>
@@ -248,25 +248,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-                                @php
-                            // Define available room types
-                                $roomTypes = [
-                                    'Single',
-                                    'Double',
-                                    'Suite',
-                                    'Deluxe Suite'
-                                ];
-                                @endphp
-
                             <div class="col-sm-12 ">
-                                {{-- <label for="room_type">Room Type</label>
-                                <input type="text" class="form-control" id="room_type" name="room_type"
-                                    placeholder="Room Type" value="{{ old('room_type') }}">
-                                @error('room_type')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
-
                                 <div class="form-floating mt-2">
                                     <label for="hotel_type">Room Type</label>
                                     <select class="form-control" id="hotel_type" name="hotel_type" required>

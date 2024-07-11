@@ -42,7 +42,7 @@
                     <div class="col-sm-6">
                         <div class="row">
 
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="confirmation_no">Confirmation No </label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
                                     name="confirmation_no" placeholder="Confirmation No" value={{ $confirmationNo }}
@@ -51,7 +51,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="pin_code">Pin Code </label>
                                 <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
                                     placeholder="Pin Code" value={{ $pinCode }} readonly>
@@ -191,7 +191,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control text-white" id="tax" name="tax"
                                     placeholder="Tax" readonly>

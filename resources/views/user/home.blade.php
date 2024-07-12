@@ -253,7 +253,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="promotion">Promotion</label>
                                 <input type="number" class="form-control" id="promotion" name="promotion"
                                     placeholder="Price includes 15% discount!" value="{{ old('promotion') }}">
@@ -395,6 +395,27 @@
                     }
                 });
             });
+        });
+
+        // calculate nights 
+        $('.datetimepicker').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm:ss'
+        });
+
+        $('#arrival, #departure').on('change', function() {
+            var arrival = $('#arrival').val();
+            var departure = $('#departure').val();
+
+            if (arrival && departure) {
+                var arrivalDate = moment(arrival, 'YYYY-MM-DD HH:mm:ss');
+                var departureDate = moment(departure, 'YYYY-MM-DD HH:mm:ss');
+
+                var days = departureDate.diff(arrivalDate, 'days');
+                var nights = days - 1;
+
+                $('#days').val(days >= 0 ? days : 0);
+                $('#nights').val(nights >= 0 ? nights : 0);
+            }
         });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">

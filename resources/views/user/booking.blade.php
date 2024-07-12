@@ -113,6 +113,13 @@
                                     @enderror
                                 </div>
                             </div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
                             <div class="col-sm-12">
                                 <label for="rooms">Rooms</label>
                                 <div class="input-group">
@@ -134,7 +141,7 @@
 
                             <div class="col-sm-12">
                                 <label for="nights">Nights</label>
-                                <div class="input-group">
+                                {{-- <div class="input-group">
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-minus" id="nights-minus"
                                             type="button">-</button>
@@ -145,21 +152,17 @@
                                         <button class="btn btn-outline-secondary btn-plus" id="nights-plus"
                                             type="button">+</button>
                                     </div>
-                                </div>
+                                </div> --}}
+                                <input type="text" class="form-control" id="nights" name="nights" readonly>
+
                                 @error('nights')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" hidden>
                                 <label for="phone">Phone </label>
                                 <input type="text" class="form-control" id="phone" name="phone"
-                                    placeholder="Phone Number">
+                                    placeholder="Phone Number" readonly>
                                 {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('phone')
                                     <span class="text-danger">{{ $message }}</span>
@@ -181,6 +184,10 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            <div class="col-sm-12" >
+                                <label for="days">Days</label>
+                                <input type="text" class="form-control" id="days" name="days" readonly>
+                            </div>
 
                             <div class="col-sm-12 ">
                                 <label for="guest_name">Guest Name</label>
@@ -199,7 +206,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <label for="price_per_night">Price per Night</label>
                                 <input type="text" class="form-control text-white" id="price_per_night"
                                     name="price_per_night" placeholder="Price per Night" readonly>
@@ -208,7 +215,7 @@
                                 @enderror
                             </div>
                             <!-- Total price display -->
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 " hidden>
                                 <div class="form-group">
                                     <label for="total_price">Total Price</label>
                                     <input type="text" class="form-control text-white" id="total_price"
@@ -234,7 +241,13 @@
 @endsection
 
 @section('js')
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+</script>
+<script>
+    // $(".datetimepicker").each(function() {
+    //     $(this).datetimepicker();
+    // });
+</script>
 
     <script>
         $(document).ready(function() {
@@ -302,11 +315,17 @@
                         $.each(data, function(index, hotel) {
                             $('#hotel').append('<option value="' + hotel.id +
                                 '" data-price="' + hotel.hotel_price_per_night +
+                                '" data-phone="' + hotel.hotel_mobile_number +
                                 '" data-tax="' + hotel.hotel_tax + '">' +
                                 hotel.name + '</option>');
                         });
                     }
                 });
+            });
+
+            $('#hotel').change(function() {
+                var property_contact_number = $('#hotel option:selected').data('phone');
+                $('#phone').val(property_contact_number);
             });
 
             $('#hotel').change(function() {
@@ -389,14 +408,31 @@
                 }
             }
         });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-    </script>
-    <script>
-        $(".datetimepicker").each(function() {
-            $(this).datetimepicker();
+
+        // calculate nights
+        $('.datetimepicker').datetimepicker({
+            format: 'YY-M-D H:m:s'
+        });
+
+        $('#check_in, #check_out').on('change', function() {
+            var check_in = $('#check_in').val();
+            var check_out = $('#check_out').val();
+            // console.log(check_in);
+
+            if (check_in && check_out) {
+                var check_inDate = moment(check_in, 'YY-M-D H:m:s');
+                var check_outDate = moment(check_out, 'YY-M-D H:m:s');
+
+                var days = check_outDate.diff(check_inDate, 'days');
+                console.log(days);
+                var nights = days - 1;
+
+                $('#days').val(days >= 0 ? days : 0);
+                $('#nights').val(nights >= 0 ? nights : 0);
+            }
         });
     </script>
+
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

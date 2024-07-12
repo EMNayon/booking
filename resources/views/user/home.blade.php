@@ -397,12 +397,20 @@
             });
         });
 
-        // calculate nights 
-        $('.datetimepicker').datetimepicker({
-            format: 'YYYY-MM-DD HH:mm:ss'
-        });
+        // calculate nights
+        // $('.datetimepicker').datetimepicker({
+        //     format: 'YYYY-MM-DD HH:mm:ss'
+        // });
 
-        $('#arrival, #departure').on('change', function() {
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
+    <script>
+        $(".datetimepicker").each(function() {
+            $(this).datetimepicker();
+
+            $('#arrival, #departure').on('change', function() {
             var arrival = $('#arrival').val();
             var departure = $('#departure').val();
 
@@ -412,17 +420,11 @@
 
                 var days = departureDate.diff(arrivalDate, 'days');
                 var nights = days - 1;
-
+                console.log(nights);
                 $('#days').val(days >= 0 ? days : 0);
                 $('#nights').val(nights >= 0 ? nights : 0);
             }
         });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-    </script>
-    <script>
-        $(".datetimepicker").each(function() {
-            $(this).datetimepicker();
         });
     </script>
 

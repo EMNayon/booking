@@ -139,26 +139,7 @@
                                 @enderror
                             </div>
 
-                            <div class="col-sm-12">
-                                <label for="nights">Nights</label>
-                                {{-- <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-minus" id="nights-minus"
-                                            type="button">-</button>
-                                    </div>
-                                    <input type="number" class="form-control" id="nights" name="nights"
-                                        placeholder="Nights" value="1">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-plus" id="nights-plus"
-                                            type="button">+</button>
-                                    </div>
-                                </div> --}}
-                                <input type="text" class="form-control" id="nights" name="nights" readonly>
 
-                                @error('nights')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
                             <div class="col-sm-12" hidden>
                                 <label for="phone">Phone </label>
                                 <input type="text" class="form-control" id="phone" name="phone"
@@ -184,7 +165,15 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12" >
+                            <div class="col-sm-12">
+                                <label for="nights">Nights</label>
+                                <input type="text" class="form-control" id="nights" name="nights" readonly>
+                                @error('nights')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-12" hidden>
                                 <label for="days">Days</label>
                                 <input type="text" class="form-control" id="days" name="days" readonly>
                             </div>
@@ -244,9 +233,27 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
 </script>
 <script>
-    // $(".datetimepicker").each(function() {
-    //     $(this).datetimepicker();
-    // });
+    $(".datetimepicker").each(function() {
+        $(this).datetimepicker();
+
+        $('#check_in, #check_out').on('change', function() {
+            var check_in = $('#check_in').val();
+            var check_out = $('#check_out').val();
+            // console.log(check_in);
+
+            if (check_in && check_out) {
+                var check_inDate = moment(check_in, 'YYYY-MM-DD HH:mm:ss');
+                var check_outDate = moment(check_out, 'YYYY-MM-DD HH:mm:ss');
+
+                var days = check_outDate.diff(check_inDate, 'days');
+                // console.log(days);
+                var nights = days - 1;
+
+                $('#days').val(days >= 0 ? days : 0);
+                $('#nights').val(nights >= 0 ? nights : 0);
+            }
+        });
+    });
 </script>
 
     <script>
@@ -394,6 +401,7 @@
             });
 
             $('#nights, #rooms, #price_per_night').on('input', function() {
+
                 calculateTotalPrice();
             });
 
@@ -410,27 +418,11 @@
         });
 
         // calculate nights
-        $('.datetimepicker').datetimepicker({
-            format: 'YY-M-D H:m:s'
-        });
+        // $('.datetimepicker').datetimepicker({
+        //     format: 'YY-M-D H:m:s'
+        // });
 
-        $('#check_in, #check_out').on('change', function() {
-            var check_in = $('#check_in').val();
-            var check_out = $('#check_out').val();
-            // console.log(check_in);
 
-            if (check_in && check_out) {
-                var check_inDate = moment(check_in, 'YY-M-D H:m:s');
-                var check_outDate = moment(check_out, 'YY-M-D H:m:s');
-
-                var days = check_outDate.diff(check_inDate, 'days');
-                console.log(days);
-                var nights = days - 1;
-
-                $('#days').val(days >= 0 ? days : 0);
-                $('#nights').val(nights >= 0 ? nights : 0);
-            }
-        });
     </script>
 
 

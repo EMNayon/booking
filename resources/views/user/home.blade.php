@@ -397,11 +397,6 @@
             });
         });
 
-        // calculate nights
-        // $('.datetimepicker').datetimepicker({
-        //     format: 'YYYY-MM-DD HH:mm:ss'
-        // });
-
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">

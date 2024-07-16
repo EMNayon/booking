@@ -204,7 +204,7 @@
                                 @enderror
                             </div>
                             <!-- Total price display -->
-                            <div class="col-sm-12 " hidden>
+                            <div class="col-sm-12 " >
                                 <div class="form-group">
                                     <label for="total_price">Total Price</label>
                                     <input type="text" class="form-control text-white" id="total_price"
@@ -230,41 +230,33 @@
 @endsection
 
 @section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
-</script>
-<script>
-    $(".datetimepicker").each(function() {
-        $(this).datetimepicker();
-
-        $('#check_in, #check_out').on('change', function() {
-            var check_in = $('#check_in').val();
-            var check_out = $('#check_out').val();
-            // console.log(check_in);
-
-            if (check_in && check_out) {
-                var check_inDate = moment(check_in, 'YYYY-MM-DD HH:mm:ss');
-                var check_outDate = moment(check_out, 'YYYY-MM-DD HH:mm:ss');
-
-                var days = check_outDate.diff(check_inDate, 'days');
-                // console.log(days);
-                var nights = days - 1;
-
-                $('#days').val(days >= 0 ? days : 0);
-                $('#nights').val(nights >= 0 ? nights : 0);
-            }
-        });
-    });
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    </script>
 
     <script>
+        $(".datetimepicker").each(function() {
+            $(this).datetimepicker();
+
+            $('#check_in, #check_out').on('change', function() {
+                var check_in = $('#check_in').val();
+                var check_out = $('#check_out').val();
+  
+                if (check_in && check_out) {
+                    var check_inDate = moment(check_in, 'YYYY-MM-DD HH:mm:ss');
+                    var check_outDate = moment(check_out, 'YYYY-MM-DD HH:mm:ss');
+
+                    var days = check_outDate.diff(check_inDate, 'days');
+                    // console.log(days);
+                    var nights = days - 1;
+
+                    $('#days').val(days >= 0 ? days : 0);
+                    $('#nights').val(nights >= 0 ? nights : 0);
+                    calculateTotalPrice();
+                }
+            });
+        });
+
         $(document).ready(function() {
-
-            // $(document).off('click', '#nights-plus');
-            // $(document).off('click', '#nights-minus');
-            // $(document).off('click', '#rooms-plus');
-            // $(document).off('click', '#rooms-minus');
-
-
             $('#country').change(function() {
                 var countryId = $(this).val();
 
@@ -370,22 +362,6 @@
                 calculateTotalPrice();
             });
 
-
-            $('#nights-plus').click(function() {
-                var nights = parseInt($('#nights').val()) || 0;
-
-                $('#nights').val(nights + 1);
-                calculateTotalPrice();
-            });
-
-            $('#nights-minus').click(function() {
-                var nights = parseInt($('#nights').val()) || 0;
-                if (nights > 1) {
-                    $('#nights').val(nights - 1);
-                    calculateTotalPrice();
-                }
-            });
-
             $('#rooms-plus').click(function() {
                 var rooms = parseInt($('#rooms').val()) || 0;
                 $('#rooms').val(rooms + 1);
@@ -401,7 +377,6 @@
             });
 
             $('#nights, #rooms, #price_per_night').on('input', function() {
-
                 calculateTotalPrice();
             });
 
@@ -416,13 +391,6 @@
                 }
             }
         });
-
-        // calculate nights
-        // $('.datetimepicker').datetimepicker({
-        //     format: 'YY-M-D H:m:s'
-        // });
-
-
     </script>
 
 

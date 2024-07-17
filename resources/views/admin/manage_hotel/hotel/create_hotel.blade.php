@@ -38,7 +38,7 @@
 
 
                             <div id="states"></div>
-                            <div id="cities"></div>
+                            {{-- <div id="cities"></div> --}}
 
                             <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="hotel" name="hotel"
@@ -77,6 +77,15 @@
                                     placeholder="Add Hotel Tax" required>
                                 <label for="hotel_tax">Hotel Tax</label>
                                 @error('hotel_tax')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="form-floating mt-2">
+                                <input type="text" class="form-control" id="promotion" name="promotion"
+                                    placeholder="Add Hotel Promotion" required>
+                                <label for="promotion">Hotel Promotion</label>
+                                @error('promotion')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -139,7 +148,7 @@
             function attachStateChangeListener() {
                 $(".state-select").change(function() {
                     var selectedState = $(this).val();
-                    fetchCities(selectedState);
+                    // fetchCities(selectedState);
                 });
             }
 

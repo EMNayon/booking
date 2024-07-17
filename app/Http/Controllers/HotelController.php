@@ -17,11 +17,12 @@ class HotelController extends Controller
 {
     public function index(Request $request){
 
-        $cityNames = City::pluck('name', 'id')->toArray();
+        // $cityNames = City::pluck('name', 'id')->toArray();
           // $stateNames = State::pluck('name', 'id')->toArray();
           // $countryNames = Country::pluck('name', 'id')->toArray();
 
         if($request->ajax()){
+            
             $data = Hotel::orderBy('name','asc')->get();
             Log::info(gettype($data));
             $finalData = [];
@@ -36,10 +37,10 @@ class HotelController extends Controller
                     'created_at' => $singleData->created_at,
                     'updated_at' => $singleData->updated_at
                 ];
-                $city         = City::where('id', $singleData->city_id)->first();
-                $temp['city'] = $city->name;
+                // $city         = City::where('id', $singleData->city_id)->first();
+                // $temp['city'] = $city->name;
 
-                $state         = State::where('id', $city->state_id)->first();
+                $state         = State::where('id', $singleData->state_id)->first();
                 $temp['state'] = $state->name;
 
                 $country         = Country::where('id', $state->country_id)->first();
@@ -115,13 +116,14 @@ class HotelController extends Controller
 
             Hotel::create([
                 'name' => $request->hotel,
-                'city_id' => $request->city,
+                'state_id' => $request->state,
                 'hotel_address' => $request->hotel_address,
                 'hotel_mobile_number' => $request->hotel_mobile_number,
                 'longitude' => $longitude,
                 'latitude' => $latitude,
                 'google_map_add' => $googleMapAdd,
                 'hotel_tax' => $request->hotel_tax,
+                'promotion' => $request->promotion,
                 // 'hotel_price_per_night' => $request->hotel_price_per_night,
                 'hotel_image' => isset($imageName) ? 'images/hotels/'.$imageName : null,
                 'google_map_image' => isset($googleMapImage) ? 'images/hotels/'.$googleMapImage : null
@@ -170,16 +172,16 @@ class HotelController extends Controller
             return redirect()->back();
         }
 
-        $oldCity    = City::where('id', $oldHotel->city_id)->first();
-        $oldState   = State::where('id', $oldCity->state_id)->first();
+        // $oldCity    = City::where('id', $oldHotel->city_id)->first();
+        $oldState   = State::where('id', $oldHotel->state_id)->first();
         $oldCountry = Country::where('id', $oldState->country_id)->first();
         $countries  = Country::all();
         $states     = State::where('country_id', $oldCountry->id)->get();
-        $cities     = City::where('state_id', $oldState->id)->get();
+        // $cities     = City::where('state_id', $oldState->id)->get();
 
 
 
-        return view('admin.manage_hotel.hotel.edit_hotel', compact('oldCountry', 'oldState', 'oldCity', 'countries', 'states', 'cities', 'oldHotel'));
+        return view('admin.manage_hotel.hotel.edit_hotel', compact('oldCountry', 'oldState',  'countries', 'states',  'oldHotel'));
     }
 
       /**

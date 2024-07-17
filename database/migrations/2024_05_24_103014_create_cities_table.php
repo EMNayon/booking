@@ -13,12 +13,12 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('state_id')->constrained('states', 'id');
-            $table->timestamps();
-        });
+        // Schema::create('cities', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name');
+        //     $table->foreignId('state_id')->constrained('states', 'id');
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +28,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        // Schema::dropIfExists('cities');
     }
 }

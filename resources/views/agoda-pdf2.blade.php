@@ -182,7 +182,7 @@
                         <td class="red" style="font-size: 10px">Promotion</td>
                         <td>
                             <div style="border: 2px solid white;text-align: center; font-size: 10px;padding: 2px 0px; min-height: 10px;">
-                                Long Stay Deal. Price includes {{$agoda->promotion}}% discount!</div>
+                                Long Stay Deal. Price includes {{$agoda->hotel->promotion}}% discount!</div>
                         </td>
                     </tr>
 

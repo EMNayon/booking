@@ -17,7 +17,7 @@ class HotelSeeder extends Seeder
         Hotel::create(
             [
                 'name' => 'mayer doa vater hotel',
-                'city_id' => 1,
+                'state_id' => 1,
                 'longitude' => 100.23,
                 'latitude' => 200.34,
                 'hotel_address' => '202, uttara, dhaka',
@@ -25,7 +25,8 @@ class HotelSeeder extends Seeder
                 'longitude' => 23,
                 'latitude' => 24,
                 'hotel_tax' => 13,
-                'status' => 1
+                'status' => 1,
+                'promotion' => 14
             ]
             );
     }

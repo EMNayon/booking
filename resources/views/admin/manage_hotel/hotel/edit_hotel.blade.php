@@ -55,14 +55,14 @@
 
                             {{-- <div id="state"></div> --}}
 
-                            <div class="form-floating mt-2">
+                            {{-- <div class="form-floating mt-2">
                                 <input type="text" class="form-control" id="city" name="city"
                                     placeholder="Edit City" value={{ $oldCity->name }}>
                                 <label for="state">City</label>
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
 
 
                             <button class="w-100 btn btn-lg btn-success mt-2" type="submit">Edit City</button>
@@ -81,13 +81,13 @@
         $("#country").change(function() {
             selectedCountry = $(this).val();
             fetchStates(selectedCountry);
-            console.log(selectedCountry);
+            
         });
 
 
 
         function fetchStates(selectedCountry) {
-            console.log('fetching....', selectedCountry)
+            
             let formData = {
                 'country': selectedCountry
             }
@@ -98,7 +98,7 @@
                 data: formData,
                 dataType: 'html',
                 success: function(data) {
-                    console.log(data);
+                    
                     $('#state').html(data);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

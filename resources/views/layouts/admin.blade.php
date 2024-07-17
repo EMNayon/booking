@@ -90,7 +90,7 @@
                                 <ul class="nav flex-column sub-menu " style="margin-left: 10px;">
                                     <li class="nav-item"> <a class="nav-link" href="{{route('country')}}">Country</a></li>
                                     <li class="nav-item"> <a class="nav-link" href="{{route('state')}}">State</a></li>
-                                    <li class="nav-item"> <a class="nav-link" href="{{route('city')}}">City</a></li>
+                                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('city')}}">City</a></li> --}}
                                     {{-- <li class="nav-item"> <a class="nav-link" href="{{route('hotel')}}">Hotel</a></li> --}}
                                 </ul>
                             </div>

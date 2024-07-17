@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->enum('user_type',['admin','user'])->default('user');
             $table->tinyInteger('status')->nullable()->default(0);
+            // $table->tinyInteger('user_status')->default('1')
             $table->rememberToken();
             $table->timestamps();
         });

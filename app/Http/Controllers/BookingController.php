@@ -53,12 +53,11 @@ class BookingController extends Controller
         $taxRate = $request->tax;
         $taxRate = trim($taxRate, "% ");
         $taxRate = (float) $taxRate / 100;
-
-          // dd($taxRate);
         $price       = $request->total_price;
         $tax         = $price * $taxRate;
         $total_price = $price + $tax;
-
+ 
+        
         DB::beginTransaction();
         try {
 
@@ -86,7 +85,6 @@ class BookingController extends Controller
             Session::flash('success', 'File Submission Successfull.');
             return redirect()->back();
         } catch (\Exception $exception) {
-           dd($exception->getMessage());
             Log::error("exception occurred during stroing booking user info " . $exception->getMessage());
             DB::rollBack();
             Session::flash('error', 'Something went wrong. Please try again letter');

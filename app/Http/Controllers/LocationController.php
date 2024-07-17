@@ -23,7 +23,7 @@ class LocationController extends Controller
 
     public function fetchHotels(Request $request)
     {
-        $hotels = Hotel::where('city_id', $request->city_id)->get();
+        $hotels = Hotel::where('state_id', $request->state_id)->get();
         return response()->json($hotels);
     }
     // public function fetchTax(Request $request)

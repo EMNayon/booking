@@ -78,13 +78,12 @@
         $("#country").change(function() {
             selectedCountry = $(this).val();
             fetchStates(selectedCountry);
-            console.log(selectedCountry);
+            
         });
 
 
 
         function fetchStates(selectedCountry) {
-            console.log('fetching....', selectedCountry)
             let formData = {
                 'country': selectedCountry
             }
@@ -95,7 +94,7 @@
                 data: formData,
                 dataType: 'html',
                 success: function(data) {
-                    console.log(data);
+                    
                     $('#state').html(data);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

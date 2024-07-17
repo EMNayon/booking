@@ -82,7 +82,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12">
+                            {{-- <div class="col-sm-12">
                                 <label for="city">City</label>
                                 <select class="form-control text-white" id="city" name="city">
                                     <option value="" disabled selected>Select City</option>
@@ -91,7 +91,7 @@
                                 @error('city')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
                                 <select class="form-control text-white" id="hotel" name="hotel">
@@ -113,6 +113,17 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-sm-12 ">
+                                <label for="guest_name">Hotel Address</label>
+                                <input type="text" class="form-control" id="hotel_address" name="hotel_address"
+                                    placeholder="" value="">
+                                {{-- @error('guest_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror --}}
+                            </div>
+
+
 
 
 
@@ -165,9 +176,9 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-12" hidden>
                                 <label for="nights">Nights</label>
-                                <input type="text" class="form-control" id="nights" name="nights" readonly>
+                                <input type="text" class="form-control" id="nights" name="nights">
                                 @error('nights')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -204,7 +215,7 @@
                                 @enderror
                             </div>
                             <!-- Total price display -->
-                            <div class="col-sm-12 " >
+                            <div class="col-sm-12 " hidden>
                                 <div class="form-group">
                                     <label for="total_price">Total Price</label>
                                     <input type="text" class="form-control text-white" id="total_price"
@@ -230,33 +241,32 @@
 @endsection
 
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" defer>
     </script>
 
     <script>
-        $(".datetimepicker").each(function() {
-            $(this).datetimepicker();
-
-            $('#check_in, #check_out').on('change', function() {
-                var check_in = $('#check_in').val();
-                var check_out = $('#check_out').val();
-  
-                if (check_in && check_out) {
-                    var check_inDate = moment(check_in, 'YYYY-MM-DD HH:mm:ss');
-                    var check_outDate = moment(check_out, 'YYYY-MM-DD HH:mm:ss');
-
-                    var days = check_outDate.diff(check_inDate, 'days');
-                    // console.log(days);
-                    var nights = days - 1;
-
-                    $('#days').val(days >= 0 ? days : 0);
-                    $('#nights').val(nights >= 0 ? nights : 0);
-                    calculateTotalPrice();
-                }
-            });
-        });
-
         $(document).ready(function() {
+            var nights = 0;
+            $(".datetimepicker").each(function() {
+                $(this).datetimepicker();
+
+                $('#check_in, #check_out').on('change', function() {
+                    var check_in = $('#check_in').val();
+                    var check_out = $('#check_out').val();
+
+                    if (check_in && check_out) {
+                        var check_inDate = moment(check_in, 'YYYY-MM-DD HH:mm:ss');
+                        var check_outDate = moment(check_out, 'YYYY-MM-DD HH:mm:ss');
+
+                        var days = check_outDate.diff(check_inDate, 'days');
+
+                        nights = days - 1;
+                        $('#nights').val(nights >= 0 ? nights : 0);
+                        calculateTotalPrice();
+                    }
+                });
+            });
+
             $('#country').change(function() {
                 var countryId = $(this).val();
 
@@ -268,7 +278,7 @@
                         country_id: countryId
                     },
                     success: function(data) {
-                        console.log(data);
+
                         $('#state').html(
                             '<option value="" disabled selected>Select State</option>');
                         $.each(data, function(index, state) {
@@ -282,40 +292,23 @@
             $('#state').change(function() {
                 var stateId = $(this).val();
                 $.ajax({
-                    url: '{{ route('fetch_cities') }}',
+                    url: '{{ route('fetch_hotels') }}',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
                         state_id: stateId
                     },
                     success: function(data) {
-                        $('#city').html(
-                            '<option value="" disabled selected>Select City</option>');
-                        $.each(data, function(index, city) {
-                            $('#city').append('<option value="' + city.id + '">' + city
-                                .name + '</option>');
-                        });
-                    }
-                });
-            });
-
-            $('#city').change(function() {
-                var cityId = $(this).val();
-                $.ajax({
-                    url: '{{ route('fetch_hotels') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        city_id: cityId
-                    },
-                    success: function(data) {
                         $('#hotel').html(
                             '<option value="" disabled selected>Select Hotel</option>');
                         $.each(data, function(index, hotel) {
+
                             $('#hotel').append('<option value="' + hotel.id +
                                 '" data-price="' + hotel.hotel_price_per_night +
                                 '" data-phone="' + hotel.hotel_mobile_number +
-                                '" data-tax="' + hotel.hotel_tax + '">' +
+                                '" data-tax="' + hotel.hotel_tax +
+                                '" data-address="' + hotel.hotel_address +
+                                '">' +
                                 hotel.name + '</option>');
                         });
                     }
@@ -324,7 +317,10 @@
 
             $('#hotel').change(function() {
                 var property_contact_number = $('#hotel option:selected').data('phone');
+                var address = $('#hotel option:selected').data('address')
+
                 $('#phone').val(property_contact_number);
+                $('#hotel_address').val(address);
             });
 
             $('#hotel').change(function() {
@@ -337,7 +333,7 @@
                         hotel_id: hotelId
                     },
                     success: function(data) {
-                        console.log(data);
+
                         $('#room_type').html(
                             '<option value="" disabled selected>Select Room Type</option>');
                         $.each(data, function(index, item) {
@@ -376,12 +372,18 @@
                 }
             });
 
-            $('#nights, #rooms, #price_per_night').on('input', function() {
+            // $('#nights, #rooms, #price_per_night').on('input', function() {
+            //     calculateTotalPrice();
+            // });
+
+            $('#rooms').on('input', function() {
                 calculateTotalPrice();
             });
 
             function calculateTotalPrice() {
                 var nights = parseInt($('#nights').val()) || 0;
+                console.log('right now night = ' + nights);
+
                 var rooms = parseInt($('#rooms').val()) || 0;
                 var pricePerNight = parseFloat($('#price_per_night').val()) || 0;
 
@@ -395,6 +397,6 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 
 @endsection

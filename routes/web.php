@@ -1,6 +1,8 @@
 <?php
 
 // use Exception;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LocationController;
@@ -74,14 +76,29 @@ Route::group(['middleware' => 'user_middleware'], function () {
 
     //manage dependent drop down in the user form
     Route::post('fetch-states', [App\Http\Controllers\LocationController::class, 'fetchStates'])->name('fetch_states');
-    Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
+    // Route::post('fetch-cities', [App\Http\Controllers\LocationController::class, 'fetchCities'])->name('fetch_cities');
     Route::post('fetch-hotels', [App\Http\Controllers\LocationController::class, 'fetchHotels'])->name('fetch_hotels');
     Route::post('fetch-price', [App\Http\Controllers\BookingController::class, 'getPricePerNight'])->name('get_price_per_night');
     Route::post('fetch-room-types', [RoomTypeController::class, 'fetchRoomTypes'])->name('fetch_room_types');
+    
 
 });
 
 Route::group(['middleware' => 'admin'], function () {
+    Route::get('/admin/change-status', function(Request $request){
+        $user = User::where('id', $request->id)->first();
+        if($user->status == 0)
+        {
+            $user->status = 1;
+        }
+        else 
+        {
+            $user->status = 0;
+        }
+        $user->save();
+        return redirect()->route('agent_list');
+        
+    })->name('change_status');
     Route::get('/admin/home', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin.home');
     Route::get('/agent/list', [\App\Http\Controllers\AgentController::class, 'index'])->name('agent_list');
     Route::get('/agent/view-point/{id}', [\App\Http\Controllers\AgentController::class, 'viewPoint'])->name('view_point');

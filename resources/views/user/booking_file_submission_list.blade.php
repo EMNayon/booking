@@ -95,15 +95,13 @@
         // Handle delete button click
         $(document).on('click', '.delete-btn', function() {
             bookingId = $(this).data('id');
-            console.log(bookingId);
+            
             $('#confirmDelete').data('id', bookingId);
         });
 
         // Handle confirm delete button click
         $('#confirmDelete').click(function() {
             var id = $(this).data('id');
-            // console.log(id);
-            console.log('okay baby' + id);
             $.ajax({
                 url: '/user/booking-delete/' + id,
                 type: 'post',
@@ -111,7 +109,7 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
-                    console.log(response.success);
+                    
                     if (response.success) {
                         location.reload();
                     } else {

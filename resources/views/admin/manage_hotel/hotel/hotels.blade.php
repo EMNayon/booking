@@ -31,7 +31,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>City</th>
+                            {{-- <th>City</th> --}}
                             <th>State</th>
                             <th>Country</th>
                             <th>Created Date</th>
@@ -85,10 +85,10 @@
                         data: 'name',
                         name: 'name'
                     },
-                    {
-                        data: 'city',
-                        name: 'city'
-                    },
+                    // {
+                    //     data: 'city',
+                    //     name: 'city'
+                    // },
                     {
                         data: 'state',
                         name: 'state'
@@ -119,15 +119,13 @@
             // Handle delete button click
             $(document).on('click', '.delete-btn', function() {
                 hotelId = $(this).data('id');
-                console.log(hotelId);
+                
                 $('#confirmDelete').data('id', hotelId);
             });
 
             // Handle confirm delete button click
             $('#confirmDelete').click(function() {
                 var id = $(this).data('id');
-                // console.log(id);
-                console.log('okay baby' + id);
                 $.ajax({
                     url: '/admin/hotels/delete/' + id,
                     type: 'post',
@@ -135,7 +133,7 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
-                        console.log(response.success);
+                        
                         if (response.success) {
                             location.reload();
                         } else {

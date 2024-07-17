@@ -30,7 +30,7 @@
             padding: 10px;
         }
 
-        .red {
+        .red1 {
             color: red;
         }
     </style>
@@ -45,7 +45,7 @@
             </div>
             <div class="right">
                 <h1 style="text-align: right; font-size: 24px">
-                    Booking <span class="red">Confirmation</span>
+                    Booking <span class="red1">Confirmation</span>
                 </h1>
                 <p style="color: #232323; font-size: 8px">
                     Please present either an electronic or paper copy of
@@ -274,7 +274,7 @@
             <p>Notes</p>
             <ul style="margin: 0; padding-left: 30px;">
                 <li>
-                    <p style="font-size: 10px;"><span class="red">Important</span>At check-in, you must present a
+                    <p style="font-size: 10px;"><span class="red1">Important </span>At check-in, you must present a
                         valid
                         photo ID with your address confirming the same name as the lead guest on the
                         booking. For

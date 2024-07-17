@@ -51,7 +51,7 @@
             width: 28%;
         }
 
-        .red {
+        .red1 {
             color: red;
         }
     </style>
@@ -154,10 +154,20 @@
                     <p class="clear"></p>
                 </div>
                 <div>
+                    <p class="left">Resort Fee</p>
+                    <p class="right"></p>
+                    <p class="clear"></p>
+                </div>
+                <div><p class="left">Destination Fee</p><p class="right"></p>
+                    <p class="clear"></p></div>
+                <div<p class="left">Final Price</p><p class="right"></p>
+                <p class="clear"></p></div>
+                <div>
                     <p class="left">(taxes included)</p>
                     <p class="right" style="font-size: 14px; color:gray;">You'll pay {{$booking->total_price}} in {{$country->currency_prefix}}</p>
                     <p class="clear"></p>
                 </div>
+
 
                 <div class="">
                     <h2>The final price shown is the amount you'll pay to the property.</h2>
@@ -238,13 +248,14 @@
                         <p class="red"><b>Cancelation cost :</b></p>
 
                         <p style="font-size: 9px;">until December 12, 2023 11:59 PM [EST]: {{$country->currency_prefix}} 0</p>
-                        <p style="font-size: 9px;">from December 13, 2023 12:00 AM [EST]: <span class="red">{{$country->currency_prefix}} 324.78 –</span></p>
-                        <p class="red">
+                        <p style="font-size: 9px;">from December 13, 2023 12:00 AM [EST]: <span class="red1">{{$country->currency_prefix}} 324.78 –</span></p>
+                        <p class="red1">
                             Changing the dates of your stay isn't possible.</p>
                     </div>
                     <div class="clear"></div>
                 </div>
-
+                <br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br>
 
                 <div style="">
                     <div class="left" style="width: 48%; padding-right: 15px;">

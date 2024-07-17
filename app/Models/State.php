@@ -17,8 +17,13 @@ class State extends Model
         return $this->belongsTo(Country::class);
     }
 
-    public function cities()
+    // public function cities()
+    // {
+    //     return $this->hasMany(City::class);
+    // }
+
+    public function hotels()
     {
-        return $this->hasMany(City::class);
+        return $this->hasMany(Hotel::class);
     }
 }

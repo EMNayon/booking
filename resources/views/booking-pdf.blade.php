@@ -84,7 +84,7 @@
                 </div>
                 <div class="left" style="margin-right:10px; margin-left:10px;  line-height: 1.6;">
                     <h3><span class="red"><b>{{ $booking->hotel->name }}</b> </span></h3>
-                    <p><span class="red"><b>Address :</b></span>{{ $booking->hotel->city->name }},{{ $booking->hotel->city->state->name }} , {{ $booking->hotel->city->state->country->name }}</p>
+                    <p><span class="red"><b>Address :</b></span>{{ $booking->hotel->state->name }},{{ $booking->hotel->state->country->name }}</p>
                     <p><span class="red"><b>Phone :</b> </span> <span>{{ $booking->phone }}</span> </p>
                     <p><span class="red"><b>GPS Coordinates : </b></span> <span>N {{ $booking->hotel->latitude }} , W {{ $booking->hotel->longitude }}</span></p>
                 </div>

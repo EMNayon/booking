@@ -95,8 +95,8 @@ class PdfController extends Controller
         $booking = Booking::where('id', $id)->first();
 
         $hotel = Hotel::where('id', $booking->hotel_id)->first();
-        $city = City::where('id', $hotel->city_id)->first();
-        $state = State::where('id', $city->state_id)->first();
+        // $city = City::where('id', $hotel->city_id)->first();
+        $state = State::where('id', $hotel->state_id)->first();
         $country = Country::where('id', $state->country_id)->first();
 
         $checkIn = $booking->check_in;

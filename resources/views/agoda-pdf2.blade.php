@@ -123,7 +123,7 @@
                         <td>
                             <div
                                 style="border: 2px solid #d3d3d3;text-align: center; font-size: 10px;padding: 1.5px 5px;">
-                                {{ $agoda->hotel->city->name}},{{   $agoda->hotel->city->state->name}} , {{ $agoda->hotel->city->state->country->name }}
+                                {{ $agoda->hotel->state->name}}, {{ $agoda->hotel->state->country->name }}
                             </div>
                         </td>
                     </tr>

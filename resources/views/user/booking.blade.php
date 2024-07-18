@@ -39,9 +39,9 @@
             <form action="{{ route('store_booking') }}" method="post">
                 @csrf
                 <div class="row">
+                    {{-- left side column --}}
                     <div class="col-sm-6">
                         <div class="row">
-
                             <div class="col-sm-12 " hidden>
                                 <label for="confirmation_no">Confirmation No </label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
@@ -59,6 +59,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            {{-- country --}}
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
                                 <select class="form-control text-white" id="country" name="country">
@@ -72,6 +73,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            {{-- state --}}
                             <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <select class="form-control text-white" id="state" name="state">
@@ -82,16 +84,7 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            {{-- <div class="col-sm-12">
-                                <label for="city">City</label>
-                                <select class="form-control text-white" id="city" name="city">
-                                    <option value="" disabled selected>Select City</option>
-                                    <!-- Add more cities as needed -->
-                                </select>
-                                @error('city')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div> --}}
+                            {{-- hotel --}}
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>
                                 <select class="form-control text-white" id="hotel" name="hotel">
@@ -102,35 +95,81 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                            <div class="col-sm-12 ">
-                                <div class="form-floating mt-2">
-                                    <label for="room_type">Room Type</label>
-                                    <select class="form-control" id="room_type" name="room_type">
-                                        <option value="" disabled selected>Select Room Type</option>
-                                    </select>
-                                    @error('room_type')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-
+                            {{-- hotel address --}}
                             <div class="col-sm-12 ">
                                 <label for="guest_name">Hotel Address</label>
                                 <input type="text" class="form-control" id="hotel_address" name="hotel_address"
-                                    placeholder="" value="">
-                                {{-- @error('guest_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror --}}
+                                    placeholder="" value="" readonly>
                             </div>
-
-
-
-
-
+                              {{-- check in --}}
+                            <div class="col-sm-12 ">
+                                <label for="check_in">Check In </label>
+                                <input type="text" class="form-control datetimepicker" id="check_in" name="check_in"
+                                    placeholder="Check In" value="{{ old('check_in') }}">
+                                @error('check_in')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- check out --}}
+                            <div class="col-sm-12 ">
+                                <label for="check_out">Check Out </label>
+                                <input type="text" class="form-control datetimepicker" id="check_out"
+                                    name="check_out" placeholder="Check Out" value="{{ old('check_out') }}">
+                                @error('check_out')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
+                    {{-- Right side column --}}
                     <div class="col-sm-6">
                         <div class="row">
+                            {{-- guest name --}}
+                            <div class="col-sm-12 ">
+                                <label for="guest_name">Guest Name</label>
+                                <input type="text" class="form-control" id="guest_name" name="guest_name"
+                                    placeholder="Guest Name" value="{{ old('guest_name') }}">
+                                @error('guest_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                             {{-- adults --}}
+                            <div class="col-sm-12 ">
+                                <label for="number_of_adults">Adults</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary button-minus" type="button">-</button>
+                                    </div>
+                                    <input type="text" class="form-control" id="number_of_adults"
+                                        name="number_of_adults" placeholder="Number of Adults"
+                                        value="{{ old('number_of_adults') }}" min="0">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary button-plus" type="button">+</button>
+                                    </div>
+                                </div>
+                                @error('number_of_adults')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- children --}}
+                            <div class="col-sm-12 ">
+                                <label for="number_of_children">Children</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary button-minus" type="button">-</button>
+                                    </div>
+                                    <input type="text" class="form-control" id="number_of_children"
+                                        name="number_of_children" placeholder="Number of Children"
+                                        value="{{ old('number_of_children') }}" min="0">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary button-plus" type="button">+</button>
+                                    </div>
+                                </div>
+                                @error('number_of_children')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- Rooms --}}
                             <div class="col-sm-12">
                                 <label for="rooms">Rooms</label>
                                 <div class="input-group">
@@ -149,30 +188,24 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
+                            {{-- room type --}}
+                            <div class="col-sm-12 ">
+                                <div class="form-floating mt-2">
+                                    <label for="room_type">Room Type</label>
+                                    <select class="form-control" id="room_type" name="room_type">
+                                        <option value="" disabled selected>Select Room Type</option>
+                                    </select>
+                                    @error('room_type')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-sm-12" hidden>
                                 <label for="phone">Phone </label>
                                 <input type="text" class="form-control" id="phone" name="phone"
                                     placeholder="Phone Number" readonly>
                                 {{-- value="{{ rand(100000000000, 9999999999) }} --}}
                                 @error('phone')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="check_in">Check In </label>
-                                <input type="text" class="form-control datetimepicker" id="check_in" name="check_in"
-                                    placeholder="Check In" value="{{ old('check_in') }}">
-                                @error('check_in')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="col-sm-12 ">
-                                <label for="check_out">Check Out </label>
-                                <input type="text" class="form-control datetimepicker" id="check_out"
-                                    name="check_out" placeholder="Check Out" value="{{ old('check_out') }}">
-                                @error('check_out')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -183,21 +216,10 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <div class="col-sm-12" hidden>
                                 <label for="days">Days</label>
                                 <input type="text" class="form-control" id="days" name="days" readonly>
                             </div>
-
-                            <div class="col-sm-12 ">
-                                <label for="guest_name">Guest Name</label>
-                                <input type="text" class="form-control" id="guest_name" name="guest_name"
-                                    placeholder="Guest Name" value="{{ old('guest_name') }}">
-                                @error('guest_name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
                             <div class="col-sm-12 " hidden>
                                 <label for="tax">Tax</label>
                                 <input type="text" class="form-control text-white" id="tax" name="tax"

@@ -56,8 +56,8 @@ class BookingController extends Controller
         $price       = $request->total_price;
         $tax         = $price * $taxRate;
         $total_price = $price + $tax;
- 
-        
+
+
         DB::beginTransaction();
         try {
 
@@ -71,6 +71,8 @@ class BookingController extends Controller
                 "check_in"            => $request->check_in,
                 "check_out"           => $request->check_out,
                 "guest_name"          => $request->guest_name,
+                "number_of_children"  => $request->number_of_children,
+                "number_of_adults" => $request->number_of_adults,
                 "room_type"         => $request->room_type,
                 'tax'                 => $taxRate,
                 'price'               => $price,

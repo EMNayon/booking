@@ -38,8 +38,8 @@ class CreateBookingsTable extends Migration
             $table->string('tax')->nullable();
 
             $table->string('total_price')->nullable();
-            $table->string('extra-2')->nullable();
-            $table->string('extra-3')->nullable();
+            $table->string('number_of_adults')->nullable();
+            $table->string('number_of_children')->nullable();
             $table->string('extra-4')->nullable();
             $table->string('extra-5')->nullable();
             $table->timestamps();

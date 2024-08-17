@@ -61,7 +61,7 @@
                             <div class="col-sm-12">
                                 <label for="country">Country</label>
                                 <input type="text" class="form-control text-white" id="pin_code" name="pin_code"
-                                    placeholder="Pin Code" value="{{ $booking->hotel->city->state->country->name }}" readonly>
+                                    placeholder="Pin Code" value="{{ $booking->hotel->state->country->name }}" readonly>
                                 @error('country')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -70,24 +70,12 @@
                                <div class="col-sm-12">
                                 <label for="state">State</label>
                                 <input type="text" class="form-control text-white" id="confirmation_no"
-                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->city->state->name }}"
+                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->state->name }}"
                                 readonly>
                                 @error('state')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-
-                            <div class="col-sm-12">
-                                <label for="city">City</label>
-                                <input type="text" class="form-control text-white" id="confirmation_no"
-                                name="confirmation_no" placeholder="Confirmation No" value="{{ $booking->hotel->city->name }}"
-                                readonly>
-                                @error('city')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
 
                             <div class="col-sm-12">
                                 <label for="hotel">Hotel</label>

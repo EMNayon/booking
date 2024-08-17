@@ -95,7 +95,7 @@
                             <div class="col-sm-12 ">
                                 <label for="address">Address </label>
                                 <input type="text" class="form-control text-white text-white" id="drawn_on" name="drawn_on"
-                                    placeholder="Drawn On"  value="{{$agoda->hotel->city->name}} , {{$agoda->hotel->city->state->name}} , {{$agoda->hotel->city->state->country->name}}" readonly>
+                                    placeholder="Drawn On"  value="{{$agoda->hotel->name}} , {{$agoda->hotel->state->name}} , {{$agoda->hotel->state->country->name}}" readonly>
                                 @error('drawn_on')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
